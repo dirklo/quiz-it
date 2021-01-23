@@ -29,11 +29,6 @@ class QuizzesController < ApplicationController
         erb :"quizzes/history"
     end
 
-    post '/quizzes/test' do
-        puts request.body.to_json
-        redirect "/"
-    end
-
     get '/quizzes/:id/show' do
         @quiz = Quiz.find(params[:id])
         @email = session[:email]

@@ -1,0 +1,11 @@
+<%= erb :'partials/header' %>
+
+<body>
+    <h1>EDITING <%= @quiz.name %> </h1>
+    <p>You are logged in as <%= session[:email]%></p>
+
+    <form action="/quizzes/landing">
+        <button>Return to My Quizzes</button>
+    </form>
+</body>
+</html>

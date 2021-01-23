@@ -1,0 +1,100 @@
+Pages:
+    -Home Page 
+        -Nav bar
+        -Footer
+        -Intro blurb
+        -Option to sign up or log into your account
+    -Login Page
+        -Email 
+        -Password
+    -Signup Page
+        -Email
+        -Password
+        -Confirm Password
+    -Landing Page
+        -All of users authored quizzes
+        -All of users accessible quizzes
+        -All of users admin capable quizes 
+    -Quiz show Page
+        -View the top level details of the quiz
+        -If admin or author, allow to go to the edit page
+        -Start quiz button
+    -Quiz start Page
+        -Loads First Question
+    -Questions Page
+        -Each question, one at a time
+        -Number of which questions user is on
+    -Results Page
+        -Percentage
+        -Questions the user got wrong, and the answers
+        -Adds results to result table
+    -Create Quiz Page
+        -Add name of quiz
+        -First question
+            -Enter content
+            -Enter kind (mc_one, mc_many, fill_in, tf)
+            -Enter optional order
+            -Add answer
+                -Enter content
+                -Enter correct/incorrect
+                -Enter optional order
+        -Add Question
+    -Review Quiz Page
+        -Enter edit page to make changes
+        -Submit
+    -Edit Page
+        -Only accessible to author or admin users
+        -loads quiz and questions from Database
+        -allows for changes
+        -save changes
+    
+
+
+Database:  
+    users
+        *has many authored quizzes
+        *has many questions through authored quizzes
+        *has many user accesses
+        *has many accessible quizzes through user accesses, source quiz
+        *has many results
+        *has many taken quizzes through results, source quiz
+            -Name
+            -Email
+            -password_digest
+    quizzes
+        *belongs to an author
+        *has many questions
+        *has many user accesses
+        *has many users through user accesses
+        *has many results
+        *has many users taken through results, source user
+            -name
+            -date_created
+            -author_id
+    questions
+        *belongs to a quiz
+        *has many answers
+            -content
+            -kind
+            -limit
+            -order
+            -quiz_id
+    answers
+        *belongs to a question
+            -content
+            -correct
+            -order
+            -question_id
+    users_access
+        *belongs to a user
+        *belongs to a quiz
+            -user_id
+            -quiz_id
+            -admin
+    results
+        *belongs to a user
+        *belongs to a quiz
+            -user_id
+            -quiz_id
+            -score
+            -date

@@ -1,0 +1,25 @@
+<%= erb :'partials/header' %>
+
+<body>
+    <h1>Results Page for <%= @quiz.name %></h1>
+
+    <p>You answers were:</p>
+
+    <ul>
+        <% @answers.each do |answer| %>
+            <li>
+                Question <%= @counter%>:
+                <br>
+                Answer: <%= answer%>
+            </li>
+            <% @counter += 1 %>    
+        <% end %>
+    </ul>
+
+    <form action="/quizzes/landing">
+        <p>Return to My Quizzes</p>
+        <button>CLICK HERE</button>
+    </form>
+</body>
+
+</html>

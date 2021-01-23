@@ -1,0 +1,72 @@
+<%= erb :'partials/header' %>
+
+<body>
+    <div class="quizId" style="display: none"><%= @quiz.id%></div>
+    <h1><%= @quiz.name %></h1>
+    <h2>Created by: <%= @quiz.author.name %></h1>
+
+    <ul>
+        <% @questions.each do |question| %>
+            <% if question.kind == "mc_one" %>
+                <br>
+                <li class="question">    
+                    <%= question.content %>
+                    <% question.answers.each do |a| %>
+                        <br>
+                        <input type="radio" id="question<%= @counter %>" name="question<%= @counter %>" value="<%= a.content %>">
+                        <%= a.content %>
+                    <% end %>
+                </li>
+            <% elsif question.kind == "mc_many" %>
+                <br>
+                <li class="question">    
+                    <%= question.content %>
+                    <% question.answers.each do |a| %>
+                        <br>
+                        <input type="checkbox" id="question<%= @counter %>" name="quesion<%= @counter %>" value="<%= a.content %>">
+                        <label for="question<%= @counter %>"> <%= a.content %> </label>
+                    <% end %>
+                </li>
+            <% end %>
+            <% @counter += 1 %>
+        <% end %>
+
+    </ul>
+    <button id="submitAnswers">SUBMIT ANSWERS</button>
+</body>
+
+<script>
+    const submitButton = document.querySelector("#submitAnswers")
+    const numOfQuestions = document.querySelectorAll(".question").length
+    const quizId = document.querySelector(".quizId").innerText
+
+    submitButton.addEventListener("click", () => {
+        let final = []
+        for (let i=1; i <= numOfQuestions; i++) {
+            let res = document.querySelectorAll(`input[id=${"question"+i}]:checked`)
+            selections = []
+            for (let i of res) {
+                final.push(i.value)
+            }
+            final.push(selections)
+        }
+        final.splice(-1)
+    
+        fetch(`/quizzes/${quizId}/results`, {
+            method: 'post',
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: final
+        })
+        .then(function(response) {
+            window.location.href = response.url;
+        })
+        .catch(function(error) {
+            console.log('Request failed', error)
+        });
+    })
+</script>
+
+
+</html>

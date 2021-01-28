@@ -1,3 +1,10 @@
 body {
     background: linear-gradient(to right, #e28de2, #8b6fb1);
 }
+
+.resultcard {
+    border: 5px solid black;
+    margin-bottom: 10px;
+    padding: 10px 40px;
+    max-width: 50%;
+}

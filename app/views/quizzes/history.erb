@@ -1,18 +1,13 @@
-<%= erb :'partials/header' %>
+<h1>QUIZ HISTORY FOR <%= @user.name %> </h1>
 
-<body>
-    <h1>QUIZ HISTORY FOR <%= @user.name %> </h1>
+<ul>
+    <% @user.results.each do |result| %>
+        <li>
+            Scored <%= result.score %>% on <%= result.quiz.name %> on <%= result.date %>
+        </li>
+    <% end %>
+</ul>
 
-    <ul>
-        <% @user.results.each do |result| %>
-            <li>
-                Scored <%= result.score %>% on <%= result.quiz.name %> on <%= result.date %>
-            </li>
-        <% end %>
-    </ul>
-
-    <form action="/quizzes/landing">
+<form action="/quizzes/landing">
     <button>Back To My Quizzes</button>
-    </form>
-</body>
-</html>
+</form>

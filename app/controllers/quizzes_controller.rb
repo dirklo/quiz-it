@@ -1,19 +1,6 @@
 class QuizzesController < ApplicationController
-
-    get '/quizzes/landing' do
-        if logged_in?
-            @email = session[:email]
-            @user = User.find_by(email: @email)
-            @authored_quizzes = @user.authored_quizzes
-            @accessible_quizzes = @user.accessible_quizzes
-            erb :'quizzes/landing'
-        else
-            redirect '/login'
-        end
-    end
-
-    get '/quizzes/all' do
-        erb :"quizzes/all"
+    get '/quizzes' do
+        erb :"quizzes/index"
     end
 
     get '/quizzes/new' do
@@ -29,7 +16,7 @@ class QuizzesController < ApplicationController
         erb :"quizzes/history"
     end
 
-    get '/quizzes/:id/show' do
+    get '/quizzes/:id' do
         @quiz = Quiz.find(params[:id])
         @email = session[:email]
         if @quiz.is_admin?(@email) || @quiz.is_author?(@email) || @quiz.has_access?(@email)
@@ -39,15 +26,28 @@ class QuizzesController < ApplicationController
         end
     end
 
-    get '/quizzes/:id/start' do
+    get '/quizzes/:id/play' do
         @quiz = Quiz.find(params[:id])
         @email = session[:email]
+        @user = current_user
         @questions = @quiz.questions
         @counter = 1
         if @quiz.is_admin?(@email) || @quiz.is_author?(@email) || @quiz.has_access?(@email)
-            erb :"quizzes/start"
+            erb :"quizzes/play"
         else
             redirect "/login"
+        end
+    end
+
+    post '/quizzes/:id/play' do
+        @quiz = Quiz.find(params[:id])
+        @answers = params[:answers].values
+        @counter = 1
+        @user = current_user
+        if !logged_in? 
+            redirect "/login"
+        else
+            erb :'/quizzes/results'
         end
     end
 
@@ -61,19 +61,5 @@ class QuizzesController < ApplicationController
         end
     end
 
-    post '/quizzes/:id/results' do
-        session[:answers] = request.body.read.split(",,")
-        if !logged_in? 
-            redirect "/login"
-        else
-            redirect "/quizzes/#{params[:id]}/results"
-        end
-    end
-
-    get '/quizzes/:id/results' do
-        @answers = session[:answers]
-        @counter = 1
-        @quiz = Quiz.find(params[:id])
-        erb :"quizzes/results"
-    end
+    
 end

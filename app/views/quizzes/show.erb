@@ -1,31 +1,26 @@
-<%= erb :'partials/header' %>
+<h1>THIS IS SHOWPAGE FOR <%= @quiz.name %></h1>
 
-<body>
-    <h1>THIS IS SHOWPAGE FOR <%= @quiz.name %></h1>
-</body>
-
-    <form action="/quizzes/<%= @quiz.id%>/start">
-        <button>
-            Take this Quiz!
-        </button>
-    </form>
+<form action="/quizzes/<%= @quiz.id%>/play">
+    <button>
+        Take this Quiz!
+    </button>
+</form>
 
 
-    <% if @quiz.is_author?(@email) || @quiz.is_admin?(@email) %>
-    <form action="/quizzes/<%= @quiz.id%>/edit">
-        <p>You are an admin for this quiz</p>
-        <button>
-            Edit this Quiz
-        </button>
-    </form>
-    <br>
-    <% end %>
+<% if @quiz.is_author?(@user.email) || @quiz.is_admin?(@user.email) %>
+<form action="/quizzes/<%= @quiz.id%>/edit">
+    <p>You are an admin for this quiz</p>
+    <button>
+        Edit this Quiz
+    </button>
+</form>
+<br>
+<% end %>
 
-    <form action="/quizzes/landing">
-        <button>
-            Return to My Quizzes
-        </button>
-    </form>
-    <br>
+<form action="/users/<%= @user.id %>">
+    <button>
+        Return to My Quizzes
+    </button>
+</form>
+<br>
 
-</html>

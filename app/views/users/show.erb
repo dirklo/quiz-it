@@ -1,0 +1,35 @@
+<h1>MY QUIZZES</h1>   
+<p>You are signed in as: <%= @email%></p>
+
+<h3>Create a new Quiz</h3>
+<form action="/quizzes/new">
+    <button>Click Here!</button>
+</form>
+
+<h3>Quizzes You Created:</h3>
+
+<ul>
+    <% @authored_quizzes.each do |quiz| %>
+        <li>
+            <a href="/quizzes/<%=quiz.id%>"><%= quiz.name%></a>
+        </li>   
+    <% end %>
+</ul>
+
+<h3>Quizzes You Have Access To:</h3>
+
+<ul>
+    <% @accessible_quizzes.each do |quiz| %>
+        <li>
+            <a href="/quizzes/<%=quiz.id%>"><%= quiz.name%></a>, by <%= quiz.author.name %> 
+        </li>   
+    <% end %>
+</ul>
+
+<form action="/quizzes/history">
+    <button>Quiz History</button>
+</form>
+</br>
+<form action="/logout">
+    <button>LOGOUT</button>
+</form>

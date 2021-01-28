@@ -23,5 +23,9 @@ class ApplicationController < Sinatra::Base
         def logout!
             session.clear
         end
+
+        def current_user
+            User.find_by(email: session[:email])
+        end
     end
 end

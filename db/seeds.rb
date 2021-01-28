@@ -1,9 +1,9 @@
 #####USERS#####
-user1 = User.create(name: "Bob", email: "bob@gmail.com")
-user2 = User.create(name: "Rick", email: "rickstache@gmail.com")
-user3 = User.create(name: "Terrance", email: "terranceb@gmail.com")
-user4 = User.create(name: "George", email: "gman@gmail.com")
-user5 = User.create(name: "Phil", email: "phillipkdick@gmail.com")
+user1 = User.create(name: "Bob", email: "bob@gmail.com", password: "bob")
+user2 = User.create(name: "Rick", email: "dirklo@gmail.com", password: "dirklo")
+user3 = User.create(name: "Terrance", email: "terrance@gmail.com", password: "terrance")
+user4 = User.create(name: "George", email: "george@gmail.com", password: "george")
+user5 = User.create(name: "Phil", email: "phil@gmail.com", password: "phil")
 
 #####QUIZZES#####
 quiz1 = user1.authored_quizzes.create(name: "Food Quiz", date_created: Time.new(2019, 2, 22))

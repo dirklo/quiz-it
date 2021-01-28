@@ -9,13 +9,8 @@ class SessionsController < ApplicationController
         redirect '/' 
     end
 
-    get '/signup' do
-        erb :"sessions/signup"
-    end
-
-    post '/sessions' do
+    post '/login' do
         login(params[:email])
-        redirect '/quizzes/landing'
+        redirect "/users/#{current_user.id}"
     end
-
 end

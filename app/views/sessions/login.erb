@@ -1,11 +1,14 @@
-<%= erb :'partials/header' %>
-
-<body>
-    <h1>I AM LOGIN PAGE</h1>
-    <form action="/sessions" method="POST">
-    <label for="email">Email:</label>
-    <input type="text" name="email">
+<h1>I AM LOGIN PAGE</h1>
+<form action="/login" method="POST">
+    <div>
+        <label for="email">Email:</label>
+        <input type="text" name="email">
+    </div>
+    <br>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" name="password">
+    </div>
+    <br>
     <input type="submit">
-    </form>
-</body>
-</html>
+</form>

@@ -1,25 +1,31 @@
-<%= erb :'partials/header' %>
+<h1>Results Page for <%= @quiz.name %></h1>
 
-<body>
-    <h1>Results Page for <%= @quiz.name %></h1>
+<h2>You answers were:</h2>
 
-    <p>You answers were:</p>
+<ul>
+    <% @answers.each do |answer| %>
+        <div class="resultcard">
+            <h3>Question <%= @counter %>:</h3>
+            <% if answer.class == String %>
+                <h4>Your answer:</h4>
+                <li>
+                    <%= answer %>
+                </li>
+            <% else %>
+                <h4>Your answers:</h4>
+                <% answer.values.each do |answer| %>
+                    <li>
+                        <%= answer %>
+                    </li>
+                <% end %>
+            <% end %>
+            <% @counter += 1 %>
+            <br>    
+        </div>
+    <% end %>
+</ul>
 
-    <ul>
-        <% @answers.each do |answer| %>
-            <li>
-                Question <%= @counter%>:
-                <br>
-                Answer: <%= answer%>
-            </li>
-            <% @counter += 1 %>    
-        <% end %>
-    </ul>
-
-    <form action="/quizzes/landing">
-        <p>Return to My Quizzes</p>
-        <button>CLICK HERE</button>
-    </form>
-</body>
-
-</html>
+<form action="/users/<%= @user.id %>">
+    <p>Return to My Quizzes</p>
+    <button>CLICK HERE</button>
+</form>

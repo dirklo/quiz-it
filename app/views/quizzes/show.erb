@@ -7,7 +7,7 @@
 </form>
 
 
-<% if @quiz.is_author?(@user.email) || @quiz.is_admin?(@user.email) %>
+<% if @quiz.is_author?(current_user.email) || @quiz.is_admin?(current_user.email) %>
 <form action="/quizzes/<%= @quiz.id%>/edit">
     <p>You are an admin for this quiz</p>
     <button>
@@ -17,7 +17,7 @@
 <br>
 <% end %>
 
-<form action="/users/<%= @user.id %>">
+<form action="/users/<%= current_user.id %>">
     <button>
         Return to My Quizzes
     </button>

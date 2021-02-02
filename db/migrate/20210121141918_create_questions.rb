@@ -5,7 +5,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.string :kind
       t.integer :order
       t.integer :limit
-      t.integer :quiz_id
+      t.integer :quiz_id 
     end
   end
 end

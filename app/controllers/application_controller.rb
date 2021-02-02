@@ -3,6 +3,7 @@ class ApplicationController < Sinatra::Base
     configure do
         set :public_folder, 'public'
         set :views, 'app/views'
+        use Rack::Flash
         enable :sessions
         set :session_secret, "quiz_collection"
     end
@@ -13,11 +14,11 @@ class ApplicationController < Sinatra::Base
 
     helpers do
         def logged_in?
-            !!session[:email]
+            !!session[:user_id]
         end
 
-        def login(email)
-            session[:email] = email
+        def login(user)
+            session[:user_id] = user.id
         end
 
         def logout!
@@ -25,7 +26,7 @@ class ApplicationController < Sinatra::Base
         end
 
         def current_user
-            User.find_by(email: session[:email])
+            User.find(session[:user_id])
         end
     end
 end

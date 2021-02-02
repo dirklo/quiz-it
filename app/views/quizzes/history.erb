@@ -1,13 +1,13 @@
-<h1>QUIZ HISTORY FOR <%= @user.name %> </h1>
+<h1>QUIZ HISTORY FOR <%= current_user.name %> </h1>
 
 <ul>
-    <% @user.results.each do |result| %>
+    <% current_user.results.each do |result| %>
         <li>
             Scored <%= result.score %>% on <%= result.quiz.name %> on <%= result.date %>
         </li>
     <% end %>
 </ul>
 
-<form action="/quizzes/landing">
+<form action="/users/<%= current_user.id %>">
     <button>Back To My Quizzes</button>
 </form>

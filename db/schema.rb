@@ -11,13 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210122075201) do
+ActiveRecord::Schema.define(version: 20210128070813) do
 
   create_table "answers", force: :cascade do |t|
     t.string  "content"
     t.boolean "correct"
     t.integer "order"
     t.integer "question_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -30,7 +34,10 @@ ActiveRecord::Schema.define(version: 20210122075201) do
 
   create_table "quizzes", force: :cascade do |t|
     t.string  "name"
+    t.string  "description"
     t.date    "date_created"
+    t.boolean "public"
+    t.integer "category_id"
     t.integer "author_id"
   end
 

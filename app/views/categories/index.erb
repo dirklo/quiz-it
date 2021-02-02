@@ -1,2 +1,14 @@
 <h1>ALL CATEGORIES PAGE</h1>
 
+<ul>
+    <% @categories.each do |category|%>
+        <li>
+            <a href="/categories/<%= category.slug %>"><%= category.name %></a>
+        </li>
+    <% end %>
+</ul>
+
+
+<form action="/users/<%= current_user.id %>">
+    <button>Back to My Quizzes</button>
+</form>

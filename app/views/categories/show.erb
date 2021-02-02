@@ -1,1 +1,9 @@
-<h1>SHOWING ALL QUIZZES IN <%= @category %></h1>
+<h1>SHOWING ALL QUIZZES IN <%= @category.name %></h1>
+
+<ul>
+    <% @category.quizzes.each do |quiz| %>
+        <li>
+            <a href="/quizzes/<%= quiz.id %>"><%= quiz.name %></a>
+        </li>
+    <% end %>
+</ul>

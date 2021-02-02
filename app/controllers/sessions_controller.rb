@@ -10,7 +10,13 @@ class SessionsController < ApplicationController
     end
 
     post '/login' do
-        login(params[:email])
-        redirect "/users/#{current_user.id}"
+        user = User.find_by(email: params[:email])
+        if user && user.authenticate(params[:password])
+            login(user)
+            redirect "/users/#{current_user.id}"
+        else
+            flash[:message] = "Incorrect Email or Password"
+            redirect '/login'
+        end
     end
 end

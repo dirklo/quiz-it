@@ -1,6 +1,6 @@
 <h1>EDITING <%= @quiz.name %> </h1>
-<p>You are logged in as <%= session[:email]%></p>
+<p>You are logged in as <%= current_user.email %></p>
 
-<form action="/quizzes/landing">
+<form action="/users/<%= current_user.id %>">
     <button>Return to My Quizzes</button>
 </form>

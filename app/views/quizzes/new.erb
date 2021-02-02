@@ -1,10 +1,89 @@
 <h1>NEW QUIZ FORM</h1>
 <div>
-    <label for="name">Enter a name for your quiz:</label>
-    <input type="text" id="name">   
+    <form action="/quizzes" method="POST">
+        <div id="quiz_setup_div">
+            <div>
+                <label for="quiz_name">Enter a name for your quiz:</label>
+                <input type="text" id="quiz_name" name="quiz[name]">   
+            </div>
+            <br>
+            <div>
+                <label for="quiz_description">Enter a description:</label>
+                <textarea id="quiz_description" name="quiz[description]"></textarea>
+            </div>
+            <br>
+            <div>   
+                <label for="quiz_category">Select a Category:</label>
+                <select id="quiz_category" name="quiz[category]">
+                    <option value="">--Please choose an option--</option>
+                    <% @categories.each do |category|%>
+                        <option value="<%= category.id %>"><%= category.name %></option>
+                    <% end %>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div>
+            <input type="checkbox" id="quiz_public" name="quiz[public]" value="true"> 
+            <label for="quiz_puplic">Make Quiz Public?</label>  
+        </div>
+        <br>
+        <section id="questions_container">
+            <article id="q1" class="question_article">
+                <h2>Question 1:</h2>
+                <div>
+                    <label for="q1_kind" class="question_kind_label">Select the question type:</label>
+                    <select id="q1_kind" class="question_kind_input" name="questions[][kind]">
+                        <option value="">--Please choose an option--</option>
+                        <option value="mc_many">Multiple Choice: Many Correct Answers</option>
+                        <option value="mc_one">Multiple Choice: One Correct Answer</option>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <label for="q1_content" class="question_content_label">Enter the Question:</label>
+                    <input type="text" id="q1_content" class="question_content_input" name="questions[][content]">
+                </div>
+                <br>
+                <div>
+                    <label for="q1_limit" class="question_limit_label">How many total answer options should there be?:</label>
+                    <input type="number" id="q1_limit" class="question_limit_input" name="questions[][limit]" value="1" max="1" min="1">
+                </div>
+                <div id="q1_answers" class="answers_container">
+                    <div id="q1_a1" class="answer_div">
+                        <h3>Answer 1:</h3>
+                        <div>
+                            <label for="q1_a1_content" class="answer_content_label">Enter the answer:</label>
+                            <input type="text" id="q1_a1_content" class="answer_content_input" name="questions[][answers][][content]">
+                        </div>
+                        <br>
+                        <div>
+                            <label for="q1_a1_correct" class="answer_correct_label">Correct Answer?</label>
+                            <input type="checkbox" id="q1_a1_correct" class="answer_correct_input" name="questions[][answers][][correct]" value="true">
+                        </div>
+                    <br>
+                    </div> 
+                </div>
+
+                <br>
+                <div>
+                    <button type="button" id="q1_add_answer">Add an Answer</button>
+                </div>
+                <br>
+            </article>
+        </section>
+        <br>
+        <div>
+            <button type="button" id="add_question">Add a Question</button>
+        </div>
+        <br>
+        <input type="submit" value="Complete Quiz">
+    </form>
 </div>
 
-<form action="/quizzes/landing" method="GET">
+<form action="/users/<%= current_user.id %>" method="GET">
     <p>Return to My Quizzes:</p>
     <button>CLICK HERE</button>
 </form>
+
+<script type="text/javascript" src="/javascripts/new.js"></script>

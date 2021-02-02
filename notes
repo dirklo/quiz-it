@@ -52,32 +52,41 @@ Pages:
 
 Database:  
     users
+        *has_secure_password
         *has many authored quizzes
         *has many questions through authored quizzes
         *has many user accesses
         *has many accessible quizzes through user accesses, source quiz
         *has many results
         *has many taken quizzes through results, source quiz
-            -Name
-            -Email
+            -name
+            -email
             -password_digest
     quizzes
         *belongs to an author
+        *belongs to a category
         *has many questions
+        *has many answers through questionss
         *has many user accesses
         *has many users through user accesses
         *has many results
         *has many users taken through results, source user
             -name
+            -description
             -date_created
+            -public
+            -category_id
             -author_id
+    categories
+        *has many quizzes
+            -name
     questions
         *belongs to a quiz
         *has many answers
             -content
             -kind
-            -limit
             -order
+            -limit
             -quiz_id
     answers
         *belongs to a question
@@ -98,3 +107,11 @@ Database:
             -quiz_id
             -score
             -date
+
+
+TODO:
+-Correct answer check and grading logic
+-New quiz page, with JS "add a question" button
+-input validation
+-nav bar
+-styling 

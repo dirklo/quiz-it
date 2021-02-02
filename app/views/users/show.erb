@@ -1,5 +1,9 @@
+<% if flash.has?(:message) %>
+    <%= flash[:message] %>
+<% end %> 
+
 <h1>MY QUIZZES</h1>   
-<p>You are signed in as: <%= @email%></p>
+<p>You are signed in as: <%= current_user.email %></p>
 
 <h3>Create a new Quiz</h3>
 <form action="/quizzes/new">
@@ -21,11 +25,15 @@
 <ul>
     <% @accessible_quizzes.each do |quiz| %>
         <li>
-            <a href="/quizzes/<%=quiz.id%>"><%= quiz.name%></a>, by <%= quiz.author.name %> 
+            <a href="/quizzes/<%= quiz.id %>"><%= quiz.name %></a>, by <%= quiz.author.name %> 
         </li>   
     <% end %>
 </ul>
 
+<form action="/categories">
+    <button>Quiz Categories</button>
+</form>
+<br>
 <form action="/quizzes/history">
     <button>Quiz History</button>
 </form>

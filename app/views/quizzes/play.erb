@@ -2,33 +2,32 @@
 <h2>Created by: <%= @quiz.author.name %></h1>
 <form action="/quizzes/<%= @quiz.id %>/play" method="POST">
     <ul>
-        <% @questions.each do |question| %>
-            <li>
-            <%= question.content %>
-            </li>
-            <% if question.kind == "mc_one" %>  
-                <% question.answers.each do |a| %>
-                    <input type="radio" id="answers[question<%= @counter %>]" name="answers[question<%= @counter %>]" value="<%= a.content %>">
-                    <%= a.content %>
+        <% @question_hashes.each do |hash| %>
+            <% hash.each do |question, answers| %>
+                <li>
+                    <%= question.content %>
+                </li>
+                <% if question.kind == "mc_one" %>  
+                    <% answers.each do |answer| %>
+                        <input type="radio" id="answers[<%= question.order %>]" name="answers[<%= question.order %>][]" value="<%= answer.id %>">
+                        <%= answer.content %>
+                        <br>
+                    <% end %>
+                    <br>
+                <% elsif question.kind == "mc_many" %> 
+                    <% answers.each do |answer| %>
+                        <input type="checkbox" name="answers[<%= question.order %>][]" value="<%= answer.id %>">
+                        <label for="answers[<%= question.order %>]"> <%= answer.content %> </label>
+                        <br>
+                    <% end %>
+                    <br>
+                <% elsif question.kind == "fill_in" %>
+                    <label for="answers[<%= question.order %>]">Your Answer:</label>
+                    <input type="text" name="answers[<%= question.order %>][]" id="answers[<%= question.id %>]">
                     <br>
                 <% end %>
-                <br>
-            <% elsif question.kind == "mc_many" %> 
-                <% checkbox_counter = 1%>
-                <% question.answers.each do |a| %>
-                    <input type="checkbox" name="answers[question<%= @counter %>][answer<%= checkbox_counter %>]" value="<%= a.content %>">
-                    <label for="answers[question<%= @counter %>][answer<%= checkbox_counter %>]"> <%= a.content %> </label>
-                    <% checkbox_counter += 1 %>
-                    <br>
-                <% end %>
-                <br>
-            <% elsif question.kind == "fill_in" %>
-                <label for="answers[question<%= @counter %>]">Your Answer:</label>
-                <input type="text" name="answers[question<%= @counter %>]" id="answers[question<%= @counter %>]">
                 <br>
             <% end %>
-            <% @counter += 1 %>
-            <br>
         <% end %>
     </ul>
     <button id="submitAnswers">SUBMIT ANSWERS</button>

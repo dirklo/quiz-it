@@ -1,31 +1,24 @@
 <h1>Results Page for <%= @quiz.name %></h1>
 
-<h2>You answers were:</h2>
+<h2>Your answers were:</h2>
 
 <ul>
-    <% @answers.each do |answer| %>
+    <% @results.each_with_index do |result, index| %>
         <div class="resultcard">
-            <h3>Question <%= @counter %>:</h3>
-            <% if answer.class == String %>
-                <h4>Your answer:</h4>
+            <h3>Question <%= index + 1%></h3>
+            <h4><%= result.first[0] %>:</h4>
+            <h5>Your answer:</h5>
+            <% result.each do |answer| %>
                 <li>
-                    <%= answer %>
+                    <%= answer[1] %>, that answer is <%= answer[2] %> 
                 </li>
-            <% else %>
-                <h4>Your answers:</h4>
-                <% answer.values.each do |answer| %>
-                    <li>
-                        <%= answer %>
-                    </li>
-                <% end %>
             <% end %>
-            <% @counter += 1 %>
             <br>    
         </div>
     <% end %>
 </ul>
 
-<form action="/users/<%= @user.id %>">
+<form action="/users/<%= current_user.id %>">
     <p>Return to My Quizzes</p>
     <button>CLICK HERE</button>
 </form>

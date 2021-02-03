@@ -1,0 +1,45 @@
+<h1>ACCESS FOR <%= @quiz.name %></h1>
+
+<p>You are logged in as <%= current_user.email %></p>
+
+<% if flash.has?(:message) %>
+    <%= flash[:message] %>
+<% end %> 
+
+<form action="/quizzes/<%= @quiz.id %>/access" method="POST">
+    <input type="hidden" id="hidden" name="_method" value="PATCH">
+    <h2>The following users have access to this quiz: </h2>
+    <ul>
+        <% @access.each do |user_access| %>
+            <li>
+                <%= user_access.user.email %>
+                <input type="hidden" name="users[<%= user_access.user.email %>]" value="false">
+                <input type="checkbox" name="users[<%= user_access.user.email %>]" value="true" <%= 'checked' if user_access.admin == true %>>admin
+            </li>
+        <% end %>
+    </ul>
+    <input type="submit" value="Save Changes">
+</form>
+
+
+<form action="/quizzes/<%= @quiz.id %>/access" method="POST">
+    <label for="new_access">Add a User:</label>
+    <input type="text" id="new_access" name="email">
+    <br>
+    <input type="checkbox" id="admin" name="admin" value="true">
+    <label for="admin">Administrator account?</label>
+    <br>
+    <input type="submit" value="Add User">
+</form>
+
+<form action="/quizzes/<%= @quiz.id %>/edit" method="GET">
+    <input type="submit" value="Return to Edit Page">
+</form>
+
+<form action="/quizzes/<%= @quiz.id %>" method="GET">
+    <input type="submit" value="View Quiz">
+</form>
+
+<form action="/users/<%= current_user.id %>" method="GET">
+    <input type="submit" value="Return to My Quizzes">
+</form>

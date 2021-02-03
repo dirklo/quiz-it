@@ -25,7 +25,7 @@
         <br>
         <div>
             <input type="checkbox" id="quiz_public" name="quiz[public]" value="true"> 
-            <label for="quiz_puplic">Make Quiz Public?</label>  
+            <label for="quiz_public">Make Quiz Public?</label>  
         </div>
         <br>
         <section id="questions_container">
@@ -67,14 +67,14 @@
 
                 <br>
                 <div>
-                    <button type="button" id="q1_add_answer">Add an Answer</button>
+                    <button type="button" id="q1_add_answer" onclick="addAnswer(1)">Add an Answer</button>
                 </div>
                 <br>
             </article>
         </section>
         <br>
         <div>
-            <button type="button" id="add_question">Add a Question</button>
+            <button type="button" id="add_question" onclick="addQuestion()">Add a Question</button>
         </div>
         <br>
         <input type="submit" value="Complete Quiz">
@@ -86,4 +86,4 @@
     <button>CLICK HERE</button>
 </form>
 
-<script type="text/javascript" src="/javascripts/new.js"></script>
+<script type="text/javascript" src="/javascripts/createandedit.js"></script>

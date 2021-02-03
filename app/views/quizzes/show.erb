@@ -1,5 +1,6 @@
 <h1>THIS IS SHOWPAGE FOR <%= @quiz.name %></h1>
 
+<p><%= @quiz.description %></p>
 <form action="/quizzes/<%= @quiz.id%>/play">
     <button>
         Take this Quiz!
@@ -8,15 +9,20 @@
 
 
 <% if @quiz.is_author?(current_user.email) || @quiz.is_admin?(current_user.email) %>
-<form action="/quizzes/<%= @quiz.id%>/edit">
-    <p>You are an admin for this quiz</p>
-    <button>
-        Edit this Quiz
-    </button>
-</form>
-<br>
+    <form action="/quizzes/<%= @quiz.id%>/edit">
+        <p>You are an admin for this quiz</p>
+        <button>
+            Edit this Quiz
+        </button>
+    </form>
+    <br>
+    <br>
+    <form action="/quizzes/<%= @quiz.id %>" method="POST">
+        <input type="hidden" id="hidden" name="_method" value="DELETE">
+        <input type="submit" value="DELETE THIS QUIZ">
+    </form>
+    <br>
 <% end %>
-
 <form action="/users/<%= current_user.id %>">
     <button>
         Return to My Quizzes

@@ -1,22 +1,14 @@
-document.querySelector('#q1_add_answer').addEventListener('click', () => {
-    currentAnswer = parseInt(document.getElementById(`q1_answers`).lastElementChild.id[4])
-    addAnswer(1, currentAnswer + 1)
-});
-
-document.querySelector('#add_question').addEventListener('click', () => {
-    currentQuestion = parseInt(document.getElementById('questions_container').lastElementChild.id[1])
-    addQuestion(currentQuestion + 1)
-});
-
-function addAnswer(questionNum, answerNum) {
+function addAnswer(questionNum) {
+    // ADD ANSWER DIV
+    answerNum = parseInt(document.getElementById(`q${questionNum}_answers`).getElementsByClassName('answer_div').length) + 1;
     var div = document.createElement('div');
     div.setAttribute('id', `q${questionNum}_a${answerNum}`);
-    div.setAttribute('class', "answer_div")
+    div.setAttribute('class', "answer_div");
     div.innerHTML = `
         <h3>Answer ${answerNum}:</h3>
         <div>
-            <label for="q${questionNum}_a${answerNum}_content" class="answer_content_label">Enter the answer:</label>
-            <input type="text" id="q${questionNum}_a${answerNum}_content" class="answer_content_input" name="questions[][answers][][content]">
+        <label for="q${questionNum}_a${answerNum}_content" class="answer_content_label">Enter the answer:</label>
+        <input type="text" id="q${questionNum}_a${answerNum}_content" class="answer_content_input" name="questions[][answers][][content]">
         </div>
         <br>
         <div>
@@ -31,15 +23,15 @@ function addAnswer(questionNum, answerNum) {
 }
 
 function deleteAnswer(questionNum, answerNum) {
-    // DELETING ANSWER DIV
+    // DELETE ANSWER DIV
     let answersDiv = document.getElementById(`q${questionNum}_answers`);
     var oldAnswerDiv = document.getElementById(`q${questionNum}_a${answerNum}`);
     answersDiv.removeChild(oldAnswerDiv);
-    renumberAnswers(questionNum)
+    renumberAnswers(questionNum);
 };
 
 function renumberAnswers(questionNum) {
-    // RENUMBERING REMAINING ANSWER DIVS
+    // RENUMBER REMAINING ANSWER DIVS
     var answers = document.getElementById(`q${questionNum}_answers`);
     var answerDivs = answers.getElementsByClassName('answer_div');
     var answerTitles = answers.getElementsByTagName('h3');
@@ -61,23 +53,25 @@ function renumberAnswers(questionNum) {
         };
     };
 
-    // SETTING THE ANSWER LIMIT ON THIS QUESTION
-    setLimit(questionNum)
+    // SET THE ANSWER LIMIT ON THIS QUESTION
+    setLimit(questionNum);
 }
 
 function setLimit(questionNum) {
-    let totalAnswers = document.getElementById(`q${questionNum}_answers`).children.length        
-    let limit = document.getElementById(`q${questionNum}_limit`)
-    limit.value = totalAnswers
-    limit.max = totalAnswers
+    let totalAnswers = document.getElementById(`q${questionNum}_answers`).getElementsByClassName('answer_div').length;
+    let limit = document.getElementById(`q${questionNum}_limit`);
+    limit.value = totalAnswers;
+    limit.max = totalAnswers;
 }
 
-function addQuestion(questionNum) {
-    var article = document.createElement("article")
+function addQuestion() {
+    // ADD QUESTION TO THIS FORM
+    questionNum = document.querySelectorAll('.question_article').length + 1;
+    var article = document.createElement('article');
     article.setAttribute('id', `q${questionNum}`);
     article.setAttribute('class', 'question_article');
     article.innerHTML = `
-    <h2>Question ${questionNum}:</h2>
+        <h2>Question ${questionNum}:</h2>
         <div>
             <button type="button" id="q${questionNum}_delete_button" class="question_delete_button" onclick="deleteAndRenumberQuestions(${questionNum})">Delete Question</button>
         </div>
@@ -115,24 +109,19 @@ function addQuestion(questionNum) {
             </div> 
         </div>
         <div>
-            <button type="button" id="q${questionNum}_add_answer">Add Answer</button>
+            <button type="button" id="q${questionNum}_add_answer" onclick="addAnswer(${questionNum})">Add an Answer</button>
         </div>
     `;
     document.getElementById('questions_container').appendChild(article);
-    
-    document.querySelector(`#q${questionNum}_add_answer`).addEventListener('click', () => {
-        currentAnswer = parseInt(document.querySelector(`#q${questionNum}_answers`).lastElementChild.id[4])
-        addAnswer(questionNum, currentAnswer + 1)
-    })
 }
 
 function deleteAndRenumberQuestions(questionNum) {
-    // DELETING QUESTION DIV
+    // DELETE QUESTION ARTICLE
     var questionsContainer = document.getElementById('questions_container');
-    var oldQuestionDiv = document.getElementById(`q${questionNum}`);
-    questionsContainer.removeChild(oldQuestionDiv);
+    var oldQuestionArticle = document.getElementById(`q${questionNum}`);
+    questionsContainer.removeChild(oldQuestionArticle);
 
-    // RENUMBERING REMAINING QUESTION DIVS
+    // RENUMBER REMAINING QUESTION ARTICLES
     var questionArticles = questionsContainer.getElementsByClassName('question_article');
     var questionTitles = questionsContainer.getElementsByTagName('h2');
     var questionKindLabels = questionsContainer.getElementsByClassName('question_kind_label');
@@ -158,7 +147,6 @@ function deleteAndRenumberQuestions(questionNum) {
             questionDeleteButtons[i].setAttribute('onclick', `deleteAndRenumberQuestions(${i + 2})`);
         };
     };
-    // debugger
     for (let i = 0; i < answerContainers.length; i++) {
         renumberAnswers(i + 1);
     }

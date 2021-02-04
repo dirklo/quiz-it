@@ -5,10 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz It!</title>
     <link rel="stylesheet" href="/stylesheets/app.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
+<nav id="main_nav">
+    <a href="/" id="nav_logo">QUIZ-IT</a>
+    <div id="buttons">
+        <% if !logged_in? %>
+            <div>
+                <form action="/login">
+                    <button>Log In</button>
+                </form>
+            </div>
+            <div>
+                <form action="/users/new">
+                    <button>Sign Up</button>
+                </form>
+            </div>
+        <% else %>
+            <div>
+                <form action="/logout">
+                    <button>Log Out</button>
+                </form>
+            </div>
+        <% end %>
+    </div>
+</nav>
 <%= yield %>
     
 </body>

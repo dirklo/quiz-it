@@ -1,43 +1,50 @@
 <% if flash.has?(:message) %>
     <%= flash[:message] %>
 <% end %> 
+<main class="container">
+    <section class="page_header">
+        <h1>MY QUIZZES</h1>   
+        <p>You are signed in as: <%= current_user.email %></p>
 
-<h1>MY QUIZZES</h1>   
-<p>You are signed in as: <%= current_user.email %></p>
+        <form action="/quizzes/new">
+            <button class="new_quiz_button"><span class="plus">+</span>Create New Quiz</button>
+        </form>
+    </section>
+    <section class="page_body">
+        <div class="authored_quiz_list">
+            <h3>Quizzes You Created:</h3>
 
-<h3>Create a new Quiz</h3>
-<form action="/quizzes/new">
-    <button>Click Here!</button>
-</form>
+            <ul>
+                <% @authored_quizzes.each do |quiz| %>
+                    <li>
+                        <a href="/quizzes/<%=quiz.id%>"><%= quiz.name%></a>
+                    </li>   
+                <% end %>
+            </ul>
+        </div>
+        <div class="accessible_quiz_list">
+            <h3>Quizzes You Have Access To:</h3>
 
-<h3>Quizzes You Created:</h3>
-
-<ul>
-    <% @authored_quizzes.each do |quiz| %>
-        <li>
-            <a href="/quizzes/<%=quiz.id%>"><%= quiz.name%></a>
-        </li>   
-    <% end %>
-</ul>
-
-<h3>Quizzes You Have Access To:</h3>
-
-<ul>
-    <% @accessible_quizzes.each do |quiz| %>
-        <li>
-            <a href="/quizzes/<%= quiz.id %>"><%= quiz.name %></a>, by <%= quiz.author.name %> 
-        </li>   
-    <% end %>
-</ul>
-
-<form action="/categories">
-    <button>Quiz Categories</button>
-</form>
-<br>
-<form action="/quizzes/history">
-    <button>Quiz History</button>
-</form>
-</br>
-<form action="/logout">
-    <button>LOGOUT</button>
-</form>
+        <ul>
+            <% @accessible_quizzes.each do |quiz| %>
+                <li>
+                    <a href="/quizzes/<%= quiz.id %>"><%= quiz.name %></a>, by <%= quiz.author.name %> 
+                </li>   
+            <% end %>
+        </ul>
+        </div>
+    </section>
+    <footer class="page_footer">
+        <form action="/categories">
+            <button>Quiz Categories</button>
+        </form>
+        <br>
+        <form action="/quizzes/history">
+            <button>Quiz History</button>
+        </form>
+        </br>
+        <form action="/logout">
+            <button>LOGOUT</button>
+        </form>
+    </footer>
+</main>

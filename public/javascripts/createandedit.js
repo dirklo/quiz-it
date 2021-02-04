@@ -5,9 +5,11 @@ function addAnswer(questionNum) {
     div.setAttribute('id', `q${questionNum}_a${answerNum}`);
     div.setAttribute('class', "answer_div");
     div.innerHTML = `
-        <h3>Answer ${answerNum}:</h3>
+        <div class="answer_title_div">
+            <h3>Answer ${answerNum}:</h3>
+            <button type="button" id="q${questionNum}_a${answerNum}_delete_button" class="answer_delete_button" onclick="deleteAnswer(${questionNum}, ${answerNum})">X</button>
+        </div>
         <div>
-        <label for="q${questionNum}_a${answerNum}_content" class="answer_content_label">Enter the answer:</label>
         <input type="text" id="q${questionNum}_a${answerNum}_content" class="answer_content_input" name="questions[][answers][][content]">
         </div>
         <br>
@@ -16,7 +18,6 @@ function addAnswer(questionNum) {
             <input type="checkbox" id="q${questionNum}_a${answerNum}_correct" class="answer_correct_input" name="questions[][answers][][correct]" value="true">
         </div>
         <br>
-        <button type="button" id="q${questionNum}_a${answerNum}_delete_button" class="answer_delete_button" onclick="deleteAnswer(${questionNum}, ${answerNum})">Delete Answer</button>
     `;
     document.getElementById(`q${questionNum}_answers`).appendChild(div);
     setLimit(questionNum);
@@ -71,9 +72,9 @@ function addQuestion() {
     article.setAttribute('id', `q${questionNum}`);
     article.setAttribute('class', 'question_article');
     article.innerHTML = `
-        <h2>Question ${questionNum}:</h2>
-        <div>
-            <button type="button" id="q${questionNum}_delete_button" class="question_delete_button" onclick="deleteAndRenumberQuestions(${questionNum})">Delete Question</button>
+        <div class="question_title_div">
+            <h2>Question ${questionNum}:</h2>
+            <button type="button" id="q${questionNum}_delete_button" class="question_delete_button" onclick="deleteAndRenumberQuestions(${questionNum})">X</button>
         </div>
         <div>
             <label for="q${questionNum}_kind" class="question_kind_label">Select the question type:</label>
@@ -89,15 +90,10 @@ function addQuestion() {
             <input type="text" id="q${questionNum}_content" class="question_content_input" name="questions[][content]">
         </div>
         <br>
-        <div>
-            <label for="q${questionNum}_limit" class="question_limit_label">How many total answer options should there be?:</label>
-            <input type="number" id="q${questionNum}_limit" class="question_limit_input" name="questions[][limit]" value="1" max="1" min="1">
-        </div>
         <div id="q${questionNum}_answers" class="answers_container">
             <div id="q${questionNum}_a1" class="answer_div">
                 <h3>Answer 1:</h3>
                 <div>
-                    <label for="q${questionNum}_a1_content" class="answer_content_label">Enter the answer:</label>
                     <input type="text" id="q${questionNum}_a1_content" class="answer_content_input" name="questions[][answers][][content]">
                 </div>
                 <br>
@@ -109,7 +105,11 @@ function addQuestion() {
             </div> 
         </div>
         <div>
-            <button type="button" id="q${questionNum}_add_answer" onclick="addAnswer(${questionNum})">Add an Answer</button>
+            <input type="number" id="q${questionNum}_limit" class="question_limit_input" name="questions[][limit]" value="1" max="1" min="1">
+            <label for="q${questionNum}_limit" class="question_limit_label">Total Answer Choices</label>
+        </div>
+        <div class="add_answer_div">
+            <button type="button" id="q${questionNum}_add_answer" class="add_answer_button" onclick="addAnswer(${questionNum})">Add an Answer</button>
         </div>
     `;
     document.getElementById('questions_container').appendChild(article);

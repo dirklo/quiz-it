@@ -1,32 +1,43 @@
-<h1>THIS IS SHOWPAGE FOR <%= @quiz.name %></h1>
+<section class="container">
+    <div class="quiz_details">
+        <h1><%= @quiz.name %></h1>
 
-<p><%= @quiz.description %></p>
-<form action="/quizzes/<%= @quiz.id%>/play">
-    <button>
-        Take this Quiz!
-    </button>
-</form>
+        <h2>Created by <%= @quiz.author.name %></h2>
+        <p>on <%= @quiz.date_created %></p>
+        <p><%= @quiz.description %></p>
+        <div>
+            <form action="/quizzes/<%= @quiz.id%>/play">
+                <button>
+                    Start Quiz!
+                </button>
+            </form>
+        </div>
+    </div>
 
-
-<% if @quiz.is_author?(current_user.email) || @quiz.is_admin?(current_user.email) %>
-    <form action="/quizzes/<%= @quiz.id%>/edit">
-        <p>You are an admin for this quiz</p>
-        <button>
-            Edit this Quiz
-        </button>
-    </form>
-    <br>
-    <br>
-    <form action="/quizzes/<%= @quiz.id %>" method="POST">
-        <input type="hidden" id="hidden" name="_method" value="DELETE">
-        <input type="submit" value="DELETE THIS QUIZ">
-    </form>
-    <br>
-<% end %>
-<form action="/users/<%= current_user.id %>">
-    <button>
-        Return to My Quizzes
-    </button>
-</form>
-<br>
+    <% if @quiz.is_author?(current_user.email) || @quiz.is_admin?(current_user.email) %>
+        <div class="admin_controls">
+            <form action="/quizzes/<%= @quiz.id%>/edit">
+                <h2>Admin Tools</h2>
+                <button class="edit_quiz_button">
+                    Edit Quiz
+                </button>
+            </form>
+    <% end %>
+    <% if @quiz.is_author?(current_user.email)%>
+            <br>
+            <form action="/quizzes/<%= @quiz.id %>" method="POST">
+                <input type="hidden" id="hidden" name="_method" value="DELETE">
+                <input type="submit" class="delete_quiz_button" value="DELETE QUIZ">
+            </form>
+            <br>
+    <% end %>
+        </div>
+    <div class="return_div">
+        <form action="/users/<%= current_user.id %>">
+            <button>
+                Cancel and Exit
+            </button>
+        </form>
+    </div>
+</section>
 

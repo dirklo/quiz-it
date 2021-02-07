@@ -1,4 +1,4 @@
-<section class="container">
+<main class="container">
     <div class="quiz_details">
         <h1><%= @quiz.name %></h1>
 
@@ -6,38 +6,36 @@
         <p>on <%= @quiz.date_created %></p>
         <p><%= @quiz.description %></p>
         <div>
-            <form action="/quizzes/<%= @quiz.id%>/play">
-                <button>
+            <a href="/quizzes/<%= @quiz.id%>/play">
+                <button class="button-green button-lg">
                     Start Quiz!
                 </button>
-            </form>
+            </a>
         </div>
     </div>
 
     <% if @quiz.is_author?(current_user.email) || @quiz.is_admin?(current_user.email) %>
         <div class="admin_controls">
-            <form action="/quizzes/<%= @quiz.id%>/edit">
-                <h2>Admin Tools</h2>
-                <button class="edit_quiz_button">
+            <h2>Admin Tools</h2>
+            <a href="/quizzes/<%= @quiz.id%>/edit">
+                <button class="button-green">
                     Edit Quiz
                 </button>
-            </form>
+            </a>
     <% end %>
     <% if @quiz.is_author?(current_user.email)%>
             <br>
             <form action="/quizzes/<%= @quiz.id %>" method="POST">
                 <input type="hidden" id="hidden" name="_method" value="DELETE">
-                <input type="submit" class="delete_quiz_button" value="DELETE QUIZ">
+                <input type="submit" class="button-red" value="Delete Quiz">
             </form>
             <br>
     <% end %>
         </div>
-    <div class="return_div">
-        <form action="/users/<%= current_user.id %>">
-            <button>
+        <a href="/users/<%= current_user.id %>">
+            <button class="button-red" id="cancel_button">
                 Cancel and Exit
             </button>
-        </form>
-    </div>
-</section>
+        </a>
+</main>
 

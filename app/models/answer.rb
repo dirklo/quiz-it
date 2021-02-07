@@ -27,7 +27,30 @@ class Answer < ActiveRecord::Base
         end
     end
 
+    def self.get_scores(results, questions)
+        final = []
+        questions.each_with_index do |question, index|
+            if question.kind == "mc_one"
+                results[index][0][2] == true ? correct = 1 : correct = 0
+                final << [correct, 1]
+            elsif question.kind == "mc_many"
+                possible_points = question.answers.filter{|a| a.correct == true}.count
+                correct_answers = results[index].each.filter{|a| a[2] == true}.count
+                incorrect_answers = results[index].each.filter{|a| a[2] == false}.count
+                if results[index].count <= possible_points
+                    final << [correct_answers, possible_points]
+                else    
+                    final << [(correct_answers - incorrect_answers), possible_points]
+                end
+            end
+        end
+        final
+    end
 
-    ##### QUIZ CREATION HELPERS#####
-
+    def self.get_percent(scores)
+        total_correct = scores.inject(0){|sum, x| sum + x[0] }
+        total_possible = scores.inject(0){|sum, x| sum + x[1] }
+        percent = (total_correct.to_f / total_possible.to_f) * 100
+        percent.round(2)
+    end
 end

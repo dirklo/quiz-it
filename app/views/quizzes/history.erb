@@ -1,13 +1,25 @@
-<h1>QUIZ HISTORY FOR <%= current_user.name %> </h1>
-
-<ul>
-    <% current_user.results.each do |result| %>
-        <li>
-            Scored <%= result.score %>% on <%= result.quiz.name %> on <%= result.date %>
-        </li>
-    <% end %>
-</ul>
-
-<form action="/users/<%= current_user.id %>">
-    <button>Back To My Quizzes</button>
-</form>
+<main class="container">
+    <section class="history_header">
+        <h1 class="page_title">QUIZ HISTORY<h1>
+        <h2><%= current_user.name %> </h2>
+    </section>
+    <section class="history_body">
+        <% if current_user.results.empty? %>
+            <p>
+                You have not taken any quizzes yet!
+            </p>
+        <% end %>
+        <ul>
+            <% current_user.results.reverse.each do |result| %>
+                <li>
+                    Scored <%= result.score %>% on <%= result.quiz.name %> on <%= result.date %>
+                </li>
+            <% end %>
+        </ul>
+    </section>
+    <section class="history_footer">
+        <a href="/users/<%= current_user.id %>">
+            <button class="button-green" id="history_return_button">Back To My Quizzes</button>
+        </a>
+    </section>
+</main>

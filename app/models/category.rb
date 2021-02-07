@@ -6,6 +6,10 @@ class Category < ActiveRecord::Base
     end
 
     def self.find_by_slug(category_slug)
-        Category.all.detect {|category| category.slug == category_slug}
+        Category.all.detect{|category| category.slug == category_slug}
+    end
+
+    def public_quizzes
+        quizzes.find_all{|quiz| quiz.public == true }
     end
 end

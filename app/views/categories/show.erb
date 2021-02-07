@@ -1,9 +1,32 @@
-<h1>SHOWING ALL QUIZZES IN <%= @category.name %></h1>
-
-<ul>
-    <% @category.quizzes.each do |quiz| %>
-        <li>
-            <a href="/quizzes/<%= quiz.id %>"><%= quiz.name %></a>
-        </li>
-    <% end %>
-</ul>
+<main class="container">
+    <section class="category_show_header">
+        <h1 class="page_title"><%= @category.name %></h1>
+    </section>
+    <section class="category_show_body list list_purple">
+        <h3>All <%= @category.name %> Quizzes</h3>
+        <ul>
+            <% if @category.public_quizzes.empty? %>
+                <p>
+                    There are no public quizzes in this category.
+                </p>
+            <% end %>
+            <% @category.public_quizzes.each do |quiz| %>
+                <li>
+                    <a href="/quizzes/<%= quiz.id %>"><%= quiz.name %></a> by <%= quiz.author.name %>
+                </li>
+            <% end %>
+        </ul>
+    </section>
+    <section class="category_show_footer">
+        <div>
+            <a href="/categories">
+                <button class="button-yellow">Back to Category List</button>
+            </a>
+        </div>
+        <div>
+            <a href="/users/<%= current_user.id %>">
+                <button class="button-yellow">Back to My Quizzes</button>
+            </a>
+        </div>
+    </section>
+</main>

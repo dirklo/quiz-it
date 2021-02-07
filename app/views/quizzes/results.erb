@@ -1,24 +1,33 @@
-<h1>Results Page for <%= @quiz.name %></h1>
-
-<h2>Your answers were:</h2>
-
-<ul>
-    <% @results.each_with_index do |result, index| %>
-        <div class="resultcard">
-            <h3>Question <%= index + 1%></h3>
-            <h4><%= result.first[0] %>:</h4>
-            <h5>Your answer:</h5>
-            <% result.each do |answer| %>
-                <li>
-                    <%= answer[1] %>, that answer is <%= answer[2] %> 
-                </li>
+<main class="container">
+    <section class="result_title">
+        <h2>You scored: <%= @percent%>%</h2>
+    </section>
+    <section class="result_cards">
+        <% @results.each_with_index do |result, index| %>
+            <div class="
+            <% if @results[index].any?{|r| r.include?(false)} %>
+                <%= 'result_card_incorrect' %>
+            <% else %>
+                <%= 'result_card_correct' %>
             <% end %>
-            <br>    
-        </div>
-    <% end %>
-</ul>
+            ">
+                <h3>Question <%= index + 1%>:</h3>
+                <br>
+                <h4><%= result.first[0] %>:</h4>
+                <br>
+                <h5>Your answer:</h5>
+                <% result.each do |answer| %>
+                    <p>
+                        <%= answer[1] %>, that answer is <%= 'correct!' if answer[2] == true %><%= 'incorrect...' if answer[2] == false %>  
+                    </p>
+                <% end %>
+                <br>
+                <h4>Score: <%= @scores[index][0] %> out of <%= @scores[index][1]%>    
+            </div>
+        <% end %>
+    </section>
+    <a href="/users/<%= current_user.id %>">
+        <button class="button-green" id="results_return_button">Return Home</button>
+    </a>
+</main>
 
-<form action="/users/<%= current_user.id %>">
-    <p>Return to My Quizzes</p>
-    <button>CLICK HERE</button>
-</form>

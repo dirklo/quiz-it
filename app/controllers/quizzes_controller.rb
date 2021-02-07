@@ -56,7 +56,7 @@ class QuizzesController < ApplicationController
     get '/quizzes/:id' do
         @quiz = Quiz.find(params[:id])
         if logged_in?
-            if @quiz.is_admin?(current_user.email) || @quiz.is_author?(current_user.email) || @quiz.has_access?(current_user.email)
+            if @quiz.is_admin?(current_user.email) || @quiz.is_author?(current_user.email) || @quiz.has_access?(current_user.email) || @quiz.public == true
                 erb :"quizzes/show"
             else
                 flash[:message] = "You do not have access to this quiz."
@@ -130,7 +130,7 @@ class QuizzesController < ApplicationController
         if logged_in?
             @quiz = Quiz.find(params[:id])
             @question_hashes = @quiz.create_question_hashes
-            if @quiz.is_admin?(current_user.email) || @quiz.is_author?(current_user.email) || @quiz.has_access?(current_user.email)
+            if @quiz.is_admin?(current_user.email) || @quiz.is_author?(current_user.email) || @quiz.has_access?(current_user.email) || @quiz.public == true
                 erb :"quizzes/play"
             else
                 flash[:message] = "You do not have access to this quiz."
@@ -146,10 +146,13 @@ class QuizzesController < ApplicationController
     post '/quizzes/:id/play' do
         @quiz = Quiz.find(params[:id])
         if logged_in?
-            if @quiz.is_admin?(current_user.email) || @quiz.is_author?(current_user.email) || @quiz.has_access?(current_user.email)
+            if @quiz.is_admin?(current_user.email) || @quiz.is_author?(current_user.email) || @quiz.has_access?(current_user.email) || @quiz.public == true
                 @questions = @quiz.questions
                 answers = @quiz.answers
                 @results = Answer.create_checked_answers(params[:answers].values, answers)
+                @scores = Answer.get_scores(@results, @questions)
+                @percent = Answer.get_percent(@scores)
+                Result.create(user: current_user, quiz: @quiz, score: @percent, date: Time.now)
                 erb :'/quizzes/results'
             else
                 flash[:message] = "You do not have access to this quiz."

@@ -1,20 +1,34 @@
-<% if flash.has?(:message) %>
-    <%= flash[:message] %>
-<% end %> 
 <main class="container">
-    <section class="page_header">
-        <h1>MY QUIZZES</h1>   
-        <p>You are signed in as: <%= current_user.email %></p>
-
-        <form action="/quizzes/new">
-            <button class="new_quiz_button"><span class="plus">+</span>Create New Quiz</button>
-        </form>
+    <section class="user_home_header">
+        <div>
+            <p>You are signed in as: <%= current_user.email %></p>
+        </div>
+        <div>
+            <h1 class="page_title">MY QUIZZES</h1>
+        </div>
+        <div>
+            <% if flash.has?(:message) %>
+                <p class="flash_message">
+                    <%= flash[:message] %>
+                </p>
+            <% end %>
+        </div>
+        <div>
+            <a href="/quizzes/new">
+                <button class="button-green button-lg">Create New Quiz</button>
+            </a>
+        </div>
     </section>
-    <section class="page_body">
-        <div class="authored_quiz_list">
+    <section class="user_home_body">
+        <div class="list list_blue">
             <h3>Quizzes You Created:</h3>
 
             <ul>
+            <% if @authored_quizzes.empty? %>
+                <p>
+                    You have not created any quizzes yet! Start one with the 'Create New Quiz' button above
+                </p>
+            <% end %>
                 <% @authored_quizzes.each do |quiz| %>
                     <li>
                         <a href="/quizzes/<%=quiz.id%>"><%= quiz.name%></a>
@@ -22,10 +36,15 @@
                 <% end %>
             </ul>
         </div>
-        <div class="accessible_quiz_list">
+        <div class="list list_purple">
             <h3>Quizzes You Have Access To:</h3>
 
-        <ul>
+            <ul>
+                <% if @accessible_quizzes.empty? %>
+                    <p>
+                        Nobody has shared a quiz with you yet!
+                    </p>
+                <% end %>
             <% @accessible_quizzes.each do |quiz| %>
                 <li>
                     <a href="/quizzes/<%= quiz.id %>"><%= quiz.name %></a>, by <%= quiz.author.name %> 
@@ -34,17 +53,16 @@
         </ul>
         </div>
     </section>
-    <footer class="page_footer">
-        <form action="/categories">
-            <button>Quiz Categories</button>
-        </form>
-        <br>
-        <form action="/quizzes/history">
-            <button>Quiz History</button>
-        </form>
-        </br>
-        <form action="/logout">
-            <button>LOGOUT</button>
-        </form>
-    </footer>
+    <section class="user_home_footer">
+        <div>
+            <a href="/quizzes/history">
+                <button class="button-yellow">Quiz History</button>
+            </a>
+        </div>
+        <div>
+            <a href="/categories">
+                <button class="button-yellow">All Public Quizzes</button>
+            </a>
+        </div>
+    </section>
 </main>

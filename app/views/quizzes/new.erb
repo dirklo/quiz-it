@@ -1,22 +1,37 @@
-<div class="container">
-    <h1 class="new_quiz_title">CREATE A NEW QUIZ</h1>
-    <div>
-        <form action="/quizzes" method="POST" autocomplete="off">
-            <div id="quiz_setup_div">
+<form action="/quizzes" method="POST" autocomplete="off">
+    <main class="container">
+        <section class="new_page_header">
+            <h1 class="page_title">CREATE A NEW QUIZ</h1>
+        </section>
+        <section class="new_page_body">
+            <div class="quiz_setup_div">
                 <h2>Quiz Setup</h2>
                 <div>
                     <label for="quiz_name">Enter a name for your quiz:</label>
-                    <input type="text" id="quiz_name" name="quiz[name]">   
+                    <input 
+                        type="text" 
+                        id="quiz_name" 
+                        name="quiz[name]" 
+                        required
+                    >   
                 </div>
                 <br>
                 <div>
                     <label for="quiz_description">Enter a description:</label>
-                    <textarea id="quiz_description" name="quiz[description]"></textarea>
+                    <textarea 
+                        id="quiz_description" 
+                        name="quiz[description]" 
+                        required
+                    ></textarea>
                 </div>
                 <br>
                 <div>   
                     <label for="quiz_category">Select a Category:</label>
-                    <select id="quiz_category" name="quiz[category]">
+                    <select 
+                        id="quiz_category" 
+                        name="quiz[category]" 
+                        required
+                    >
                         <option value="">--Choose an Option--</option>
                         <% @categories.each do |category|%>
                             <option value="<%= category.id %>"><%= category.name %></option>
@@ -25,68 +40,150 @@
                 </div>
                 <div>
                     <label for="quiz_public">Make Quiz Public?</label>  
-                    <input type="checkbox" id="quiz_public" name="quiz[public]" value="true"> 
+                    <input 
+                        type="checkbox" 
+                        id="quiz_public" 
+                        name="quiz[public]" 
+                        value="true"
+                    > 
                 </div>
                 <br>
             </div>
             <br>
             <div class="questions_label">
-                <h2>Questions</h2>
+                <h2 class="page_subtitle">Questions</h2>
             </div>
-            <section id="questions_container">
+                
+            <div class="questions_container">
                 <article id="q1" class="question_article">
                     <h2>Question 1:</h2>
                     <div>
-                        <label for="q1_kind" class="question_kind_label">Select the question type:</label>
-                        <select id="q1_kind" class="question_kind_input" name="questions[][kind]">
-                            <option value="">--Choose an Option--</option>
-                            <option value="mc_many">Multiple Choice: Many Correct Answers</option>
+                        <label for="q1_kind" class="question_kind_label">
+                            Select the question type:
+                        </label>
+                        <select 
+                            id="q1_kind" 
+                            class="question_kind_input" 
+                            name="questions[][kind]"
+                        >
                             <option value="mc_one">Multiple Choice: One Correct Answer</option>
+                            <option value="mc_many">Multiple Choice: Many Correct Answers</option>
                         </select>
                     </div>
                     <br>
                     <div>
-                        <label for="q1_content" class="question_content_label">Enter the Question:</label>
-                        <input type="text" id="q1_content" class="question_content_input" name="questions[][content]">
+                        <label 
+                            for="q1_content" 
+                            class="question_content_label"
+                        >
+                            Enter the Question:
+                        </label>
+                        <input 
+                            type="text" 
+                            id="q1_content" 
+                            class="question_content_input" 
+                            name="questions[][content]" 
+                            required
+                        >
                     </div>
                     <br>
                     <div id="q1_answers" class="answers_container">
                         <div id="q1_a1" class="answer_div">
                             <h3>Answer 1:</h3>
                             <div>
-                                <input type="text" id="q1_a1_content" class="answer_content_input" name="questions[][answers][][content]">
+                                <input 
+                                    type="text" 
+                                    id="q1_a1_content" 
+                                    class="answer_content_input" 
+                                    name="questions[][answers][][content]" 
+                                    required
+                                >
                             </div>
                             <br>
                             <div>
-                                <label for="q1_a1_correct" class="answer_correct_label">Correct Answer?</label>
-                                <input type="checkbox" id="q1_a1_correct" class="answer_correct_input" name="questions[][answers][][correct]" value="true">
+                                <label 
+                                    for="q1_a1_correct" 
+                                    class="answer_correct_label"
+                                >
+                                    Correct Answer?
+                                </label>
+                                <input 
+                                    type="checkbox" 
+                                    id="q1_a1_correct" 
+                                    class="answer_correct_input" 
+                                    name="questions[][answers][][correct]" 
+                                    value="true"
+                                >
                             </div>
                         <br>
                         </div> 
                     </div>
                     <div class="add_answer_div">
-                        <button type="button" id="q1_add_answer" class="add_answer_button" onclick="addAnswer(1)">Add an Answer</button>
+                        <button 
+                            type="button" 
+                            id="q1_add_answer" 
+                            class="button-green" 
+                            onclick="addAnswer(1)"
+                        >
+                            Add an Answer
+                        </button>
                     </div>
                     <br>
                     <div>
-                        <input type="number" id="q1_limit" class="question_limit_input" name="questions[][limit]" value="1" max="1" min="1">
-                        <label for="q1_limit" class="question_limit_label">Total Answer Choices</label>
+                        <input 
+                            type="number" 
+                            id="q1_limit" 
+                            class="question_limit_input" 
+                            name="questions[][limit]" 
+                            value="1" 
+                            max="1" 
+                            min="1"
+                        >
+                        <label 
+                            for="q1_limit" 
+                            class="question_limit_label"
+                        >
+                            Total Answer Choices
+                        </label>
                     </div>
                     <br>
                 </article>
-            </section>
-            <br>
-            <div class="new_quiz_controls">
-                <button type="button" id="add_question" onclick="addQuestion()">Add a Question</button>
-                <input type="submit" value="Complete Quiz">
             </div>
-        </form>
-        <div class="return_div">
-            <form action="/users/<%= current_user.id %>" method="GET">
-                <button>Cancel and Exit</button>
-            </form>
+            <br>
+        </section>
+        <section class="new_page_footer">
+            <section class="new_quiz_controls">
+                <div>
+                    <button 
+                        type="button" 
+                        class="button-green" 
+                        id="add_question" 
+                        onclick="addQuestion()"
+                    >
+                        Add a Question
+                    </button>
+                </div>
+                <div>
+                    <input 
+                        type="submit" 
+                        class="button-yellow button-lg" 
+                        value="Complete Quiz"
+                    >
+                </div>
+                <div>
+                    <a href="/users/<%= current_user.id %>">
+                        <button 
+                            type="button" 
+                            class="button-red"
+                        >
+                            Cancel and Exit
+                        </button>
+                    </a>
+                </div>
+            </section>
         </div>
-    </div>
-</div>
+        </section>
+    </main>
+</form>
 
 <script type="text/javascript" src="/javascripts/createandedit.js"></script>

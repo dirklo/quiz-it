@@ -18,11 +18,16 @@ class UsersController < ApplicationController
     end
 
     post '/users' do
-        user = User.create(
-            name: params[:user][:name], 
-            email: params[:user][:email], 
-            password: params[:user][:password])
-        flash[:message] = "Sucessfully created user, please log in."
-        redirect "/login"
+        if User.find_by(email: params[:user][:email])
+            flash[:message] = "That email is already in use by another account."
+            redirect '/users/new'
+        else
+            User.create(
+                name: params[:user][:username], 
+                email: params[:user][:email], 
+                password: params[:user][:password])
+            flash[:message] = "Sucessfully created user, please log in."
+            redirect "/login"
+        end
     end
 end

@@ -1,4 +1,4 @@
-# quiz-it
+# Quiz-It
  Flatiron School, Phase 2 final project using Ruby 2.6.1 and Sinatra. 
 
 A fully functioning quiz creation web application.  

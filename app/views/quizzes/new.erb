@@ -4,8 +4,8 @@
             <h1 class="page_title">CREATE A NEW QUIZ</h1>
         </section>
         <section class="new_page_body">
-            <div class="quiz_setup_div">
-                <h2>Quiz Setup</h2>
+            <div class="quiz_details_card">
+                <h2>Quiz Details</h2>
                 <div>
                     <label for="quiz_name">Enter a name for your quiz:</label>
                     <input 
@@ -50,11 +50,11 @@
                 <br>
             </div>
             <br>
-            <div class="questions_label">
+            <div>
                 <h2 class="page_subtitle">Questions</h2>
             </div>
                 
-            <div class="questions_container">
+            <div class="questions_card">
                 <article id="q1" class="question_article">
                     <h2>Question 1:</h2>
                     <div>
@@ -115,7 +115,6 @@
                                     value="true"
                                 >
                             </div>
-                        <br>
                         </div> 
                     </div>
                     <div class="add_answer_div">
@@ -152,36 +151,33 @@
             <br>
         </section>
         <section class="new_page_footer">
-            <section class="new_quiz_controls">
-                <div>
+            <div>
+                <button 
+                    type="button" 
+                    class="button-green" 
+                    id="add_question" 
+                    onclick="addQuestion()"
+                >
+                    Add a Question
+                </button>
+            </div>
+            <div>
+                <input 
+                    type="submit" 
+                    class="button-yellow button-lg" 
+                    value="Complete Quiz"
+                >
+            </div>
+            <div>
+                <a href="/users/<%= current_user.id %>">
                     <button 
                         type="button" 
-                        class="button-green" 
-                        id="add_question" 
-                        onclick="addQuestion()"
+                        class="button-red"
                     >
-                        Add a Question
+                        Cancel and Exit
                     </button>
-                </div>
-                <div>
-                    <input 
-                        type="submit" 
-                        class="button-yellow button-lg" 
-                        value="Complete Quiz"
-                    >
-                </div>
-                <div>
-                    <a href="/users/<%= current_user.id %>">
-                        <button 
-                            type="button" 
-                            class="button-red"
-                        >
-                            Cancel and Exit
-                        </button>
-                    </a>
-                </div>
-            </section>
-        </div>
+                </a>
+            </div>
         </section>
     </main>
 </form>

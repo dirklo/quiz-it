@@ -119,6 +119,149 @@ nav #buttons button:focus {
     box-shadow: none;
 }
 
+/* BUTTONS */
+.button-green {
+    padding: 2px 13px 4px 17px;
+    background: linear-gradient(
+        to bottom,  
+        rgba(7, 214, 7, .05), 
+        rgba(0, 255, 0, .05)
+    );
+    border-radius: 10px;
+    font-family: 'Sawarabi Gothic', sans-serif;
+    text-shadow: 1px 1px 1px #000;
+    font-weight: 400;
+    font-size: 18px;
+    color: white;
+    box-shadow: -2px -2px 3px #000;
+    box-shadow: 
+        1px 1px 2px rgb(3, 59, 3),
+        -1px -1px 2px rgb(214, 245, 217),
+        inset 1px 1px 2px rgb(3, 59, 3),
+        inset -1px -1px 2px rgb(214, 245, 217);
+    border:none;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.button-green:hover {
+    transform: scale(1.1);
+    box-shadow: 
+        4px 4px 5px rgb(3, 59, 3),
+        -1px -1px 2px rgb(214, 245, 217);
+}
+
+.button-green:focus {
+    outline: none;
+    box-shadow: 
+        4px 4px 5px rgb(3, 59, 3),
+        -1px -1px 2px rgb(214, 245, 217);
+}
+
+.button-yellow {
+    padding: 2px 13px 4px 17px;
+    background: linear-gradient(
+        to bottom,  
+        rgba(238, 241, 7, .05), 
+        rgba(255, 217, 0, .05)
+    );
+    border-radius: 10px;
+    font-family: 'Sawarabi Gothic', sans-serif;
+    text-shadow: 1px 1px 1px #000;
+    font-weight: 400;
+    font-size: 18px;
+    color: white;
+    box-shadow: -2px -2px 3px #000;
+    box-shadow: 
+        1px 1px 2px rgb(84, 85, 7),
+        -1px -1px 2px rgb(239, 241, 210),
+        inset 1px 1px 2px rgb(84, 85, 7),
+        inset -1px -1px 2px rgb(239, 241, 210);
+    border:none;
+    transition: all 0.3s ease;
+}
+
+.button-yellow:hover {
+    transform: scale(1.1);
+    box-shadow: 
+        4px 4px 5px rgb(84, 85, 7),
+        -1px -1px 2px rgb(239, 241, 210);
+}
+
+.button-yellow:focus {
+    outline: none;
+    box-shadow: 
+        4px 4px 5px rgb(84, 85, 7),
+        -1px -1px 2px rgb(239, 241, 210);
+}
+
+.button-red {
+    padding: 2px 13px 4px 17px;
+    background: linear-gradient(
+        to bottom,  
+        rgba(214, 7, 7, 0.05), 
+        rgba(255, 60, 0, 0.05)
+    );
+    border-radius: 10px;
+    font-family: 'Sawarabi Gothic', sans-serif;
+    text-shadow: 1px 1px 1px #000;
+    font-weight: 400;
+    font-size: 18px;
+    color: white;
+    box-shadow: -2px -2px 3px #000;
+    box-shadow: 
+        1px 1px 2px rgb(59, 3, 3),
+        -1px -1px 2px rgb(245, 214, 214),
+        inset 1px 1px 2px rgb(59, 3, 3),
+        inset -1px -1px 2px rgb(245, 214, 214);
+    border:none;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.button-red:hover {
+    transform: scale(1.1);
+    box-shadow: 
+        4px 4px 5px rgb(59, 3, 3),
+        -1px -1px 2px rgb(245, 214, 214);
+}
+
+.button-red:focus {
+    outline: none;
+    box-shadow: 
+        4px 4px 5px rgb(59, 3, 3),
+        -1px -1px 2px rgb(245, 214, 214);
+}
+
+.button-lg {
+    padding: 10px 20px !important;
+}
+
+.card_delete_button {
+    color: rgb(255, 255, 255);
+    border-radius: 50%;
+    border: 1px solid rgb(77, 8, 8);
+    background: rgba(220, 20, 20, 0.3);
+    padding: 0px 13px;
+    position: relative;
+    left: 10px;
+    bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.card_delete_button:hover {
+    transform: scale(1.1);
+}
+
+.card_delete_button:focus {
+    outline: none;
+}
+
+
+
+
+
 /* ITEM LISTS  */
 
 .list {
@@ -206,6 +349,147 @@ nav #buttons button:focus {
 }
 
 
+/* QUIZ CARDS FOR NEW AND EDIT PAGES*/
+
+.quiz_details_card {
+    font-family: 'Baloo 2', cursive;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    background: rgba(152, 222, 217, 0.4);
+    border: 1px solid rgba(0, 0, 0, .5);
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .1);
+    width: 90%;
+    max-width: 500px;
+    padding: 30px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.quiz_details_card h1 {
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.quiz_details_card h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.quiz_details_card div {
+    width: 100%;
+}
+
+.quiz_details_card p {
+    text-align: center;
+}
+
+.quiz_details_card #quiz_name, 
+.quiz_details_card select, 
+.quiz_details_card textarea {
+    font-family: 'Baloo 2', cursive;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.quiz_details_card #quiz_name:focus, 
+.quiz_details_card textarea:focus, 
+.quiz_details_card select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.quiz_details_card select {
+    margin-bottom: 20px;
+}
+
+.quiz_details_card textarea {
+    width: 100%;
+    height: 5rem;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 5px;
+    resize: none;
+}
+
+.questions_card {
+    font-family: 'Baloo 2', cursive;
+    color: white;
+    text-shadow: 1px 1px 2px black; 
+    width: 90%;
+    max-width: 500px;
+}
+
+.questions_card .question_article {
+    background: rgba(100, 108, 223, 0.3);
+    border: 1px solid rgba(0, 0, 0, .5);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .3);
+    margin-top: 10px;
+}
+
+.questions_card input[type="text"] {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.questions_card select {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.questions_card select:focus,
+.questions_card input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.answer_div {
+    background: rgba(191, 152, 222, 0.5);
+    border: 1px solid rgba(0, 0, 0, .5);
+    border-left: 20px solid rgba(14, 9, 51, 0.7);
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.add_answer_div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.answer_title_div, 
+.question_title_div {
+    display: flex;
+    height: 38px;
+}
+
+.answer_title_div h3, 
+.question_title_div h2 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.question_limit_input {
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+
 
 
 /* SPLASH AND LOGIN SIGNUP SCREENS */
@@ -234,6 +518,7 @@ nav #buttons button:focus {
     justify-content: center;
     align-items: center;
 }
+
 
 /* LOGIN AND SIGNUP FORMS */
 .form_container {
@@ -349,225 +634,61 @@ nav #buttons button:focus {
     margin-bottom: 30px;
 }
 
+.user_home_body div {
+    margin-bottom: 10px;
+}
+
 .user_home_footer {
     max-width: 1000px;
     width: 80%;
+    height: 150px;
     display: flex;
-    margin-bottom: 50px;
+    flex-direction: row;
     justify-content: space-evenly;
+    align-items: space-evenly;
+    flex-wrap: wrap;
 }
 
 
 /* NEW QUIZ PAGE */
-.new_quiz_body {
+.new_page_body {
+    max-width: 650px;
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 500px;
-    width: 90%;
-}
-
-.quiz_setup_div {
-    font-family: 'Baloo 2', cursive;
-    background: rgba(152, 222, 217, 0.4);
-    border: 1px solid rgba(0, 0, 0, .5);
-    border-radius: 20px;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, .1);
-    width: 90%;
-    max-width: 500px;
-    padding: 30px;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.quiz_setup_div h2 {
-    font-size: 30px;
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-
-.quiz_setup_div div {
-    width: 100%;
-}
-
-.quiz_setup_div #quiz_name, 
-.quiz_setup_div select, 
-.quiz_setup_div textarea {
-    font-family: 'Baloo 2', cursive;
-    width: 100%;
-    padding: 10px 20px;
-    border-radius: 10px;
-    margin-top: 5px;
-}
-
-.quiz_setup_div #quiz_name:focus, 
-.quiz_setup_div textarea:focus, 
-.quiz_setup_div select:focus,
-.return_div button:focus  {
-    outline: none;
-    box-shadow: none;
-}
-
-.quiz_setup_div select {
-    margin-bottom: 20px;
-}
-
-.quiz_setup_div textarea {
-    width: 100%;
-    height: 5rem;
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 5px;
-    resize: none;
-}
-
-.new_quiz_title {
-    font-family: 'Fredoka One', cursive;
-    text-align: center;
-    font-size: 50px;
-    text-shadow: 1px 2px 5px #000;
-}
-
-.questions_label {
-    font-family: 'Fredoka One', cursive;
-    text-align: center;
-    font-size: 40px;
-    text-shadow: 1px 2px 5px #000;
-}
-
-.questions_container {
-    font-family: 'Baloo 2', cursive;
-    width: 90%;
-    max-width: 500px;
-}
-
-.questions_container .question_article {
-    background: rgba(100, 108, 223, 0.3);
-    border: 1px solid rgba(0, 0, 0, .5);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, .3);
-    margin-top: 10px;
-}
-
-.questions_container input[type="text"] {
-    width: 100%;
-    padding: 10px 20px;
-    border-radius: 10px;
-    margin-top: 5px;
-}
-
-.answer_div {
-    background: rgba(191, 152, 222, 0.5);
-    border: 1px solid rgba(0, 0, 0, .5);
-    border-left: 20px solid rgba(14, 9, 51, 0.7);
-    border-radius: 20px;
-    padding: 15px;
-    margin-bottom: 10px;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
-}
-
-
-.questions_container select {
-    width: 100%;
-    padding: 10px 20px;
-    border-radius: 10px;
-    margin-top: 5px;
-}
-
-.questions_container select:focus,
-.questions_container input:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-.add_answer_div {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.answer_title_div, 
-.question_title_div {
-    display:flex;
-    height: 38px;
-}
-
-.answer_title_div h3, 
-.question_title_div h2 {
-    flex: 1;
-}
-
-.answer_delete_button,
-.question_delete_button {
-    border-radius: 50%;
-    font-family: sans-serif;
-    font-size: 16px;
-    padding: 0px 13px;
-    border: none;
-    box-shadow: 1px 1px 3px rgb(0,0,0);
-    color: rgb(253, 23, 92);
-    background: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    position: relative;
-    top: -10px;
-    right: -10px;
-}
-
-.answer_delete_button:focus,
-.question_delete_button:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-.question_limit_input {
-    padding: 5px;
-    border-radius: 10px;
 }
 
 .new_page_footer {
+    max-width: 500px;
+    width: 100%;
+    margin-bottom: 50px;
+    height: 200px;
     display: flex;
     flex-direction: column;
-    max-width: 500px;
-    width: 90%;
-    margin-bottom: 50px;
+    justify-content: space-evenly;
     align-items: flex-end;
 }
 
 
+
 /* QUIZ SHOW PAGE */
 
-.quiz_details {
-    background: rgba(152, 222, 217, 0.4);
-    border: 1px solid rgba(0, 0, 0, .5);
-    border-radius: 20px;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, .1);
-    width: 90%;
-    max-width: 500px;
-    padding: 30px;
-    margin-top: 10px;
+.quiz_show_body {
+    width: 100%;
+    max-width: 650px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
-.quiz_details h1{
-    font-family: 'Fredoka One', cursive;
-    font-size: 40px;
-    text-align: center;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+.quiz_show_body button {
+    margin-top: 20px;
 }
 
-.quiz_details button{
-    margin-top: 10px;
-}
-
-.admin_controls {
+.quiz_show_body .admin_controls {
+    color: white;
     background:  rgba(191, 152, 222, 0.5);
     border: 1px solid rgba(0, 0, 0, .5);
     border-radius: 20px;
@@ -581,7 +702,7 @@ nav #buttons button:focus {
     justify-content: center;
 }
 
-.admin_controls h2{
+.quiz_show_body .admin_controls h2{
     font-family: 'Fredoka One', cursive;
     font-size: 30px;
     text-align: center;
@@ -589,47 +710,36 @@ nav #buttons button:focus {
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
 }
 
-.edit_quiz_button {
-    margin-top: 10px;
-}
-
-#cancel_button {
-    margin-top: 10px;
-}
-
 /* QUIZ EDIT PAGE */
-
-.edit_user_access_button {
-    margin-top: 10px;
+.edit_page_body {
+    max-width: 650px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-
-.edit_quiz_title {
-    font-size: 40px;
-    text-align: center;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+.edit_page_footer {
+    max-width: 500px;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-end;
 }
 
 /* PLAY QUIZ PAGE */
-
-.quiz_title h1 {
-    font-family: 'Fredoka One', cursive;
-    text-align: center;
-    font-size: 50px;
-    text-shadow: 1px 2px 5px #000;
-}
-
-.quiz_title h2 {
-    text-align: center;
-}
-
-.play_questions {
+.play_page_body {
     width: 90%;
     max-width: 500px;
+    color: white;
+    text-shadow: 1px 1px 2px black;
 }
 
-.play_questions .play_question {
+.play_page_body .play_questions {
+    font-family: 'Baloo 2', cursive;
     background: rgba(100, 108, 223, 0.3);
     border: 1px solid rgba(0, 0, 0, .5);
     border-radius: 20px;
@@ -638,20 +748,34 @@ nav #buttons button:focus {
     margin-top: 10px;
 }
 
-.submit_answers {
-    margin: 20px 0px 50px 0px;
+.play_page_body .play_questions h2 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.play_page_body .play_questions input {
+    margin-left: 20px;
+}
+
+.play_page_body .play_questions span {
+    font-size: 25px;
+}
+
+.play_page_footer {
+    width: 90%;
+    max-width: 500px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
 }
 
 /* RESULTS PAGE */
 
-.result_title {
-    font-family: 'Fredoka One', cursive;
-    text-align: center;
-    font-size: 50px;
-    text-shadow: 1px 2px 5px #000;
-}
-
-.result_cards {
+.result_page_body {
+    color: white;
+    text-shadow: 1px 1px 2px black;
     width: 90%;
     max-width: 500px;
     display: flex;
@@ -659,7 +783,7 @@ nav #buttons button:focus {
     justify-content: center;
 }
 
-.result_cards .result_card_correct {
+.result_page_body .result_card_correct {
     background: rgba(132, 219, 132, 0.5);
     border: 1px solid rgba(0, 0, 0, .5);
     border-radius: 20px;
@@ -668,7 +792,7 @@ nav #buttons button:focus {
     margin-top: 10px;
 }
 
-.result_cards .result_card_incorrect {
+.result_page_body .result_card_incorrect {
     background: rgba(212, 62, 62, 0.5);
     border: 1px solid rgba(0, 0, 0, .5);
     border-radius: 20px;
@@ -677,10 +801,16 @@ nav #buttons button:focus {
     margin-top: 10px;
 }
 
-#results_return_button {
-    margin-top: 10px;
-    margin-bottom: 50px;
+.result_page_footer {
+    width: 100%;
+    max-width: 500px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
 
 /* HISTORY PAGE */
 
@@ -690,14 +820,20 @@ nav #buttons button:focus {
     background: rgba(145, 132, 219, 0.5);
     border: 1px solid rgba(0, 0, 0, .5);
     border-radius: 20px;
-    padding: 30px;
+    padding: 30px 50px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, .3);
     margin-top: 10px;
 }
 
-#history_return_button {
-    margin-top: 10px;
+.history_footer {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
 
 /* CATEGORY SHOW PAGE */
 .category_show_footer {
@@ -707,121 +843,3 @@ nav #buttons button:focus {
     justify-content: space-evenly;
 }
 
-/* BUTTONS */
-.button-green {
-    padding: 2px 13px 4px 17px;
-    background: linear-gradient(
-        to bottom,  
-        rgba(7, 214, 7, .05), 
-        rgba(0, 255, 0, .05)
-    );
-    border-radius: 10px;
-    font-family: 'Sawarabi Gothic', sans-serif;
-    text-shadow: 1px 1px 1px #000;
-    font-weight: 400;
-    font-size: 18px;
-    color: white;
-    box-shadow: -2px -2px 3px #000;
-    box-shadow: 
-        1px 1px 2px rgb(3, 59, 3),
-        -1px -1px 2px rgb(214, 245, 217),
-        inset 1px 1px 2px rgb(3, 59, 3),
-        inset -1px -1px 2px rgb(214, 245, 217);
-    border:none;
-    transition: all 0.3s ease;
-    z-index: 1;
-}
-
-.button-green:hover {
-    transform: scale(1.1);
-    box-shadow: 
-        4px 4px 5px rgb(3, 59, 3),
-        -1px -1px 2px rgb(214, 245, 217);
-}
-
-.button-green:focus {
-    outline: none;
-    box-shadow: 
-        4px 4px 5px rgb(3, 59, 3),
-        -1px -1px 2px rgb(214, 245, 217);
-}
-
-.button-yellow {
-    margin-top: 10px;
-    padding: 2px 13px 4px 17px;
-    background: linear-gradient(
-        to bottom,  
-        rgba(238, 241, 7, .05), 
-        rgba(255, 217, 0, .05)
-    );
-    border-radius: 10px;
-    font-family: 'Sawarabi Gothic', sans-serif;
-    text-shadow: 1px 1px 1px #000;
-    font-weight: 400;
-    font-size: 18px;
-    color: white;
-    box-shadow: -2px -2px 3px #000;
-    box-shadow: 
-        1px 1px 2px rgb(84, 85, 7),
-        -1px -1px 2px rgb(239, 241, 210),
-        inset 1px 1px 2px rgb(84, 85, 7),
-        inset -1px -1px 2px rgb(239, 241, 210);
-    border:none;
-    transition: all 0.3s ease;
-}
-
-.button-yellow:hover {
-    transform: scale(1.1);
-    box-shadow: 
-        4px 4px 5px rgb(84, 85, 7),
-        -1px -1px 2px rgb(239, 241, 210);
-}
-
-.button-yellow:focus {
-    outline: none;
-    box-shadow: 
-        4px 4px 5px rgb(84, 85, 7),
-        -1px -1px 2px rgb(239, 241, 210);
-}
-
-.button-red {
-    padding: 2px 13px 4px 17px;
-    background: linear-gradient(
-        to bottom,  
-        rgba(214, 7, 7, 0.05), 
-        rgba(255, 60, 0, 0.05)
-    );
-    border-radius: 10px;
-    font-family: 'Sawarabi Gothic', sans-serif;
-    text-shadow: 1px 1px 1px #000;
-    font-weight: 400;
-    font-size: 18px;
-    color: white;
-    box-shadow: -2px -2px 3px #000;
-    box-shadow: 
-        1px 1px 2px rgb(59, 3, 3),
-        -1px -1px 2px rgb(245, 214, 214),
-        inset 1px 1px 2px rgb(59, 3, 3),
-        inset -1px -1px 2px rgb(245, 214, 214);
-    border:none;
-    transition: all 0.3s ease;
-    z-index: 1;
-}
-
-.button-red:hover {
-    transform: scale(1.1);
-    box-shadow: 
-        4px 4px 5px rgb(59, 3, 3),
-        -1px -1px 2px rgb(245, 214, 214);
-}
-
-.button-red:focus {
-    outline: none;
-    box-shadow: 
-        4px 4px 5px rgb(59, 3, 3),
-        -1px -1px 2px rgb(245, 214, 214);
-}
-
-.button-lg {
-    padding: 10px 20px !important;
-}

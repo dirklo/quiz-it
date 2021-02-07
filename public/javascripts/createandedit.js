@@ -11,7 +11,7 @@ function addAnswer(questionNum) {
             <button 
                 type="button" 
                 id="q${questionNum}_a${answerNum}_delete_button" 
-                class="answer_delete_button" 
+                class="card_delete_button" 
                 onclick="deleteAnswer(${questionNum}, ${answerNum})"
             >
                 X
@@ -41,7 +41,6 @@ function addAnswer(questionNum) {
                 name="questions[][answers][][correct]" 
                 value="true">
         </div>
-        <br>
     `;
     document.getElementById(`q${questionNum}_answers`).appendChild(div);
     setLimit(questionNum);
@@ -99,7 +98,7 @@ function addQuestion() {
             <button 
                 type="button" 
                 id="q${questionNum}_delete_button" 
-                class="question_delete_button" 
+                class="card_delete_button" 
                 onclick="deleteAndRenumberQuestions(${questionNum})"
             >
                 X
@@ -166,7 +165,6 @@ function addQuestion() {
                         value="true"
                     >
                 </div>
-                <br>
             </div> 
         </div>
         <div>
@@ -197,12 +195,12 @@ function addQuestion() {
             </button>
         </div>
     `;
-    document.getElementsByClassName('questions_container')[0].appendChild(article);
+    document.getElementsByClassName('questions_card')[0].appendChild(article);
 }
 
 function deleteAndRenumberQuestions(questionNum) {
     // DELETE QUESTION ARTICLE
-    var questionsContainer = document.getElementsByClassName('questions_container')[0];
+    var questionsContainer = document.getElementsByClassName('questions_card')[0];
     var oldQuestionArticle = document.getElementById(`q${questionNum}`);
     questionsContainer.removeChild(oldQuestionArticle);
 

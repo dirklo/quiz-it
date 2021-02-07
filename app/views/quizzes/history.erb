@@ -1,7 +1,7 @@
 <main class="container">
     <section class="history_header">
         <h1 class="page_title">QUIZ HISTORY<h1>
-        <h2><%= current_user.name %> </h2>
+        <h2 class="page_subtitle"><%= current_user.name %> </h2>
     </section>
     <section class="history_body">
         <% if current_user.results.empty? %>

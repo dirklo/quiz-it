@@ -1,10 +1,12 @@
 <form action="/quizzes/<%= @quiz.id %>" method="POST">
     <input type="hidden" id="hidden" name="_method" value="PATCH">
     <main class="container">
-        <h1 class="edit_quiz_title">Edit Quiz</h1>
-        <div class="new_quiz_container">
-            <section class="quiz_setup_div">
-                <h2>Quiz Setup</h2>
+        <section class="edit_page_header">
+            <h1 class="page_title">Edit Quiz</h1>
+        </section>
+        <section class="edit_page_body">
+            <div class="quiz_details_card">
+                <h2>Quiz Details</h2>
                 <div>
                     <label for="quiz_name">Quiz Name:</label>
                     <input 
@@ -53,13 +55,13 @@
                         <button type="button" class="button-yellow">Edit User Access</button>
                     </a>
                 <% end %>
-            </section>
+            </div>
             <br>
-            <div class="questions_label">
-                <h2>Questions</h2>
+            <div>
+                <h2 class="page_subtitle">Questions</h2>
             </div>
 
-            <section class="questions_container">
+            <div class="questions_card">
                 <% @quiz.questions.each do |question| %>
                     <article id="q<%= question.order %>" class="question_article">
                         <div class="question_title_div">
@@ -68,7 +70,7 @@
                                 <button 
                                     type="button" 
                                     id="q<%= question.order %>_delete_button" 
-                                    class="question_delete_button" 
+                                    class="card_delete_button" 
                                     onclick="deleteAndRenumberQuestions(<%= question.order %>)"
                                 >
                                     X
@@ -127,7 +129,7 @@
                                         <button 
                                             type="button" 
                                             id="q<%= question.order %>_a<%= index + 1 %>_delete_button" 
-                                            class="answer_delete_button" 
+                                            class="card_delete_button" 
                                             onclick="deleteAnswer(<%= question.order %>, <%= index + 1 %>)"
                                         >
                                             X
@@ -143,7 +145,6 @@
                                             value="<%= answer.content %>"
                                         >
                                     </div>
-                                    <br>
                                     <div>
                                         <label 
                                             for="q<%= question.order %>_a<%= index + 1 %>_correct" 
@@ -192,35 +193,34 @@
                         </div>
                     </article>
                 <% end %>
-            </section>
+            </div>
+        </section>
             
+        <section class="edit_page_footer">
+            <div>
+                <button 
+                    type="button" 
+                    id="add_question" 
+                    class="button-green" 
+                    onclick="addQuestion()"
+                >
+                    Add Question
+                </button>
+            </div>
             <br>
-            <section class="new_quiz_controls">
-                <div>
-                    <button 
-                        type="button" 
-                        id="add_question" 
-                        class="button-green" 
-                        onclick="addQuestion()"
-                    >
-                        Add Question
-                    </button>
-                </div>
-                <br>
-                <div>
-                    <input 
-                        type="submit" 
-                        class="button-yellow button-lg" 
-                        value="Update Quiz"
-                    >
-                </div>
-                <div>
-                    <a href="/users/<%= current_user.id %>">
-                        <button type="button" class="button-red">Cancel and Exit</button>
-                    </a>
-                </div>
-            </section>
-        </div>
+            <div>
+                <input 
+                    type="submit" 
+                    class="button-yellow button-lg" 
+                    value="Update Quiz"
+                >
+            </div>
+            <div>
+                <a href="/users/<%= current_user.id %>">
+                    <button type="button" class="button-red">Cancel and Exit</button>
+                </a>
+            </div>
+        </section>
     </main>
 </form>
 

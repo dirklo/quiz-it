@@ -1,55 +1,50 @@
 <form action="/quizzes/<%= @quiz.id %>/play" method="POST">
     <main class="container">
-        <section class="quiz_title">
-            <h1><%= @quiz.name %></h1>
-            <h2>Created by: <%= @quiz.author.name %></h1>
+        <section class="play_page_header">
+            <h1 class="page_title"><%= @quiz.name %></h1>
+            <h2 class="page_subtitle">Created by: <%= @quiz.author.name %></h2>
         </section>
-        <section class="play_questions">
+        <section class="play_page_body">
             <% @question_hashes.each do |hash| %>
-                <article class="play_question">
+                <article class="play_questions">
                     <% hash.each do |question, answers| %>
                         <h2>
                             <%= question.content %>
                         </h2>
                         <br>
                         <% if question.kind == "mc_one" %>  
-                            <% answers.each do |answer| %>
+                            <% answers.each_with_index do |answer, index| %>
                                 <input 
                                     type="radio" 
                                     id="answers[<%= question.order %>]" 
                                     name="answers[<%= question.order %>][]" 
                                     value="<%= answer.id %>"
                                 >
-                                <%= answer.content %>
+                                <span>&nbsp<%= answer.content %></span>
                                 <br>
+                                <% if index < answers.length - 1 %>
+                                    <hr>
+                                <% end %>
                             <% end %>
-                            <br>
                         <% elsif question.kind == "mc_many" %> 
-                            <% answers.each do |answer| %>
+                            <% answers.each_with_index do |answer, index| %>
                                 <input 
                                     type="checkbox" 
                                     name="answers[<%= question.order %>][]" 
                                     value="<%= answer.id %>"
                                 >
-                                <label for="answers[<%= question.order %>]"> <%= answer.content %> </label>
+                                <label for="answers[<%= question.order %>]"> <span>&nbsp<%= answer.content %></span> </label>
                                 <br>
+                                <% if index < answers.length - 1 %>
+                                    <hr>
+                                <% end %>
                             <% end %>
-                            <br>
-                        <% elsif question.kind == "fill_in" %>
-                            <label for="answers[<%= question.order %>]">Your Answer:</label>
-                            <input 
-                                type="text" 
-                                name="answers[<%= question.order %>][]" 
-                                id="answers[<%= question.id %>]"
-                            >
-                            <br>
                         <% end %>
-                        <br>
                     <% end %>
                 </article>
             <% end %>
         </section>
-        <section class="submit_answers">
+        <section class="play_page_footer">
             <button class="button-green button-lg">SUBMIT ANSWERS</button>
         </section>
     </main>

@@ -1,8 +1,8 @@
 <main class="container">
-    <section class="result_title">
-        <h2>You scored: <%= @percent%>%</h2>
+    <section class="result_page_header">
+        <h1 class="page_title">You scored: <%= @percent%>%</h1>
     </section>
-    <section class="result_cards">
+    <section class="result_page_body">
         <% @results.each_with_index do |result, index| %>
             <div class="
             <% if @results[index].any?{|r| r.include?(false)} %>
@@ -26,8 +26,10 @@
             </div>
         <% end %>
     </section>
-    <a href="/users/<%= current_user.id %>">
-        <button class="button-green" id="results_return_button">Return Home</button>
-    </a>
+    <section class="result_page_footer">
+        <a href="/users/<%= current_user.id %>">
+            <button class="button-green button-lg">Return Home</button>
+        </a>
+    </section>
 </main>
 

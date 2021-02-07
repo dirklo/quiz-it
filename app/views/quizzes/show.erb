@@ -1,41 +1,42 @@
 <main class="container">
-    <div class="quiz_details">
-        <h1><%= @quiz.name %></h1>
+    <section class="quiz_show_body">
+        <div class="quiz_details_card">
+            <h1><%= @quiz.name %></h1>
 
-        <h2>Created by <%= @quiz.author.name %></h2>
-        <p>on <%= @quiz.date_created %></p>
-        <p><%= @quiz.description %></p>
-        <div>
+            <h2>Created by <%= @quiz.author.name %></h2>
+            <p><%= @quiz.description %></p>
             <a href="/quizzes/<%= @quiz.id%>/play">
                 <button class="button-green button-lg">
                     Start Quiz!
                 </button>
             </a>
         </div>
-    </div>
 
-    <% if @quiz.is_author?(current_user.email) || @quiz.is_admin?(current_user.email) %>
-        <div class="admin_controls">
-            <h2>Admin Tools</h2>
-            <a href="/quizzes/<%= @quiz.id%>/edit">
-                <button class="button-green">
-                    Edit Quiz
-                </button>
-            </a>
-    <% end %>
-    <% if @quiz.is_author?(current_user.email)%>
-            <br>
-            <form action="/quizzes/<%= @quiz.id %>" method="POST">
-                <input type="hidden" id="hidden" name="_method" value="DELETE">
-                <input type="submit" class="button-red" value="Delete Quiz">
-            </form>
-            <br>
-    <% end %>
-        </div>
+        <% if @quiz.is_author?(current_user.email) || @quiz.is_admin?(current_user.email) %>
+            <div class="admin_controls">
+                <h2>Admin Tools</h2>
+                <a href="/quizzes/<%= @quiz.id%>/edit">
+                    <button class="button-green">
+                        Edit Quiz
+                    </button>
+                </a>
+        <% end %>
+        <% if @quiz.is_author?(current_user.email)%>
+                <br>
+                <form action="/quizzes/<%= @quiz.id %>" method="POST">
+                    <input type="hidden" id="hidden" name="_method" value="DELETE">
+                    <input type="submit" class="button-red" value="Delete Quiz">
+                </form>
+                <br>
+        <% end %>
+            </div>
+    </section>
+    <section class="quiz_show_footer">
         <a href="/users/<%= current_user.id %>">
             <button class="button-red" id="cancel_button">
                 Cancel and Exit
             </button>
         </a>
+    </section>
 </main>
 

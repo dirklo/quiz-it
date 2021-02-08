@@ -12,25 +12,19 @@
 
 <body>
 <nav id="main_nav">
-    <a href="/" id="nav_logo">QUIZ-IT</a>
+    <a href="/users/home" id="nav_logo">QUIZ-IT</a>
     <div id="buttons">
         <% if !logged_in? %>
-            <div>
-                <form action="/login">
+                <a href="/login">
                     <button>Log In</button>
-                </form>
-            </div>
-            <div>
-                <form action="/users/new">
+                </a>
+                <a href="/users/new">
                     <button>Sign Up</button>
-                </form>
-            </div>
+                </a>
         <% else %>
-            <div>
-                <form action="/logout">
+                <a href="/logout">
                     <button>Log Out</button>
-                </form>
-            </div>
+                </a>
         <% end %>
     </div>
 </nav>

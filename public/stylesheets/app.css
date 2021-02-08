@@ -70,18 +70,6 @@
 }
 
 /* NAVBAR */
-#nav_logo {
-    font-family: 'Hachi Maru Pop', cursive;
-    font-weight: 400;
-    font-size: 20px;
-    padding: 0px 10px 6px 10px;
-    cursor: pointer;
-    text-decoration: none;
-    color:rgb(255, 255, 255);
-    border: 5px solid white;
-    border-radius: 10px;
-}
-
 nav {
     color: white;
     background:
@@ -96,8 +84,6 @@ nav {
             rgba(126, 152, 240, .5)
         );
     padding: 10px;
-    /* border-bottom: 1px solid rgba(0, 0, 0, 0.5); */
-    border-radius: 100%/0 0 30px 0;
     box-shadow: 0 6px 0 rgba(246, 246, 246, 0.5);
     display: flex;
     flex-direction: row;
@@ -107,26 +93,137 @@ nav {
     width: 100%;
     height: auto;
     z-index: 2;
+    overflow: hidden;
+}
+
+#nav_logo {
+    font-family: 'Hachi Maru Pop', cursive;
+    font-weight: 400;
+    font-size: 20px;
+    padding: 0px 10px 6px 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color:rgb(255, 255, 255);
+    border: 5px solid white;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+#nav_logo:hover {
+    transform: scale(1.1);
+    border: 5px solid rgb(229, 219, 243);
+    box-shadow: 2px 2px 3px rgb(92, 57, 189);
 }
 
 nav #buttons {
-    position: absolute;
-    right: 0;
+    max-width: 200px;
     display: flex;
-    justify-content: space-evenly;
-    margin-right: 10px;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 nav #buttons button {
-    margin: 5px;
-    padding: 7px 12px;
-    border-radius: 10px;
+    font-family: 'Sawarabi Gothic', sans-serif;
+    text-shadow: 1px 1px 2px black;
+    margin: 0px 5px;
+    padding: 8px 10px;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    color: white;
+    background: linear-gradient(90deg, #2d5d9c, #5c39bd, #7d39bd);
+    box-shadow: 2px 2px 3px rgba(51, 17, 83, 0.5);
+    transition: all 0.3s ease;
 }
 
-nav #buttons button:focus {
-    outline: none;
-    box-shadow: none;
+nav #buttons button:hover{
+    transform: scale(1.1);
+    box-shadow: 3px 3px 5px rgba(51, 17, 83, 0.5);
+    cursor: pointer;
 }
+
+.main_overlay .login_buttons{
+    margin-top: 15px;
+    width: 250px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: space-evenly;
+}
+
+.main_overlay .login_buttons button {
+    position: relative;
+    font-family: 'Fredoka One', cursive;
+    height: 40px;
+    padding: 8px 15px 20px 15px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    background: #111;
+    color: #fff;
+    font-size: 20px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.main_overlay .login_buttons button:hover {
+    transform: scale(1.1);
+}
+
+#login_button:hover {
+    background: linear-gradient(90deg, #2d5d9c, #5c39bd, #7d39bd, #2d5d9c);
+    background-size: 400%;
+}
+
+#signup_button:hover {
+    background: linear-gradient(90deg, #2d799c, #5c39bd, #3982bd, #2d799c);
+    background-size: 400%;
+}
+
+#signup_button:before, 
+#login_button:before {
+    width: 100%;
+    content: '';
+    position: absolute;
+    background: inherit;
+    top: -5px;
+    right: -5px;
+    bottom: -5px;
+    left: -5px;
+    border-radius: 50px;
+    filter: blur(20px);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+#signup_button:hover:before,
+#login_button:hover:before {
+    border-radius: 50px;
+    opacity: 1;
+    z-index: -1;
+}
+
+#signup_button:hover,
+#login_button:hover {
+    border-radius: 50px;
+    z-index: 1;
+    animation: glow 8s linear infinite;
+}
+
+@keyframes glow {
+    0%{
+        background-position: 0%;
+    }
+    100%{
+        background-position: 400%;
+    }
+    0%{
+        background-position: 0%;
+    }
+}
+
 
 /* BUTTONS */
 .button-green {
@@ -514,6 +611,7 @@ nav #buttons button:focus {
 .main_overlay {
     position: absolute;
     font-family: 'Fredoka One', cursive;
+    text-shadow: 1px 1px 2px black;
     height: 100%;
     width: 100%;
     background: linear-gradient(
@@ -526,6 +624,7 @@ nav #buttons button:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 
@@ -626,6 +725,11 @@ nav #buttons button:focus {
     flex-direction: column;
     justify-content: center;
     margin-bottom: 30px;
+}
+
+.user_home_header p {
+    font-family: 'Baloo 2', cursive;
+    text-shadow: 1px 1px 2px rgb(0, 0, 0);
 }
 
 .user_home_header div {
@@ -900,8 +1004,9 @@ nav #buttons button:focus {
     padding: 5px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-evenly;
+    align-items: space-evenly;
+    flex-wrap: wrap;
 }
 
 .access_page_body .access_table_row .access_email{
@@ -912,7 +1017,14 @@ nav #buttons button:focus {
     flex: 1;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.access_page_body .access_table_row .access_admin span {
+    flex-wrap: nowrap;
+    min-width: 100px;
 }
 
 .access_page_body .add_access {

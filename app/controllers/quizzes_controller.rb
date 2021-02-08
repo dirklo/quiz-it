@@ -247,7 +247,7 @@ class QuizzesController < ApplicationController
                 params[:users].each do |user|
                     this_user = User.find_by(email: user[0])
                     if user[1] == "delete"
-                        user_access = UserAccess.find_by(quiz_id: quiz.id, user_id: this_user.id).destroy
+                        UserAccess.find_by(quiz_id: quiz.id, user_id: this_user.id).destroy
                     else
                         user_access = UserAccess.find_by(quiz_id: quiz.id, user_id: this_user.id)
                         user_access.admin = user[1]

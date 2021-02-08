@@ -22,18 +22,27 @@
                                 <%= user_access.user.email %>
                             </div>
                             <div class="access_admin">
-                                <input 
-                                    type="hidden" 
-                                    name="users[<%= user_access.user.email %>]" 
-                                    value="false"
-                                >
-                                <input 
-                                    type="checkbox" 
-                                    name="users[<%= user_access.user.email %>]" 
-                                    value="true" <%= 'checked' if user_access.admin == true %>
-                                >
-                                    &nbsp admin
-                                <input type="checkbox" name="users[<%= user_access.user.email %>]" value="delete"> delete?
+                                <span>
+                                    <input 
+                                        type="hidden" 
+                                        name="users[<%= user_access.user.email %>]" 
+                                        value="false"
+                                    >
+                                    <input 
+                                        type="checkbox" 
+                                        name="users[<%= user_access.user.email %>]" 
+                                        value="true" <%= 'checked' if user_access.admin == true %>
+                                    >
+                                        &nbsp admin
+                                </span>
+                                <span>
+                                    <input 
+                                        type="checkbox" 
+                                        name="users[<%= user_access.user.email %>]" 
+                                        value="delete"
+                                    > 
+                                        &nbsp delete?
+                                </span>
                             </div>
                         </div>
                     <% end %>

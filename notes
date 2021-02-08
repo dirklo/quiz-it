@@ -8,6 +8,7 @@ Pages:
         -Email 
         -Password
     -Signup Page
+        -Username
         -Email
         -Password
         -Confirm Password
@@ -94,7 +95,7 @@ Database:
             -correct
             -order
             -question_id
-    users_access
+    users_accesses
         *belongs to a user
         *belongs to a quiz
             -user_id
@@ -110,8 +111,20 @@ Database:
 
 
 TODO:
--Correct answer check and grading logic
--New quiz page, with JS "add a question" button
 -input validation
--nav bar
--styling 
+-validations:
+    -3 answers required for a mc_many
+    -2 answers required for a mc_one
+    -No empty questions or fields
+-Add feedback option for answers
+-ensure that everything is being deleted in the database when a quiz is deleted
+-Fix Footer
+-Table report card style in quiz history
+-Style log-in sign-up and log-out buttons
+-fix main Quiz it button.
+    -if logged in, take you to My Quizzes, if not, go to splash page.
+-download spec from dashboard and include on github
+-quiz show screen return button spacing
+-confirm password functionality
+-remember password functionality
+-remove 'forgot password'

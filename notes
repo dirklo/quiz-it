@@ -117,14 +117,8 @@ TODO:
     -2 answers required for a mc_one
     -No empty questions or fields
 -Add feedback option for answers
--ensure that everything is being deleted in the database when a quiz is deleted
--Fix Footer
 -Table report card style in quiz history
--Style log-in sign-up and log-out buttons
--fix main Quiz it button.
-    -if logged in, take you to My Quizzes, if not, go to splash page.
--download spec from dashboard and include on github
 -quiz show screen return button spacing
--confirm password functionality
--remember password functionality
--remove 'forgot password'
+-check all buttons for cursor: pointer
+-outline on input in user accesses page
+-account settings with delete option?

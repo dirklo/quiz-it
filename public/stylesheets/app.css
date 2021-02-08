@@ -69,6 +69,20 @@
     text-shadow: 1px 2px 5px #000;
 }
 
+footer {
+    position: relative;
+    bottom: 18px;
+    height: 0;
+    background-color: rgba(61, 85, 167, 0.5);
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* NAVBAR */
 nav {
     color: white;
@@ -111,8 +125,9 @@ nav {
 
 #nav_logo:hover {
     transform: scale(1.1);
-    border: 5px solid rgb(229, 219, 243);
+    border: 5px solid rgb(140, 138, 224);
     box-shadow: 2px 2px 3px rgb(92, 57, 189);
+    text-shadow: 1px 1px 3px #ffffff;
 }
 
 nav #buttons {
@@ -239,6 +254,7 @@ nav #buttons button:hover{
     font-weight: 400;
     font-size: 18px;
     color: white;
+    cursor: pointer;
     box-shadow: -2px -2px 3px #000;
     box-shadow: 
         1px 1px 2px rgb(3, 59, 3),
@@ -276,6 +292,7 @@ nav #buttons button:hover{
     text-shadow: 1px 1px 1px #000;
     font-weight: 400;
     font-size: 18px;
+    cursor: pointer;
     color: white;
     box-shadow: -2px -2px 3px #000;
     box-shadow: 
@@ -314,6 +331,7 @@ nav #buttons button:hover{
     font-weight: 400;
     font-size: 18px;
     color: white;
+    cursor: pointer;
     box-shadow: -2px -2px 3px #000;
     box-shadow: 
         1px 1px 2px rgb(59, 3, 3),
@@ -668,6 +686,7 @@ nav #buttons button:hover{
     transition: opacity .3s ease;
     border: none;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .form_container .control input[type="submit"]:hover {
@@ -823,6 +842,15 @@ nav #buttons button:hover{
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
 }
 
+.quiz_show_footer {
+    height: 100px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /* QUIZ EDIT PAGE */
 .edit_page_body {
     max-width: 650px;
@@ -835,7 +863,8 @@ nav #buttons button:hover{
 
 .edit_page_footer {
     max-width: 500px;
-    width: 100%;
+    width: 90%;
+    margin-bottom: 50px;
     height: 200px;
     display: flex;
     flex-direction: column;

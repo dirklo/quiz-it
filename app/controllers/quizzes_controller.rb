@@ -113,6 +113,10 @@ class QuizzesController < ApplicationController
         if logged_in?
             quiz = Quiz.find(params[:id])
             if quiz.is_author?(current_user.email)
+                quiz.questions.each do |question|
+                    question.answers.destroy_all
+                end
+                quiz.questions.destroy_all
                 quiz.delete
                 flash[:message] = "Quiz successfully deleted."
                 flash[:success] = true

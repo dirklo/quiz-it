@@ -1,0 +1,29 @@
+<main class="container">
+    <section class="statistics_page_header">
+        <h1 class="page_title"><%= @quiz.name %></h1>
+        <h2 class="page_subtitle">Statistics</h2>
+    </section>
+    <section class="statistics_page_body">
+        <div class="quiz_details_card"> 
+            <h2>Your quiz has been taken <%= @quiz.results.length %> times.</h2>
+            <h2>Players score an average of <%= @average %>%</h3>
+            <div class="statistics_list">
+                <ul>
+                    <% @quiz.results.reverse.each do |result| %>
+                        <li>
+                            <%= result.user.name %> scored <%= result.score %>% on <%= result.date %>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="statistics_page_footer">
+        <a href="/quizzes/<%= @quiz.id %>">
+            <button type="button" class="button-green">Back to Quiz</button>
+        </a> 
+        <a href="/users/<%= current_user.id %>">
+            <button type="button" class="button-red">Back to My Quizzes</button>
+        </a>  
+    </section>
+</main>

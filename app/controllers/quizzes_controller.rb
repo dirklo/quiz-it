@@ -96,6 +96,7 @@ class QuizzesController < ApplicationController
                     end
                 end
                 flash[:message] = "Quiz succcessfully Updated"
+                flash[:success] = true
                 redirect "/quizzes/#{quiz.id}"
             else
                 flash[:message] = "You must be an administrator on this quiz to continue."
@@ -114,6 +115,7 @@ class QuizzesController < ApplicationController
             if quiz.is_author?(current_user.email)
                 quiz.delete
                 flash[:message] = "Quiz successfully deleted."
+                flash[:success] = true
                 redirect "/users/#{current_user.id}"  
             else
                 flash[:message] = "Only the author of a quiz may delete"
@@ -173,6 +175,7 @@ class QuizzesController < ApplicationController
                 erb :'quizzes/edit'
             else
                 flash[:message] = "You are not an administrator on this quiz."
+                flash[:success] = false
                 redirect "/users/#{current_user.id}"
             end
         else
@@ -216,6 +219,7 @@ class QuizzesController < ApplicationController
                     flash[:message] = "That user already has access to this quiz"
                 elsif user_access
                     flash[:message] = "Updating Admin Privelege for #{user_access.user.email}"
+                    flash[:success] = true
                     user_access.admin = !!params[:admin]
                     user_access.save
                 else 
@@ -242,11 +246,17 @@ class QuizzesController < ApplicationController
             if current_user == quiz.author
                 params[:users].each do |user|
                     this_user = User.find_by(email: user[0])
-                    user_access = UserAccess.find_by(quiz_id: quiz.id, user_id: this_user.id)
-                    user_access.admin = user[1]
-                    user_access.save
+                    if user[1] == "delete"
+                        user_access = UserAccess.find_by(quiz_id: quiz.id, user_id: this_user.id).destroy
+                    else
+                        user_access = UserAccess.find_by(quiz_id: quiz.id, user_id: this_user.id)
+                        user_access.admin = user[1]
+                        user_access.save
+                    end
                 end
                 flash[:message] = "Quiz Access Saved"
+                flash[:success] = true
+                @access = quiz.user_accesses
                 redirect "quizzes/#{quiz.id}/access"
             else
                 flash[:message] = "Only the author of a quiz may change access priveleges."
@@ -255,6 +265,18 @@ class QuizzesController < ApplicationController
         else
             flash[:message] = "You must be logged in to continue"
             redirect '/login'
+        end
+    end
+
+    ##### RENDER QUIZ STATISTICS FOR ADMIN OR AUTHOR #####
+    get '/quizzes/:id/statistics' do
+        @quiz = Quiz.find(params[:id])
+        if @quiz.is_admin?(current_user.email) || @quiz.is_author?(current_user.email)
+            @average = Result.average_score(@quiz.results)
+            erb :'quizzes/statistics'
+        else
+            flash[:message] = "You are not an administrator on this quiz."
+            redirect "/users/#{current_user.id}"
         end
     end
 end

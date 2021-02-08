@@ -8,10 +8,12 @@
         </div>
         <div>
             <% if flash.has?(:message) %>
-                <p class="flash_message">
-                    <%= flash[:message] %>
-                </p>
-            <% end %>
+                <% if flash[:success] == true %>
+                    <p class="flash_message_success"><%= flash[:message] %></p>
+                <% else %>
+                    <p class="flash_message_failure"><%= flash[:message] %></p>
+                <% end %>
+            <% end %> 
         </div>
         <div>
             <a href="/quizzes/new">

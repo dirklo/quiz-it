@@ -116,8 +116,8 @@ function addQuestion() {
                 class="question_kind_input" 
                 name="questions[][kind]"
             >
-                <option value="mc_one">Multiple Choice: One Correct Answer</option>
-                <option value="mc_many">Multiple Choice: Many Correct Answers</option>
+                <option value="mc_one">One Correct Answer</option>
+                <option value="mc_many">Many Correct Answers</option>
             </select>
         </div>
         <br>

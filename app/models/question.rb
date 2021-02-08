@@ -27,6 +27,4 @@ class Question < ActiveRecord::Base
     def sort_answers_by_order
         sorted = self.answers.sort {|a, b| a.order <=> b.order}
     end
-
-    ##### QUIZ CREATING HELPERS ##### 
 end

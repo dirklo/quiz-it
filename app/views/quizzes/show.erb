@@ -20,6 +20,9 @@
                         Edit Quiz
                     </button>
                 </a>
+                <a href="/quizzes/<%= @quiz.id %>/statistics">
+                    <button type="button" class="button-yellow">Quiz Statistics</button>
+                </a>
         <% end %>
         <% if @quiz.is_author?(current_user.email)%>
                 <br>

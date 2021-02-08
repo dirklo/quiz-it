@@ -4,9 +4,11 @@
             <form action="/login" method="POST">
                 <h1>Log In</h1>
                 <% if flash.has?(:message) %>
-                    <p class="flash_message">
-                        <%= flash[:message] %>
-                    </p>
+                    <% if flash[:success] == true %>
+                        <p class="flash_message_success"><%= flash[:message] %></p>
+                    <% else %>
+                        <p class="flash_message_failure"><%= flash[:message] %></p>
+                    <% end %>
                 <% end %> 
                 <div class="control">
                     <input type="text" id="user_email "name="email" required>

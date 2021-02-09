@@ -53,6 +53,7 @@
     text-align: center;
 }
 
+
 .page_title {
     color: white;
     font-family: 'Fredoka One', cursive;
@@ -241,7 +242,7 @@ nav #buttons button:hover{
 
 
 /* BUTTONS */
-.button-green:visited,
+.button-green:focus,
 .button-green {
     padding: 2px 13px 4px 17px;
     background: linear-gradient(
@@ -1110,7 +1111,6 @@ nav #buttons button:hover{
 .access_page_body .add_access .add_admin {
     width: 80%;
 }
-
 
 .access_page_footer {
     width: 90%;

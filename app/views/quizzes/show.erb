@@ -2,7 +2,15 @@
     <section class="quiz_show_body">
         <div class="quiz_details_card">
             <h1><%= @quiz.name %></h1>
-
+            <div>
+            <% if flash.has?(:message) %>
+                <% if flash[:success] == true %>
+                    <p class="flash_message_success"><%= flash[:message] %></p>
+                <% else %>
+                    <p class="flash_message_failure"><%= flash[:message] %></p>
+                <% end %>
+            <% end %> 
+            </div>
             <h2>Created by <%= @quiz.author.name %></h2>
             <p><%= @quiz.description %></p>
             <a href="/quizzes/<%= @quiz.id%>/play">

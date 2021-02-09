@@ -773,11 +773,11 @@ nav #buttons button:hover{
 .user_home_footer {
     max-width: 1000px;
     width: 80%;
-    height: 150px;
+    height: 200px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    align-items: space-evenly;
+    align-items: center;
     flex-wrap: wrap;
 }
 
@@ -790,6 +790,32 @@ nav #buttons button:hover{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.answer_correct_div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment_button {
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Baloo 2', cursive;
+    font-size: 15px;
+    background: rgba(154, 112, 221, 0.2);
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    transition: all 0.3s ease;
+}
+
+.comment_button:hover {
+    transform: scale(1.1)
+}
+
+.comment_button:focus {
+    outline: none;
 }
 
 .new_page_footer {
@@ -957,6 +983,8 @@ nav #buttons button:hover{
 /* HISTORY PAGE */
 
 .history_body {
+    width: 90%;
+    max-width: 500px;
     color: white;
     font-family: 'Baloo 2', cursive;
     background: rgba(145, 132, 219, 0.5);
@@ -997,6 +1025,10 @@ nav #buttons button:hover{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.access_page_body input:focus {
+    outline: none;
 }
 
 .access_page_body h2 {
@@ -1088,7 +1120,7 @@ nav #buttons button:hover{
 .access_page_footer {
     width: 90%;
     max-width: 500px;
-    height: 200px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

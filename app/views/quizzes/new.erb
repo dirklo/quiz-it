@@ -100,20 +100,72 @@
                                 >
                             </div>
                             <br>
+                            <div id="q1_a1_answer_correct_div" class="answer_correct_div">
+                                <div>
+                                    <label 
+                                        for="q1_a1_correct" 
+                                        class="answer_correct_label"
+                                    >
+                                        Correct Answer?
+                                    </label>
+                                    <input 
+                                        type="checkbox" 
+                                        id="q1_a1_correct" 
+                                        class="answer_correct_input" 
+                                        name="questions[][answers][][correct]" 
+                                        value="true"
+                                    >
+                                </div>
+                                <div id="q1_a1_add_comment_div">
+                                    <button 
+                                        type="button" 
+                                        id="q1_a1_add_comment" 
+                                        class="comment_button add_comment_button" 
+                                        onclick="addComment(1,1)"
+                                    >
+                                        Add Comment
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="q1_a2" class="answer_div">
+                            <h3>Answer 2:</h3>
                             <div>
-                                <label 
-                                    for="q1_a1_correct" 
-                                    class="answer_correct_label"
-                                >
-                                    Correct Answer?
-                                </label>
                                 <input 
-                                    type="checkbox" 
-                                    id="q1_a1_correct" 
-                                    class="answer_correct_input" 
-                                    name="questions[][answers][][correct]" 
-                                    value="true"
+                                    type="text" 
+                                    id="q1_a2_content" 
+                                    class="answer_content_input" 
+                                    name="questions[][answers][][content]" 
+                                    required
                                 >
+                            </div>
+                            <br>
+                            <div id="q1_a2_answer_correct_div" class="answer_correct_div">
+                                <div>
+                                    <label 
+                                        for="q1_a2_correct" 
+                                        class="answer_correct_label"
+                                    >
+                                        Correct Answer?
+                                    </label>
+                                    <input 
+                                        type="checkbox" 
+                                        id="q1_a2_correct" 
+                                        class="answer_correct_input" 
+                                        name="questions[][answers][][correct]" 
+                                        value="true"
+                                    >
+                                </div>
+                                <div id="q1_a2_add_comment_div" class="add_comment_div">
+                                    <button 
+                                        type="button" 
+                                        id="q1_a2_add_comment" 
+                                        class="comment_button add_comment_button" 
+                                        onclick="addComment(1, 2)"
+                                    >
+                                        Add Comment
+                                    </button>
+                                </div>
                             </div>
                         </div> 
                     </div>
@@ -134,8 +186,8 @@
                             id="q1_limit" 
                             class="question_limit_input" 
                             name="questions[][limit]" 
-                            value="1" 
-                            max="1" 
+                            value="2" 
+                            max="2" 
                             min="1"
                         >
                         <label 

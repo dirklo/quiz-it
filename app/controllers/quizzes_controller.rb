@@ -35,6 +35,7 @@ class QuizzesController < ApplicationController
                 question.answers.create(
                     content: answer[:content],
                     correct: !!answer[:correct],
+                    comment: answer[:comment],
                     order: answer[:order]
                 )
             end
@@ -91,6 +92,7 @@ class QuizzesController < ApplicationController
                         question.answers.create(
                             content: answer[:content],
                             correct: !!answer[:correct],
+                            comment: answer[:comment],
                             order: answer[:order]
                         )
                     end
@@ -122,7 +124,7 @@ class QuizzesController < ApplicationController
                 flash[:success] = true
                 redirect "/users/#{current_user.id}"  
             else
-                flash[:message] = "Only the author of a quiz may delete"
+                flash[:message] = "Only the author of a quiz may delete."
                 redirect "/users/#{current_user.id}" 
             end
         else    

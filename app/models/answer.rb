@@ -22,7 +22,7 @@ class Answer < ActiveRecord::Base
         answer_arrays.map do |array|
             array.map do |answer_id|
                 answer = answers.detect{|x| x.id == answer_id.to_i}
-                [answer.question.content, answer.content, answer.correct]
+                [answer.question.content, answer.content, answer.correct, answer.comment]
             end
         end
     end

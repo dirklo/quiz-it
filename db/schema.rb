@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20210128070813) do
   create_table "answers", force: :cascade do |t|
     t.string  "content"
     t.boolean "correct"
+    t.string  "comment"
     t.integer "order"
     t.integer "question_id"
   end

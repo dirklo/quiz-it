@@ -124,42 +124,82 @@
                             <% question.answers.each_with_index do |answer, index| %>
                                 <div id="q<%= question.order %>_a<%= index + 1 %>" class="answer_div">
                                     <div class="answer_title_div">
-                                    <h3>Answer <%= index + 1 %>:</h3>
-                                    <% if index > 0 %>
-                                        <button 
-                                            type="button" 
-                                            id="q<%= question.order %>_a<%= index + 1 %>_delete_button" 
-                                            class="card_delete_button" 
-                                            onclick="deleteAnswer(<%= question.order %>, <%= index + 1 %>)"
-                                        >
-                                            X
-                                        </button>
-                                    <% end %>
+                                        <h3>Answer <%= index + 1 %>:</h3>
+                                        <% if index > 1 %>
+                                            <button 
+                                                type="button" 
+                                                id="q<%= question.order %>_a<%= index + 1 %>_delete_button" 
+                                                class="card_delete_button" 
+                                                onclick="deleteAnswer(<%= question.order %>, <%= index + 1 %>)"
+                                            >
+                                                X
+                                            </button>
+                                        <% end %>
                                     </div>
                                     <div>
                                         <input 
                                             type="text" 
                                             id="q<%= question.order %>_a<%= index + 1 %>_content" 
                                             class="answer_content_input" 
-                                            name="questions[][answers][][content]" 
-                                            value="<%= answer.content %>"
+                                            name="questions[][answers][][content]"
+                                            value="<%= answer.content %>" 
+                                            required
                                         >
                                     </div>
-                                    <div>
-                                        <label 
-                                            for="q<%= question.order %>_a<%= index + 1 %>_correct" 
-                                            class="answer_correct_label"
-                                        >
-                                            Correct Answer?
-                                        </label>
-                                        <input 
-                                            type="checkbox" 
-                                            id="q<%= question.order %>_a<%= index + 1 %>_correct" 
-                                            class="answer_correct_input" 
-                                            name="questions[][answers][][correct]" 
-                                            value="true" <%= 'checked' if answer.correct == true %>
-                                        >
+                                    <br>
+                                    <div id="q<%= question.order %>_a<%= index + 1 %>_answer_correct_div" class="answer_correct_div">
+                                        <div>
+                                            <label 
+                                                for="q<%= question.order %>_a<%= index + 1 %>_correct" 
+                                                class="answer_correct_label"
+                                            >
+                                                Correct Answer?
+                                            </label>
+                                            <input 
+                                                type="checkbox" 
+                                                id="q<%= question.order %>_a<%= index + 1 %>_correct" 
+                                                class="answer_correct_input" 
+                                                name="questions[][answers][][correct]" 
+                                                value="true"
+                                                <%= 'checked' if answer.correct == true %>
+                                            >
+                                        </div>
+                                        <% if answer.comment %>
+                                            <div>
+                                                <button 
+                                                    type="button" 
+                                                    id="q<%= question.order %>_a<%= index + 1 %>_remove_comment_button"
+                                                    class="comment_button remove_comment_button"
+                                                    onclick="removeComment(<%= question.order %>, <%= index + 1 %>)"
+                                                >
+                                                    Remove Comment
+                                                </button>  
+                                            </div>
+                                        <% else %>
+                                        <div id="q<%= question.order %>_a<%= index + 1 %>_add_comment_div" class="add_comment_div">
+                                            <button 
+                                                type="button" 
+                                                id="q<%= question.order %>_a<%= index + 1 %>_add_comment" 
+                                                class="comment_button add_comment_button" 
+                                                onclick="addComment(<%= question.order %>, <%= index + 1 %>)"
+                                            >
+                                                Add Comment
+                                            </button>
+                                        </div>
+                                        <% end %>
                                     </div>
+                                    <% if answer.comment %>
+                                        <div id="q<%= question.order %>_a<%= index + 1 %>_comment_div" class="comment_div">
+                                            <label for="q<%= question.order %>_a<%= index + 1 %>_comment" class="comment_label">Comment:</label>
+                                            <input 
+                                                type="text" 
+                                                id="q<%= question.order %>_a<%= index + 1 %>_comment" 
+                                                class="comment_input" 
+                                                name="questions[][answers][][comment]"
+                                                value="<%= answer.comment %>"
+                                            >
+                                        </div>
+                                    <% end %>
                                 </div>
                             <% end %>
                         </div>  

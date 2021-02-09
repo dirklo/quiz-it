@@ -11,7 +11,7 @@ function addAnswer(questionNum) {
             <button 
                 type="button" 
                 id="q${questionNum}_a${answerNum}_delete_button" 
-                class="card_delete_button" 
+                class="card_delete_button answer_delete_button" 
                 onclick="deleteAnswer(${questionNum}, ${answerNum})"
             >
                 X
@@ -27,19 +27,32 @@ function addAnswer(questionNum) {
             >
         </div>
         <br>
-        <div>
-            <label 
-                for="q${questionNum}_a${answerNum}_correct" 
-                class="answer_correct_label"
-            >
-                Correct Answer?
-            </label>
-            <input 
-                type="checkbox" 
-                id="q${questionNum}_a${answerNum}_correct" 
-                class="answer_correct_input" 
-                name="questions[][answers][][correct]" 
-                value="true">
+        <div id="q${questionNum}_a${answerNum}_answer_correct_div" class="answer_correct_div">
+            <div>
+                <label 
+                    for="q${questionNum}_a${answerNum}_correct" 
+                    class="answer_correct_label"
+                >
+                    Correct Answer?
+                </label>
+                <input 
+                    type="checkbox" 
+                    id="q${questionNum}_a${answerNum}_correct" 
+                    class="answer_correct_input" 
+                    name="questions[][answers][][correct]" 
+                    value="true"
+                >
+            </div>
+            <div id="q${questionNum}_a${answerNum}_add_comment_div" class="add_comment_div">
+                <button 
+                    type="button" 
+                    id="q${questionNum}_a${answerNum}_add_comment" 
+                    class="comment_button add_comment_button" 
+                    onclick="addComment(${questionNum}, ${answerNum})"
+                >
+                    Add Comment
+                </button>
+            </div>
         </div>
     `;
     document.getElementById(`q${questionNum}_answers`).appendChild(div);
@@ -58,22 +71,34 @@ function renumberAnswers(questionNum) {
     // RENUMBER REMAINING ANSWER DIVS
     var answers = document.getElementById(`q${questionNum}_answers`);
     var answerDivs = answers.getElementsByClassName('answer_div');
-    var answerTitles = answers.getElementsByTagName('h3');
-    var answerContentInputs = answers.getElementsByClassName('answer_content_input');
-    var answerCorrectLabels = answers.getElementsByClassName('answer_correct_label');
-    var answerCorrectInputs = answers.getElementsByClassName('answer_correct_input');
-    var answerDeleteButtons = answers.getElementsByClassName('answer_delete_button');
-    for (let i = 0; i < answerDivs.length; i++) {
-        answerDivs[i].id = `q${questionNum}_a${i + 1}`;
-        answerTitles[i].innerText = `Answer ${i + 1}:`;
-        answerContentInputs[i].id = `q${questionNum}_a${i + 1}_content`;
-        answerCorrectLabels[i].setAttribute('for', `q${questionNum}_a${i + 1}_correct`);
-        answerCorrectInputs[i].id = `q${questionNum}_a${i + 1}_correct`;
-        if (answerDeleteButtons[i]) {
-            answerDeleteButtons[i].id = `q${questionNum}_a${i + 2}_delete_button`;
-            answerDeleteButtons[i].setAttribute('onclick', `deleteAnswer(${questionNum}, ${i + 2})`);
-        };
-    };
+        for (let i = 0; i < answerDivs.length; i++) {
+            answerNum = i + 1;
+            answerDivs[i].id = `q${questionNum}_a${answerNum}`
+            answerDivs[i].getElementsByTagName('h3')[0].innerText = `Answer ${answerNum}:`
+            answerDivs[i].getElementsByClassName('answer_content_input')[0].id = `q${questionNum}_a${answerNum}_content`;
+            answerDivs[i].getElementsByClassName('answer_correct_label')[0].setAttribute('for', `q${questionNum}_a${answerNum}_correct`);
+            answerDivs[i].getElementsByClassName('answer_correct_input')[0].id = `q${questionNum}_a${answerNum}_correct`;
+            answerDivs[i].getElementsByClassName('answer_correct_div')[0].id = `q${questionNum}_a${answerNum}_answer_correct_div`;
+            if (answerDivs[i].getElementsByClassName('answer_delete_button')[0]) {
+                answerDivs[i].getElementsByClassName('answer_delete_button')[0].id = `q${questionNum}_a${answerNum}_delete_button`;
+                answerDivs[i].getElementsByClassName('answer_delete_button')[0].setAttribute('onclick', `deleteAnswer(${questionNum}, ${answerNum})`);
+            };
+            if (answerDivs[i].getElementsByClassName('comment_div')[0]) {
+                answerDivs[i].getElementsByClassName('comment_div')[0].id = `q${questionNum}_a${answerNum}_comment_div`;
+                answerDivs[i].getElementsByClassName('comment_input')[0].id = `q${questionNum}_a${answerNum}_comment`;
+                answerDivs[i].getElementsByClassName('comment_label')[0].setAttribute('for', `q${questionNum}_a${answerNum}_label`);
+            };
+            if (answerDivs[i].getElementsByClassName('remove_comment_div')[0]) {
+                answerDivs[i].getElementsByClassName('remove_comment_div')[0].id = `q${questionNum}_a${answerNum}_remove_comment_div`;
+                answerDivs[i].getElementsByClassName('remove_comment_button')[0].id = `q${questionNum}_a${answerNum}_remove_comment_button`;
+                answerDivs[i].getElementsByClassName('remove_comment_button')[0].setAttribute('onclick', `removeComment(${questionNum}, ${answerNum})`);
+            };
+            if (answerDivs[i].getElementsByClassName('add_comment_div')[0]) {
+                answerDivs[i].getElementsByClassName('add_comment_div')[0].id = `q${questionNum}_a${answerNum}_add_comment_div`;
+                answerDivs[i].getElementsByClassName('add_comment_button')[0].id = `q${questionNum}_a${answerNum}_add_comment_button`;
+                answerDivs[i].getElementsByClassName('add_comment_button')[0].setAttribute('onclick', `addComment(${questionNum}, ${answerNum})`);
+            };
+        }
 
     // SET THE ANSWER LIMIT ON THIS QUESTION
     setLimit(questionNum);
@@ -98,7 +123,7 @@ function addQuestion() {
             <button 
                 type="button" 
                 id="q${questionNum}_delete_button" 
-                class="card_delete_button" 
+                class="card_delete_button question_delete_button" 
                 onclick="deleteAndRenumberQuestions(${questionNum})"
             >
                 X
@@ -150,39 +175,74 @@ function addQuestion() {
                     >
                 </div>
                 <br>
+                <div id="q${questionNum}_a1_answer_correct_div" class="answer_correct_div">
+                    <div>
+                        <label 
+                            for="q${questionNum}_a1_correct" 
+                            class="answer_correct_label"
+                        >
+                            Correct Answer?
+                        </label>
+                        <input 
+                            type="checkbox" 
+                            id="q${questionNum}_a1_correct" 
+                            class="answer_correct_input" 
+                            name="questions[][answers][][correct]" 
+                            value="true"
+                        >
+                    </div>
+                    <div id="q${questionNum}_a1_add_comment_div" class="add_comment_div">
+                        <button 
+                            type="button" 
+                            id="q${questionNum}_a1_add_comment" 
+                            class="comment_button add_comment_button" 
+                            onclick="addComment(${questionNum}, 1)"
+                        >
+                            Add Comment
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="q${questionNum}_a2" class="answer_div">
+                <h3>Answer 2:</h3>
                 <div>
-                    <label 
-                        for="q${questionNum}_a1_correct" 
-                        class="answer_correct_label"
-                    >
-                        Correct Answer?
-                    </label>
                     <input 
-                        type="checkbox" 
-                        id="q${questionNum}_a1_correct" 
-                        class="answer_correct_input" 
-                        name="questions[][answers][][correct]" 
-                        value="true"
+                        type="text" 
+                        id="q${questionNum}_a2_content" 
+                        class="answer_content_input" 
+                        name="questions[][answers][][content]" 
+                        required
                     >
                 </div>
-            </div> 
-        </div>
-        <div>
-            <input 
-                type="number" 
-                id="q${questionNum}_limit" 
-                class="question_limit_input" 
-                name="questions[][limit]" 
-                value="1" 
-                max="1" 
-                min="1"
-            >
-            <label 
-                for="q${questionNum}_limit" 
-                class="question_limit_label"
-            >
-                Total Answer Choices
-            </label>
+                <br>
+                <div id="q${questionNum}_a2_answer_correct_div" class="answer_correct_div">
+                    <div>
+                        <label 
+                            for="q${questionNum}_a2_correct" 
+                            class="answer_correct_label"
+                        >
+                            Correct Answer?
+                        </label>
+                        <input 
+                            type="checkbox" 
+                            id="q${questionNum}_a2_correct" 
+                            class="answer_correct_input" 
+                            name="questions[][answers][][correct]" 
+                            value="true"
+                        >
+                    </div>
+                    <div id="q${questionNum}_a2_add_comment_div" class="add_comment_div">
+                        <button 
+                            type="button" 
+                            id="q${questionNum}_a2_add_comment" 
+                            class="comment_button add_comment_button" 
+                            onclick="addComment(${questionNum}, 2)"
+                        >
+                            Add Comment
+                        </button>
+                    </div>
+                </div>
+            </div>  
         </div>
         <div class="add_answer_div">
             <button 
@@ -193,6 +253,23 @@ function addQuestion() {
             >
                 Add an Answer
             </button>
+        </div>
+        <div>
+            <input 
+                type="number" 
+                id="q${questionNum}_limit" 
+                class="question_limit_input" 
+                name="questions[][limit]" 
+                value="2" 
+                max="2" 
+                min="1"
+            >
+            <label 
+                for="q${questionNum}_limit" 
+                class="question_limit_label"
+            >
+                Total Answer Choices
+            </label>
         </div>
     `;
     document.getElementsByClassName('questions_card')[0].appendChild(article);
@@ -233,4 +310,52 @@ function deleteAndRenumberQuestions(questionNum) {
     for (let i = 0; i < answerContainers.length; i++) {
         renumberAnswers(i + 1);
     }
+}
+
+function addComment(questionNum, answerNum) {
+    document.getElementById(`q${questionNum}_a${answerNum}_add_comment_div`).remove()
+
+    var div = document.createElement('div');
+    div.setAttribute('id', `q${questionNum}_a${answerNum}_comment_div`)
+    div.setAttribute('class', "comment_div")
+    div.innerHTML = `
+        <label for="q${questionNum}_a${answerNum}_comment" class="comment_label">Comment:</label>
+        <input type="text" id="q${questionNum}_a${answerNum}_comment" class="comment_input" name="questions[][answers][][comment]">
+    `;
+    document.getElementById(`q${questionNum}_a${answerNum}`).appendChild(div);
+
+    var div2 = document.createElement('div');
+    div2.setAttribute('id', `q${questionNum}_a${answerNum}_remove_comment_div`)
+    div2.setAttribute('class', `remove_comment_div`)
+    div2.innerHTML = `
+        <button 
+            type="button" 
+            id="q${questionNum}_a${answerNum}_remove_comment_button"
+            class="comment_button remove_comment_button"
+            onclick="removeComment(${questionNum}, ${answerNum})"
+        >
+            Remove Comment
+        </button>    
+    `;
+    document.getElementById(`q${questionNum}_a${answerNum}_answer_correct_div`).appendChild(div2);
+}
+
+function removeComment(questionNum, answerNum) {
+    document.getElementById(`q${questionNum}_a${answerNum}_remove_comment_div`).remove()
+    document.getElementById(`q${questionNum}_a${answerNum}_comment_div`).remove()
+
+    var div = document.createElement('div');
+    div.setAttribute('id', `q${questionNum}_a${answerNum}_add_comment_div`)
+    div.setAttribute('class', "add_comment_div")
+    div.innerHTML = `
+        <button 
+            type="button" 
+            id="q${questionNum}_a${answerNum}_add_comment_button"
+            class="comment_button add_comment_button"
+            onclick="addComment(${questionNum}, ${answerNum})"
+        >
+            Add Comment
+        </button>
+    `;
+    document.getElementById(`q${questionNum}_a${answerNum}_answer_correct_div`).appendChild(div);
 }

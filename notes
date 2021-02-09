@@ -93,6 +93,7 @@ Database:
         *belongs to a question
             -content
             -correct
+            -feedback
             -order
             -question_id
     users_accesses
@@ -116,9 +117,9 @@ TODO:
     -3 answers required for a mc_many
     -2 answers required for a mc_one
     -No empty questions or fields
--Add feedback option for answers
--Table report card style in quiz history
--quiz show screen return button spacing
--check all buttons for cursor: pointer
--outline on input in user accesses page
+-results page styling
+-move password validate script
+-categories responsiveness
 -account settings with delete option?
+-Table report card style in quiz history
+-placeholder in user access page

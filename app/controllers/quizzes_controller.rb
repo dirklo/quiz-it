@@ -16,31 +16,39 @@ class QuizzesController < ApplicationController
 
     ##### POST DATA FOR A NEW QUIZ #####
     post '/quizzes' do
-        quiz = Quiz.create(
-            name: params[:quiz][:name], 
-            description: params[:quiz][:description], 
-            category: Category.find(params[:quiz][:category]), 
-            public: !!params[:quiz][:public],
-            date_created: Time.now,
-            author: current_user
-            )
-        params[:questions].each_with_index do |question, index|
-            question = quiz.questions.create(
-                content: question[:content],
-                kind: question[:kind],
-                order: index + 1,
-                limit: question[:limit]
-            )
-            params[:questions][index][:answers].each do |answer| 
-                question.answers.create(
-                    content: answer[:content],
-                    correct: !!answer[:correct],
-                    comment: answer[:comment],
-                    order: answer[:order]
+        @test_quiz = Quiz.create_test(params)
+        validated = @test_quiz.validate_quiz
+
+        if validated[0] && logged_in?
+            quiz = Quiz.create(
+                name: params[:quiz][:name], 
+                description: params[:quiz][:description], 
+                category: Category.find(params[:quiz][:category]), 
+                public: !!params[:quiz][:public],
+                date_created: Time.now,
+                author: current_user
                 )
+            params[:questions].each_with_index do |question, index|
+                question = quiz.questions.create(
+                    content: question[:content],
+                    kind: question[:kind],
+                    order: index + 1,
+                    limit: question[:limit]
+                )
+                params[:questions][index][:answers].each do |answer| 
+                    question.answers.create(
+                        content: answer[:content],
+                        correct: !!answer[:correct],
+                        comment: answer[:comment],
+                        order: answer[:order]
+                    )
+                end
             end
+            redirect "/quizzes/#{quiz.id}"
+        else
+            flash[:message] = validated[1]
+            redirect "/quizzes/new"
         end
-        redirect "/quizzes/#{quiz.id}"
     end
     
     ##### VIEW QUIZ HISTORY #####
@@ -71,38 +79,46 @@ class QuizzesController < ApplicationController
 
     ##### SEND DATA FOR QUIZ EDIT #####
     patch '/quizzes/:id' do
+        @test_quiz = Quiz.create_test(params)
+        validated = @test_quiz.validate_quiz
+
         if logged_in?
-            quiz = Quiz.find(params[:id])
-            if quiz.is_admin?(current_user.email) || quiz.is_author?(current_user.email)
-                quiz.update(
-                    name: params[:quiz][:name],
-                    description: params[:quiz][:description],
-                    category: Category.find(params[:quiz][:category]), 
-                    public: !!params[:quiz][:public]
-                )
-                quiz.questions.delete_all
-                params[:questions].each_with_index do |question, index|
-                    question = quiz.questions.create(
-                        content: question[:content],
-                        kind: question[:kind],
-                        order: index + 1,
-                        limit: question[:limit]
+            if validated[0]
+                quiz = Quiz.find(params[:id])
+                if quiz.is_admin?(current_user.email) || quiz.is_author?(current_user.email)
+                    quiz.update(
+                        name: params[:quiz][:name],
+                        description: params[:quiz][:description],
+                        category: Category.find(params[:quiz][:category]), 
+                        public: !!params[:quiz][:public]
                     )
-                    params[:questions][index][:answers].each do |answer| 
-                        question.answers.create(
-                            content: answer[:content],
-                            correct: !!answer[:correct],
-                            comment: answer[:comment],
-                            order: answer[:order]
+                    quiz.questions.delete_all
+                    params[:questions].each_with_index do |question, index|
+                        question = quiz.questions.create(
+                            content: question[:content],
+                            kind: question[:kind],
+                            order: index + 1,
+                            limit: question[:limit]
                         )
+                        params[:questions][index][:answers].each do |answer| 
+                            question.answers.create(
+                                content: answer[:content],
+                                correct: !!answer[:correct],
+                                comment: answer[:comment],
+                                order: answer[:order]
+                            )
+                        end
                     end
+                    flash[:message] = "Quiz succcessfully Updated"
+                    flash[:success] = true
+                    redirect "/quizzes/#{quiz.id}"
+                else
+                    flash[:message] = "You must be an administrator on this quiz to continue."
+                    redirect "/users/#{current_user.id}"  
                 end
-                flash[:message] = "Quiz succcessfully Updated"
-                flash[:success] = true
-                redirect "/quizzes/#{quiz.id}"
             else
-                flash[:message] = "You must be an administrator on this quiz to continue."
-                redirect "/users/#{current_user.id}"  
+                flash[:message] = validated[1]
+                redirect "/quizzes/#{params[:id]}/edit"
             end
         else    
             flash[:message] = "You must be logged in to continue."

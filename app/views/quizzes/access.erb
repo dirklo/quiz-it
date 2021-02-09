@@ -16,6 +16,9 @@
             <input type="hidden" name="_method" value="PATCH">
             <h2>The following users have access to this quiz: </h2>
                 <div class="access_table">
+                    <% if @access.empty? %>
+                        <p>You haven't given access anyone access to this quiz yet.  Add an email with the field below:</p>
+                    <% end %>
                     <% @access.each do |user_access| %>
                         <div class="access_table_row">
                             <div class="access_email">

@@ -241,6 +241,7 @@ nav #buttons button:hover{
 
 
 /* BUTTONS */
+.button-green:visited,
 .button-green {
     padding: 2px 13px 4px 17px;
     background: linear-gradient(
@@ -275,11 +276,9 @@ nav #buttons button:hover{
 
 .button-green:focus {
     outline: none;
-    box-shadow: 
-        4px 4px 5px rgb(3, 59, 3),
-        -1px -1px 2px rgb(214, 245, 217);
 }
 
+.button-yellow:focus,
 .button-yellow {
     padding: 2px 13px 4px 17px;
     background: linear-gradient(
@@ -313,11 +312,9 @@ nav #buttons button:hover{
 
 .button-yellow:focus {
     outline: none;
-    box-shadow: 
-        4px 4px 5px rgb(84, 85, 7),
-        -1px -1px 2px rgb(239, 241, 210);
 }
 
+.button-red:focus,
 .button-red {
     padding: 2px 13px 4px 17px;
     background: linear-gradient(
@@ -352,9 +349,6 @@ nav #buttons button:hover{
 
 .button-red:focus {
     outline: none;
-    box-shadow: 
-        4px 4px 5px rgb(59, 3, 3),
-        -1px -1px 2px rgb(245, 214, 214);
 }
 
 .button-lg {
@@ -381,9 +375,6 @@ nav #buttons button:hover{
 .card_delete_button:focus {
     outline: none;
 }
-
-
-
 
 
 /* ITEM LISTS  */
@@ -678,7 +669,7 @@ nav #buttons button:hover{
     background: transparent;
 }
 
-.form_container .control input[type="submit"]{
+.form_container .control input[type="submit"] {
     background: rgb(20, 197, 220);
     color: #fff;
     font-size: 1em;
@@ -820,7 +811,7 @@ nav #buttons button:hover{
 
 .new_page_footer {
     max-width: 500px;
-    width: 100%;
+    width: 90%;
     margin-bottom: 50px;
     height: 200px;
     display: flex;
@@ -1049,6 +1040,10 @@ nav #buttons button:hover{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.access_page_body .access_table p {
+    text-align: center;
 }
 
 .access_page_body form {

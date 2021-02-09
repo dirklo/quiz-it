@@ -2,6 +2,15 @@
     <main class="container">
         <section class="new_page_header">
             <h1 class="page_title">CREATE A NEW QUIZ</h1>
+            <div>
+                <% if flash.has?(:message) %>
+                    <% if flash[:success] == true %>
+                        <p class="flash_message_success"><%= flash[:message] %></p>
+                    <% else %>
+                        <p class="flash_message_failure"><%= flash[:message] %></p>
+                    <% end %>
+                <% end %> 
+            </div>
         </section>
         <section class="new_page_body">
             <div class="quiz_details_card">
@@ -13,6 +22,9 @@
                         id="quiz_name" 
                         name="quiz[name]" 
                         required
+                        <% if @test_quiz %>
+                            value="<%= @test_quiz.name %>"
+                        <% end %>
                     >   
                 </div>
                 <br>

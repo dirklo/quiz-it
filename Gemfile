@@ -8,6 +8,7 @@ gem 'require_all'
 gem 'thin'
 gem 'bcrypt'
 gem 'rack-flash3'
+gem 'rack'
 
 group :development do
   gem 'tux'

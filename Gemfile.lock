@@ -129,6 +129,7 @@ DEPENDENCIES
   dotenv
   pg
   pry
+  rack
   rack-flash3
   rack-test
   rake

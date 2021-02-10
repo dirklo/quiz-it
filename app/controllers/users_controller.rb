@@ -38,4 +38,36 @@ class UsersController < ApplicationController
             redirect "/login"
         end
     end
+
+    get '/users/:id/settings' do
+        erb :'/users/settings'
+    end
+
+    get '/users/:id/confirm' do
+        erb :'/users/confirm'
+    end
+
+    delete '/users/:id' do
+        if logged_in? && current_user.id == params[:id].to_i
+            user = User.find(current_user.id)
+            user.authored_quizzes.each do |quiz|
+                quiz.questions.each do |question|
+                    question.answers.destroy_all
+                end
+                quiz.questions.destroy_all
+                quiz.results.destroy_all
+                quiz.user_accesses.destroy_all
+                quiz.delete
+            end
+            user.user_accesses.destroy_all
+            user.destroy
+            flash[:message] = "Account succcessfully deleted."
+            flash[:success] = true
+            session.clear
+            redirect '/'
+        else
+            flash[:message] = "There was a problem, account not deleted."
+            redirect "/users/#{current_user.id}"
+        end 
+    end
 end

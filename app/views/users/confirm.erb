@@ -1,0 +1,19 @@
+<main class="container">
+    <section class="confirm_header">
+        <h1 class="page_title">Delete Account?</h1>
+        <p><%= current_user.email %></p>
+    </section>
+    <section class="confirm_body">
+        <h3>ARE YOU SURE YOU WANT TO PROCEED?</h3>
+        <h3>ALL YOUR QUIZZES WILL BE LOST FOREVER!</h3>
+        <form action="/users/<%= current_user.id %>" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="button-red button-lg">
+                YES, I UNDERSTAND
+            </button>
+        </form>
+        <a href="/users/<%= current_user.id%>">
+            <button class="button-green button-lg">NO, TAKE ME BACK HOME</button>
+        </a>
+    </section>
+</main>

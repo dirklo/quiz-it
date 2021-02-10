@@ -10,22 +10,26 @@
             <% else %>
                 <%= 'result_card_correct' %>
             <% end %>
-            ">
-                <h3>Question <%= index + 1%>:</h3>
+            ">  
+                <div class="result_card_title">
+                    <h2>Question <%= index + 1%>:</h3>
+                    <h4 class="score">Score: <%= @scores[index][0] %> of <%= @scores[index][1]%>    
+                </div>
+                <h3><%= result.first[0] %></h4>
                 <br>
-                <h4><%= result.first[0] %>:</h4>
-                <br>
-                <h5>Your answer:</h5>
+                <h4>You answered:</h5>
                 <% result.each do |answer| %>
-                    <p>
-                        <%= answer[1] %>, that answer is <%= 'correct!' if answer[2] == true %><%= 'incorrect...' if answer[2] == false %>  
-                    </p>
-                        <% if answer[3] %>
-                            <p><%= answer[3] %></p>
-                        <% end %>
+                    <div class="answer">
+                        <p>
+                            <h3><%= answer[1] %></h3> 
+                            <%= 'Correct!' if answer[2] == true %><%= 'Incorrect...' if answer[2] == false %>  
+                        </p>
+                            <% if answer[3] %>
+                                <p class="comment"><%= answer[3] %></p>
+                            <% end %>
+                    </div>
                 <% end %>
                 <br>
-                <h4>Score: <%= @scores[index][0] %> out of <%= @scores[index][1]%>    
             </div>
         <% end %>
     </section>

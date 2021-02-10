@@ -9,13 +9,24 @@
                 You have not taken any quizzes yet!
             </p>
         <% end %>
-        <ul>
-            <% current_user.results.reverse.each do |result| %>
-                <li>
-                    Scored <%= result.score %>% on <%= result.quiz.name %> on <%= result.date %>
-                </li>
+            <% current_user.results.reverse.each_with_index do |result, index| %>
+                <div>
+                     <span class="quiz_name">
+                        <%= result.quiz.name %>
+                    </span>
+                </div>
+                <div class="history_row">
+                    <span class="quiz_date">
+                        <%= result.date %>
+                    </span>
+                    <span class="quiz_score">
+                        <%= result.score %>%
+                    </span>
+                </div>
+                <% if index < current_user.results.length - 1 %>
+                    <hr>
+                <% end %>
             <% end %>
-        </ul>
     </section>
     <section class="history_footer">
         <a href="/users/<%= current_user.id %>">

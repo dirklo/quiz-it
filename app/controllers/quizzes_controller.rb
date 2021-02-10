@@ -135,6 +135,8 @@ class QuizzesController < ApplicationController
                     question.answers.destroy_all
                 end
                 quiz.questions.destroy_all
+                quiz.results.destroy_all
+                quiz.user_accesses.destroy_all
                 quiz.delete
                 flash[:message] = "Quiz successfully deleted."
                 flash[:success] = true

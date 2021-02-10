@@ -62,6 +62,12 @@
     text-shadow: 1px 2px 5px #000;
 }
 
+@media (max-width: 375px){
+    .page_title {
+        font-size: 30px;
+    }
+}
+
 .page_subtitle {
     color: white;
     font-family: 'Fredoka One', cursive;
@@ -765,12 +771,13 @@ nav #buttons button:hover{
 .user_home_footer {
     max-width: 1000px;
     width: 80%;
-    height: 200px;
+    height: 150px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
+    margin-bottom: 50px;
 }
 
 
@@ -934,6 +941,7 @@ nav #buttons button:hover{
 /* RESULTS PAGE */
 
 .result_page_body {
+    font-family: 'Baloo 2', cursive;
     color: white;
     text-shadow: 1px 1px 2px black;
     width: 90%;
@@ -941,6 +949,43 @@ nav #buttons button:hover{
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.result_page_body .result_card_title {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.result_page_body .answer {
+    margin-top: 20px;
+    background:rgba(161, 161, 161, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.result_page_body .answer h3 {
+    margin-bottom: 5px;
+}
+
+.result_page_body .comment {
+    width: fit-content;
+    margin: 10px 0 10px 30px;
+    background: rgba(112, 112, 112, 0.5);
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.result_page_body .result_card_title .score {
+    border: 2px solid rgb(112, 112, 112, 0.5);
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .result_page_body .result_card_correct {
@@ -985,6 +1030,28 @@ nav #buttons button:hover{
     padding: 30px 50px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, .3);
     margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.history_body .quiz_name {
+    text-align: center;
+    font-size: 20px;
+}
+
+.history_body .quiz_score {
+    text-align: center;
+    font-size: 20px;
+}
+
+.history_body .history_row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-end;
+
 }
 
 .history_footer {
@@ -996,6 +1063,22 @@ nav #buttons button:hover{
     align-items: center;
 }
 
+/* CATEGORY INDEX */
+.categories_header {
+    margin-bottom: 50px;
+}
+
+.categories_footer {
+    margin-bottom: 50px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.categories_body {
+    width: 90%;
+}
 
 /* CATEGORY SHOW PAGE */
 .category_show_footer {
@@ -1003,6 +1086,13 @@ nav #buttons button:hover{
     max-width: 1000px;
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.category_show_footer div {
+    margin-top: 10px;
+}
+.category_show_body {
+    width: 90%;
 }
 
 /* USER ACCESS PAGE */
@@ -1143,5 +1233,50 @@ nav #buttons button:hover{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    margin-top: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
 }
+
+/* SETTINGS PAGE */
+.settings_header {
+    width: 90%;
+    max-width: 500px;
+}
+.settings_header p {
+    text-align: center;
+    font-family: 'Baloo 2', cursive;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    font-size: 20px;
+}
+
+/* CONFIRM ACCOUNT DELETE PAGE */
+.confirm_header {
+    width: 90%;
+    max-width: 500px;
+}
+
+.confirm_header p {
+    text-align: center;
+    font-family: 'Baloo 2', cursive;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    font-size: 20px;
+}
+.confirm_body {
+    height: 300px;
+    max-width: 500px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.confirm_body h3 {
+    font-family: 'Baloo 2', cursive;
+    color: white;
+    text-align: center;
+    text-shadow: 1px 1px 2px black;
+}
+

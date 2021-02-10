@@ -1,0 +1,16 @@
+<main class="container">
+    <section class="settings_header">
+        <h1 class="page_title">Account Settings</h1>
+        <p><%= current_user.email %></p>
+    </section>
+    <section class="settings_body">
+        <a href="/users/<%= current_user.id %>/confirm">
+            <button type="button" class="button-red button-lg">
+                DELETE ACCOUNT
+            </button>
+        </a>
+    </section>
+    <section class="settings_footer">
+    
+    </section>
+</main>

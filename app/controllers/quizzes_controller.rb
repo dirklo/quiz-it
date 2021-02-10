@@ -120,8 +120,10 @@ class QuizzesController < ApplicationController
                     redirect "/users/#{current_user.id}"  
                 end
             else
+                @quiz = Quiz.find(params[:id])
+                @categories = Category.all
                 flash[:message] = validated[1]
-                redirect "/quizzes/#{params[:id]}/edit"
+                erb :'/quizzes/editedit'
             end
         else    
             flash[:message] = "You must be logged in to continue."

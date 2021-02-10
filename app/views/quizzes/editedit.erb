@@ -1,0 +1,276 @@
+<form action="/quizzes/<%= @quiz.id %>" method="POST">
+    <input type="hidden" id="hidden" name="_method" value="PATCH">
+    <main class="container">
+        <section class="edit_edit_page_header">
+            <h1 class="page_title">Edit Quiz</h1>
+            <div>
+                <% if flash.has?(:message) %>
+                    <% if flash[:success] == true %>
+                        <p class="flash_message_success"><%= flash[:message] %></p>
+                    <% else %>
+                        <p class="flash_message_failure"><%= flash[:message] %></p>
+                    <% end %>
+                <% end %> 
+            </div>
+        </section>
+        <section class="edit_edit_page_body">
+            <div class="quiz_details_card">
+                <h2>Quiz Details</h2>
+                <div>
+                    <label for="quiz_name">Quiz Name:</label>
+                    <input 
+                        type="text" 
+                        id="quiz_name" 
+                        name="quiz[name]" 
+                        value="<%= @test_quiz.name %>" 
+                        required
+                    >   
+                </div>
+                <br>
+                <div>
+                    <label for="quiz_description">Quiz Description:</label>
+                    <textarea 
+                        id="quiz_description" 
+                        name="quiz[description]" 
+                        required
+                    ><%= @test_quiz.description %></textarea>
+                </div>
+                <br>
+                <div>   
+                    <label for="quiz_category">Select a Category:</label>
+                    <select id="quiz_category" name="quiz[category]" required>
+                        <% @categories.each do |category|%>
+                            <option 
+                                value="<%= category.id %>" 
+                                <%= 'selected' if category.id == @test_quiz.category_id %>
+                            >
+                                <%= category.name %>
+                            </option>
+                        <% end %>
+                    </select>
+                </div>
+                <div>
+                    <input 
+                        type="checkbox" 
+                        id="quiz_public" 
+                        name="quiz[public]" 
+                        value="true" 
+                        <%= 'checked' if @test_quiz.public == true %>
+                    > 
+                    <label for="quiz_public">Public Quiz</label>  
+                </div>
+            </div>
+            <br>
+            <div>
+                <h2 class="page_subtitle">Questions</h2>
+            </div>
+
+            <div class="questions_card">
+                <% @test_quiz.questions.each do |question| %>
+                    <article id="q<%= question.order %>" class="question_article">
+                        <div class="question_title_div">
+                            <h2>Question <%= question.order %>:</h2>
+                            <% if question.order > 1 %>
+                                <button 
+                                    type="button" 
+                                    id="q<%= question.order %>_delete_button" 
+                                    class="card_delete_button" 
+                                    onclick="deleteAndRenumberQuestions(<%= question.order %>)"
+                                >
+                                    X
+                                </button>
+                            <% end %>
+                        </div>
+                        <div>
+                            <label 
+                                for="q<%= question.order %>_kind" 
+                                class="question_kind_label"
+                            >
+                                Question Type:
+                            </label>
+                            <select 
+                                id="q<%= question.order %>_kind" 
+                                class="question_kind_input" 
+                                name="questions[][kind]" 
+                                value="<%= question.kind %>"
+                            >
+                                <option 
+                                    value="mc_many" <%= 'selected' if question.kind == 'mc_many' %>
+                                >
+                                    Many Correct Answers
+                                </option>
+                                <option 
+                                    value="mc_one" <%= 'selected' if question.kind == 'mc_one' %>
+                                >
+                                    One Correct Answer
+                                </option>
+                            </select>
+                        </div>
+                        <br>
+                        <div>
+                            <label 
+                                for="q<%= question.order %>_content" 
+                                class="question_content_label"
+                            >
+                                Question:
+                            </label>
+                            <input 
+                                type="text" 
+                                id="q<%= question.order %>_content" 
+                                class="question_content_input" 
+                                name="questions[][content]" 
+                                value="<%= question.content %>"
+                                required
+                            >
+                        </div>
+                        <br>
+                        <div id="q<%= question.order %>_answers" class="answers_container">
+                            <% question.answers.each_with_index do |answer, index| %>
+                                <div id="q<%= question.order %>_a<%= index + 1 %>" class="answer_div">
+                                    <div class="answer_title_div">
+                                        <h3>Answer <%= index + 1 %>:</h3>
+                                        <% if index > 1 %>
+                                            <button 
+                                                type="button" 
+                                                id="q<%= question.order %>_a<%= index + 1 %>_delete_button" 
+                                                class="card_delete_button" 
+                                                onclick="deleteAnswer(<%= question.order %>, <%= index + 1 %>)"
+                                            >
+                                                X
+                                            </button>
+                                        <% end %>
+                                    </div>
+                                    <div>
+                                        <input 
+                                            type="text" 
+                                            id="q<%= question.order %>_a<%= index + 1 %>_content" 
+                                            class="answer_content_input" 
+                                            name="questions[][answers][][content]"
+                                            value="<%= answer.content %>" 
+                                            required
+                                        >
+                                    </div>
+                                    <br>
+                                    <div id="q<%= question.order %>_a<%= index + 1 %>_answer_correct_div" class="answer_correct_div">
+                                        <div>
+                                            <label 
+                                                for="q<%= question.order %>_a<%= index + 1 %>_correct" 
+                                                class="answer_correct_label"
+                                            >
+                                                Correct Answer?
+                                            </label>
+                                            <input 
+                                                type="checkbox" 
+                                                id="q<%= question.order %>_a<%= index + 1 %>_correct" 
+                                                class="answer_correct_input" 
+                                                name="questions[][answers][][correct]" 
+                                                value="true"
+                                                <%= 'checked' if answer.correct == true %>
+                                            >
+                                        </div>
+                                        <% if answer.comment %>
+                                            <div>
+                                                <button 
+                                                    type="button" 
+                                                    id="q<%= question.order %>_a<%= index + 1 %>_remove_comment_button"
+                                                    class="comment_button remove_comment_button"
+                                                    onclick="removeComment(<%= question.order %>, <%= index + 1 %>)"
+                                                >
+                                                    Remove Comment
+                                                </button>  
+                                            </div>
+                                        <% else %>
+                                        <div id="q<%= question.order %>_a<%= index + 1 %>_add_comment_div" class="add_comment_div">
+                                            <button 
+                                                type="button" 
+                                                id="q<%= question.order %>_a<%= index + 1 %>_add_comment" 
+                                                class="comment_button add_comment_button" 
+                                                onclick="addComment(<%= question.order %>, <%= index + 1 %>)"
+                                            >
+                                                Add Comment
+                                            </button>
+                                        </div>
+                                        <% end %>
+                                    </div>
+                                    <% if answer.comment %>
+                                        <div id="q<%= question.order %>_a<%= index + 1 %>_comment_div" class="comment_div">
+                                            <label for="q<%= question.order %>_a<%= index + 1 %>_comment" class="comment_label">Comment:</label>
+                                            <input 
+                                                type="text" 
+                                                id="q<%= question.order %>_a<%= index + 1 %>_comment" 
+                                                class="comment_input" 
+                                                name="questions[][answers][][comment]"
+                                                value="<%= answer.comment %>"
+                                            >
+                                        </div>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                        </div>  
+                        <div class="add_answer_div">
+                            <button 
+                                type="button" 
+                                id="q<%= question.order %>_add_answer" 
+                                class="button-green"
+                                onclick="addAnswer(<%= question.order %>)"
+                            >
+                                Add Answer
+                            </button>
+                        </div>
+                        <br>
+                        <div>
+                            <label 
+                                for="q<%= question.order %>_limit" 
+                                class="question_limit_label"
+                            >
+                                Answer Limit:
+                            </label>
+                            <input 
+                                type="number" 
+                                id="q<%= question.order %>_limit" 
+                                class="question_limit_input" 
+                                name="questions[][limit]" 
+                                value="<%= question.limit || question.answers.length %>" 
+                                max="<%= question.answers.length %>" 
+                                min="1"
+                            >
+                        </div>
+                    </article>
+                <% end %>
+            </div>
+        </section>
+            
+        <section class="edit_edit_page_footer">
+            <div>
+                <button 
+                    type="button" 
+                    class="button-green" 
+                    id="add_question" 
+                    onclick="addQuestion()"
+                >
+                    Add a Question
+                </button>
+            </div>
+            <div>
+                <input 
+                    type="submit" 
+                    class="button-yellow button-lg" 
+                    value="Update Quiz"
+                >
+            </div>
+            <div>
+                <a href="/users/<%= current_user.id %>">
+                    <button 
+                        type="button" 
+                        class="button-red"
+                    >
+                        Cancel and Exit
+                    </button>
+                </a>
+            </div>
+        </section>
+    </main>
+</form>
+
+
+<script type="text/javascript" src="/javascripts/createandedit.js"></script>

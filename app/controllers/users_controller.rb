@@ -34,8 +34,9 @@ class UsersController < ApplicationController
                 name: params[:user][:username], 
                 email: params[:user][:email], 
                 password: params[:user][:password])
-            flash[:message] = "Sucessfully created user, please log in."
-            redirect "/login"
+            flash[:message] = "Sucessfully created account, please log in."
+            flash[:success] = true
+            redirect '/login'
         end
     end
 
@@ -61,10 +62,10 @@ class UsersController < ApplicationController
             end
             user.user_accesses.destroy_all
             user.destroy
-            flash[:message] = "Account succcessfully deleted."
-            flash[:success] = true
             session.clear
-            redirect '/'
+            flash[:message] = "User successfully deleted."
+            flash[:success] = true
+            erb :'/index'
         else
             flash[:message] = "There was a problem, account not deleted."
             redirect "/users/#{current_user.id}"

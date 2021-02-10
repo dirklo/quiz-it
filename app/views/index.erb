@@ -1,5 +1,12 @@
 <div class="main_splash">
     <div class="main_overlay">
+        <% if flash.has?(:message) %>
+            <% if flash[:success] == true %>
+                <p class="flash_message_success"><%= flash[:message] %></p>
+            <% else %>
+                <p class="flash_message_failure"><%= flash[:message] %></p>
+            <% end %>
+        <% end %> 
         <h1>WELCOME TO QUIZ-IT!</h1>
         <div class="login_buttons">
             <a href="/login">

@@ -6,7 +6,9 @@ class SessionsController < ApplicationController
 
     get '/logout' do
         logout!
-        redirect '/' 
+        flash[:message] = "Successfully logged out."
+        flash[:success] = true
+        erb :'/index'
     end
 
     post '/login' do

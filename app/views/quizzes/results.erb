@@ -18,7 +18,7 @@
                 <h3><%= result.first[0] %></h4>
                 <br>
                 <h4>You answered:</h5>
-                <% result.each do |answer| %>
+                <% result.each_with_index do |answer, i| %>
                     <div class="answer">
                         <p>
                             <h3><%= answer[1] %></h3> 
@@ -28,8 +28,19 @@
                                 <p class="comment"><%= answer[3] %></p>
                             <% end %>
                     </div>
+                    <% if answer[2] == false && i == result.length - 1 %>
+                        <div class="corrections">
+                            <p>Correct answers:</p>
+                            <ul>
+                                <% @correct_answers[index].each do |answer| %>
+                                    <li>
+                                        <%= answer.content %>
+                                    </li>
+                                <% end %>
+                            </ul>
+                        </div>
+                    <% end %>
                 <% end %>
-                <br>
             </div>
         <% end %>
     </section>

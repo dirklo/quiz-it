@@ -1010,6 +1010,11 @@ nav #buttons button:hover{
     margin-top: 10px;
 }
 
+.result_page_body .corrections {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
 .result_page_footer {
     width: 100%;
     max-width: 500px;

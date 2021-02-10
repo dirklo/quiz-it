@@ -179,6 +179,7 @@ class QuizzesController < ApplicationController
         if logged_in?
             if @quiz.is_admin?(current_user.email) || @quiz.is_author?(current_user.email) || @quiz.has_access?(current_user.email) || @quiz.public == true
                 @questions = @quiz.questions
+                @correct_answers = @questions.map{|q| q.get_correct_answers}
                 answers = @quiz.answers
                 @results = Answer.create_checked_answers(params[:answers].values, answers)
                 @scores = Answer.get_scores(@results, @questions)

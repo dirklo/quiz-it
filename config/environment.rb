@@ -1,13 +1,20 @@
-ENV['QUIZ_ENV'] ||= "development"
+require 'dotenv'
+Dotenv.load
+
+ENV['RACK_ENV'] ||= "development"
 
 require 'bundler/setup'
-Bundler.require(:default, ENV['QUIZ_ENV'])
+Bundler.require(:default, ENV['RACK_ENV'])
 
 require 'rack-flash'
 
-ActiveRecord::Base.establish_connection(
-  :adapter => "sqlite3",
-  :database => "db/#{ENV['QUIZ_ENV']}.sqlite"
-) 
+
+configure :development do
+  set :database, 'sqlite3:db/development.sqlite'
+end
+
+configure :production do
+  set :database, ENV['DATABASE_URL']
+end
 
 require_all 'app'

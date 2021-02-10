@@ -7,7 +7,7 @@ require 'bundler/setup'
 Bundler.require(:default, ENV['RACK_ENV'])
 
 require 'rack-flash'
-
+require 'rack'
 
 configure :development do
   set :database, 'sqlite3:db/development.sqlite'

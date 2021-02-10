@@ -44,10 +44,13 @@ class QuizzesController < ApplicationController
                     )
                 end
             end
+            flash[:message] = "Quiz successfully created"
+            flash[:success] = true
             redirect "/quizzes/#{quiz.id}"
         else
+            @categories = Category.all
             flash[:message] = validated[1]
-            redirect "/quizzes/new"
+            erb :'/quizzes/newedit'
         end
     end
     

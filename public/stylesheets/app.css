@@ -877,6 +877,7 @@ nav #buttons button:hover{
 }
 
 /* QUIZ EDIT PAGE */
+.new_edit_page_body,
 .edit_page_body {
     max-width: 650px;
     width: 100%;
@@ -886,6 +887,7 @@ nav #buttons button:hover{
     align-items: center;
 }
 
+.new_edit_page_footer,
 .edit_page_footer {
     max-width: 500px;
     width: 90%;
@@ -1077,6 +1079,7 @@ nav #buttons button:hover{
 }
 
 .categories_body {
+    max-width: 400px;
     width: 90%;
 }
 
@@ -1092,6 +1095,7 @@ nav #buttons button:hover{
     margin-top: 10px;
 }
 .category_show_body {
+    max-width: 400px;
     width: 90%;
 }
 

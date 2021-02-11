@@ -170,7 +170,7 @@
                                             >
                                         </div>
                                         <% if answer.comment %>
-                                            <div>
+                                            <div id="q<%= question.order %>_a<%= index + 1 %>_remove_comment_div" class="remove_comment_div">
                                                 <button 
                                                     type="button" 
                                                     id="q<%= question.order %>_a<%= index + 1 %>_remove_comment_button"
@@ -178,7 +178,7 @@
                                                     onclick="removeComment(<%= question.order %>, <%= index + 1 %>)"
                                                 >
                                                     Remove Comment
-                                                </button>  
+                                                </button>
                                             </div>
                                         <% else %>
                                         <div id="q<%= question.order %>_a<%= index + 1 %>_add_comment_div" class="add_comment_div">
@@ -233,7 +233,7 @@
                                 name="questions[][limit]" 
                                 value="<%= question.limit || question.answers.length %>" 
                                 max="<%= question.answers.length %>" 
-                                min="1"
+                                min="2"
                             >
                         </div>
                     </article>

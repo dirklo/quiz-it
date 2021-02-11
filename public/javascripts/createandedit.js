@@ -277,7 +277,7 @@ function addQuestion() {
                 name="questions[][limit]" 
                 value="2" 
                 max="2" 
-                min="1"
+                min="2"
             >
             <label 
                 for="q${questionNum}_limit" 

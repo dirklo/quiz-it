@@ -19,6 +19,7 @@
                                     id="answers[<%= question.order %>]" 
                                     name="answers[<%= question.order %>][]" 
                                     value="<%= answer.id %>"
+                                    required
                                 >
                                 <span>&nbsp<%= answer.content %></span>
                                 <br>
@@ -32,6 +33,9 @@
                                     type="checkbox" 
                                     name="answers[<%= question.order %>][]" 
                                     value="<%= answer.id %>"
+                                    class="cb<%= question.order %>"
+                                    onclick="checkboxValidate('cb<%= question.order %>')"
+                                    required
                                 >
                                 <label for="answers[<%= question.order %>]"> <span>&nbsp<%= answer.content %></span> </label>
                                 <br>
@@ -49,3 +53,5 @@
         </section>
     </main>
 </form>
+
+<script type="text/javascript" src="/javascripts/playvalidate.js"></script>

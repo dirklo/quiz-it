@@ -62,6 +62,34 @@ class Quiz < ActiveRecord::Base
         quiz
     end
 
+    def self.new_to_database(params, current_user)
+        quiz = Quiz.create(
+            name: params[:quiz][:name], 
+            description: params[:quiz][:description], 
+            category: Category.find(params[:quiz][:category]), 
+            public: !!params[:quiz][:public],
+            date_created: Time.now,
+            author: current_user
+            )
+        params[:questions].each_with_index do |question, index|
+            question = quiz.questions.create(
+                content: question[:content],
+                kind: question[:kind],
+                order: index + 1,
+                limit: question[:limit]
+            )
+            params[:questions][index][:answers].each do |answer| 
+                question.answers.create(
+                    content: answer[:content],
+                    correct: !!answer[:correct],
+                    comment: answer[:comment],
+                    order: answer[:order]
+                )
+            end
+        end
+        quiz
+    end
+
     def validate_quiz 
         pass = true
         message = "none"
@@ -105,5 +133,32 @@ class Quiz < ActiveRecord::Base
             end
         end
         [pass, message]
+    end
+
+    def self.update_to_database(params, quiz)
+        quiz.update(
+            name: params[:quiz][:name],
+            description: params[:quiz][:description],
+            category: Category.find(params[:quiz][:category]), 
+            public: !!params[:quiz][:public]
+        )
+        quiz.questions.delete_all
+        params[:questions].each_with_index do |question, index|
+            question = quiz.questions.create(
+                content: question[:content],
+                kind: question[:kind],
+                order: index + 1,
+                limit: question[:limit]
+            )
+            params[:questions][index][:answers].each do |answer| 
+                question.answers.create(
+                    content: answer[:content],
+                    correct: !!answer[:correct],
+                    comment: answer[:comment],
+                    order: answer[:order]
+                )
+            end
+        end
+        quiz
     end
 end 

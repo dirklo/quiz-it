@@ -20,30 +20,7 @@ class QuizzesController < ApplicationController
         validated = @test_quiz.validate_quiz
 
         if validated[0] && logged_in?
-            quiz = Quiz.create(
-                name: params[:quiz][:name], 
-                description: params[:quiz][:description], 
-                category: Category.find(params[:quiz][:category]), 
-                public: !!params[:quiz][:public],
-                date_created: Time.now,
-                author: current_user
-                )
-            params[:questions].each_with_index do |question, index|
-                question = quiz.questions.create(
-                    content: question[:content],
-                    kind: question[:kind],
-                    order: index + 1,
-                    limit: question[:limit]
-                )
-                params[:questions][index][:answers].each do |answer| 
-                    question.answers.create(
-                        content: answer[:content],
-                        correct: !!answer[:correct],
-                        comment: answer[:comment],
-                        order: answer[:order]
-                    )
-                end
-            end
+            quiz = Quiz.new_to_database(params, current_user)
             flash[:message] = "Quiz successfully created"
             flash[:success] = true
             redirect "/quizzes/#{quiz.id}"
@@ -89,29 +66,7 @@ class QuizzesController < ApplicationController
             if validated[0]
                 quiz = Quiz.find(params[:id])
                 if quiz.is_admin?(current_user.email) || quiz.is_author?(current_user.email)
-                    quiz.update(
-                        name: params[:quiz][:name],
-                        description: params[:quiz][:description],
-                        category: Category.find(params[:quiz][:category]), 
-                        public: !!params[:quiz][:public]
-                    )
-                    quiz.questions.delete_all
-                    params[:questions].each_with_index do |question, index|
-                        question = quiz.questions.create(
-                            content: question[:content],
-                            kind: question[:kind],
-                            order: index + 1,
-                            limit: question[:limit]
-                        )
-                        params[:questions][index][:answers].each do |answer| 
-                            question.answers.create(
-                                content: answer[:content],
-                                correct: !!answer[:correct],
-                                comment: answer[:comment],
-                                order: answer[:order]
-                            )
-                        end
-                    end
+                    quiz = Quiz.update_to_database(params, quiz)
                     flash[:message] = "Quiz succcessfully Updated"
                     flash[:success] = true
                     redirect "/quizzes/#{quiz.id}"

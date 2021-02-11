@@ -16,9 +16,11 @@ class Question < ActiveRecord::Base
         correct = get_correct_answers
         incorrect = get_incorrect_answers
         while correct.length > a
-            correct.pop
+            correct = correct.shuffle if correct.length > 1
+            correct.pop 
         end
         while incorrect.length > b
+            incorrect = incorrect.shuffle if incorrect.length > 1
             incorrect.pop
         end
         (correct + incorrect).shuffle.each_with_index{|answer, index| answer.order = index + 1}

@@ -111,4 +111,204 @@ Database:
             -date
 
 
-TODO:
+Process flows:
+
+New Quiz Create:
+-params format from form:
+    {
+        "quiz"=>
+            {
+                "name"=>"String", "description"=>"String", "category"=>"category_id", public=>"Boolean"
+            },
+        "questions"=>
+            [
+                {"kind"=>"String", "content"=>"String", "answers"=>
+                    [
+                        {"content"=>"String", "correct"=>"Boolean", "comment"=>"string"},
+                        {"content"=>"String", "correct"=>"Boolean", "comment"=>"string"}
+                    ], "limit"=>"Integer"
+                },
+                {"kind"=>"String", "content"=>"String", "answers"=>
+                    [
+                        {"content"=>"String", "correct"=>"Boolean", "comment"=>"string"},
+                        {"content"=>"String", "correct"=>"Boolean", "comment"=>"string"}
+                    ], "limit"=>"Integer"
+                }
+            ]
+    }
+-Create @test_quiz object, without sending to database, to run validations:
+    -Quiz must have a name
+    -Quiz must have a description
+    -Quiz must have a category
+    -Quiz must have questions
+    -Questions must have a type (mc_one or mc_many)
+    -Questions must have a limit
+    -All questions must have at least 1 incorrect answer
+    -All questions must have at least 1 correct answer
+    -Questions with many correct answers must have at least 2 correct answers
+    -All answers must have text
+-Validation method returns [pass(Boolean), fail message(String)]
+-Test if user is logged in and validation is passed
+-If passed, 
+    create and submit quiz to database, 
+    set flash to success, 
+    redirect to quiz show page
+-If failed, 
+    load categories, 
+    set flash to fail message, 
+    render "/quizzes/newedit",
+    populates from @test_quiz
+
+
+
+Quiz Play:
+-Check for active session
+-@quiz pulls quiz from db by id in params
+-@question_hashes creates array of hashes for the play view to render questions:
+    [
+        {Question Object=>[Answer Object, Answer Object, Answer Object]},
+        {Question Object=>[Answer Object, Answer Object, Answer Object]},
+        {Question Object=>[Answer Object, Answer Object, Answer Object]}
+    ]
+-Check for current user as admin, author, has access or quiz is public
+-Render "quizzes/play"
+-Redirect as appropriate
+
+
+
+Quiz Results:
+-params format from form:
+    {"answers"=>
+        {
+        "Question Number"=>["answer_id"],
+        "Question Number"=>["answer_id", "answer_id", "answer_id"]
+        },
+        "id"=>"quiz_id"
+    }
+-Search for quiz in db by id
+-Check for session
+-Check if current user is author, admin, has access, or if quiz is public
+-@questions pulls all questions from the quiz in db
+-@correct_answers is an array of arrays of only the correct answer objects for each question
+-answers is a list of all answers for the quiz from the db
+-@responses is an array of 
+    [Question Content, Selected Answer Content, Correct Boolean, Comment] 
+    for each question
+-@scores takes in @responses and @questions and returns an array of
+    [Correct Responses(Integer), Total Correct Anwers(Integer)]
+    for each question
+-@percent = takes in scores and returns a float percentage correct
+-Create a Result object with current_user, @quiz, @percent, and current time in db
+-Render "/quizzes/result"
+
+
+
+Quiz Edit:
+-params format from form
+-params format from form:
+    {"_method"=>"PATCH"
+        "quiz"=>
+            {
+                "name"=>"String", "description"=>"String", "category"=>"category_id", public=>"Boolean"
+            },
+        "questions"=>
+            [
+                {"kind"=>"String", "content"=>"String", "answers"=>
+                    [
+                        {"content"=>"String", "correct"=>"Boolean", "comment"=>"string"},
+                        {"content"=>"String", "correct"=>"Boolean", "comment"=>"string"}
+                    ], "limit"=>"Integer"
+                },
+                {"kind"=>"String", "content"=>"String", "answers"=>
+                    [
+                        {"content"=>"String", "correct"=>"Boolean", "comment"=>"string"},
+                        {"content"=>"String", "correct"=>"Boolean", "comment"=>"string"}
+                    ], "limit"=>"Integer"
+                }
+            ],
+        "id"=>"quiz_id"
+    }
+-Create @test_quiz object, without sending to database
+-Check for active session
+-Validate Quiz (Same validations as new quiz)
+-If passed,
+    -Search for quiz in db by id
+    -Check for current_user as admin or author
+    -Update quiz to db with params
+    -Set flash message to success
+    -Redirect to /quizzes/quiz_id show page
+-If failed,
+    -@quiz pulls quiz from db
+    -@categories is all categories ActiceRecord collection
+    -Set flash message to fail
+    -render "/quizzes/editedit"
+    -populates with @test_quiz
+
+
+
+Quiz Delete: 
+-Check for active session
+-Pull quiz from db by id in params
+-Check for current user as author
+-if passed,
+    -Destroy all answers from all questions
+    -Destroy all questions
+    -Destroy all results
+    -Destroy all user accesses
+    -Destroy quiz
+    -Set flash message to success
+    -Redirect to "/users/current_user.id"
+-if failed,
+    -Redirect as appropriate
+
+
+
+Create New User Access:
+-Check for active session
+-quiz searches for quiz on db by id in params
+-Check for current user as author
+-user searches for user by params[:email]
+-user_access searches for existing user_access by user_id and quiz_id 
+-If no user is found, set flash to failed, email is not registered
+-If user_access is found and the admin status is matching the params, 
+    -set flash failure, user already has access
+-If user is found, but admin is changed, 
+    -set flash to success
+    -update the user_access to the admin status on the params
+    -save user_access
+-If User found, but no existing user_access,
+    -push user to quiz.users, to create the user_access
+    -search for that access, and set the admin from the params.
+    -save user_access
+-Redirect to "quizzes/quiz_id/access" no matter what.
+
+
+User Access Uppdate:
+-params format from form
+    {
+        "_method"="PATCH",
+        "users"=>
+            {
+                "email"=>"Status(String)",
+                "email"=>"Status(String)",
+                "email"=>"Status(String)"
+            },
+        "id"=>"quiz_id"
+    }
+-Check for active session
+-quiz searches for quiz on db by id in params
+-Check for current user as author
+-Iterate over all entries in params hash
+-this_user finds user by email in params
+-If status is "delete"
+    -Find user_access by quiz_id and this_user.id and delete
+-If status is true or false,
+    -Find user_access by quiz_id and this_user.id
+    -Set admin status by params
+    -Save user_access
+-Set flash to success, Quiz access saved.
+-@access loads all user_accesses from quiz
+-redirect to "quizzes/quiz_id/access"
+-Flash failure and redirect where appropriate
+
+

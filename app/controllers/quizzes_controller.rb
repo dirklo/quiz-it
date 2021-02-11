@@ -16,6 +16,7 @@ class QuizzesController < ApplicationController
 
     ##### POST DATA FOR A NEW QUIZ #####
     post '/quizzes' do
+
         @test_quiz = Quiz.create_test(params)
         validated = @test_quiz.validate_quiz
 
@@ -23,6 +24,7 @@ class QuizzesController < ApplicationController
             quiz = Quiz.new_to_database(params, current_user)
             flash[:message] = "Quiz successfully created"
             flash[:success] = true
+            binding.pry
             redirect "/quizzes/#{quiz.id}"
         else
             @categories = Category.all

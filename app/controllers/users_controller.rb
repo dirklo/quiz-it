@@ -10,6 +10,16 @@ class UsersController < ApplicationController
             redirect '/'
         end
     end
+
+    ##### VIEW QUIZ HISTORY #####
+    get '/users/history' do
+        if logged_in? 
+            erb :"users/history"
+        else
+            flash[:message] = "You must be logged in to view your hisory."
+            redirect "/login"
+        end 
+    end
     
     get '/users/:id' do
         if logged_in?

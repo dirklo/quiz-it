@@ -3,9 +3,11 @@
         <h1 class="page_title">You scored: <%= @percent%>%</h1>
     </section>
     <section class="result_page_body">
-        <% @results.each_with_index do |result, index| %>
+        <% @responses.each_with_index do |response, index| %>
             <div class="
-            <% if @results[index].any?{|r| r.include?(false)} %>
+            <% if @responses[index].any?{|r| r.include?(false)} %>
+                <%= 'result_card_incorrect' %>
+            <% elsif @questions[index].get_correct_answers.length > response.length %>    
                 <%= 'result_card_incorrect' %>
             <% else %>
                 <%= 'result_card_correct' %>
@@ -15,31 +17,36 @@
                     <h2>Question <%= index + 1%>:</h3>
                     <h4 class="score">Score: <%= @scores[index][0] %> of <%= @scores[index][1]%>    
                 </div>
-                <h3><%= result.first[0] %></h4>
+                <h3><%= response.first[0] %></h4>
                 <br>
                 <h4>You answered:</h5>
-                <% result.each_with_index do |answer, i| %>
+                <% one_wrong = false %>
+                <% response.each_with_index do |answer, i| %>
                     <div class="answer">
                         <p>
                             <h3><%= answer[1] %></h3> 
                             <%= 'Correct!' if answer[2] == true %><%= 'Incorrect...' if answer[2] == false %>  
                         </p>
-                            <% if answer[3] %>
-                                <p class="comment"><%= answer[3] %></p>
-                            <% end %>
+                        <% if answer[3] %>
+                            <p class="comment"><%= answer[3] %></p>
+                        <% end %>
                     </div>
-                    <% if answer[2] == false && i == result.length - 1 %>
-                        <div class="corrections">
-                            <p>Correct answers:</p>
-                            <ul>
-                                <% @correct_answers[index].each do |answer| %>
-                                    <li>
-                                        <%= answer.content %>
-                                    </li>
-                                <% end %>
-                            </ul>
-                        </div>
+                    <% if answer[2] == false %>
+                        <% one_wrong = true %>
                     <% end %>
+                        
+                <% end %>
+                <% if one_wrong == true || @questions[index].get_correct_answers.length > response.length %>
+                    <div class="corrections">
+                        <p>Correct answers:</p>
+                        <ul>
+                            <% @correct_answers[index].each do |answer| %>
+                                <li>
+                                    <%= answer.content %>
+                                </li>
+                            <% end %>
+                        </ul>
+                    </div>
                 <% end %>
             </div>
         <% end %>

@@ -30,16 +30,6 @@ class QuizzesController < ApplicationController
             erb :'/quizzes/newedit'
         end
     end
-    
-    ##### VIEW QUIZ HISTORY #####
-    get '/quizzes/history' do
-        if logged_in? 
-            erb :"quizzes/history"
-        else
-            flash[:message] = "You must be logged in to view your hisory."
-            redirect "/login"
-        end 
-    end
 
     ##### RENDER QUIZ SHOW PAGE #####
     get '/quizzes/:id' do
@@ -133,12 +123,12 @@ class QuizzesController < ApplicationController
         @quiz = Quiz.find(params[:id])
         if logged_in?
             if @quiz.is_admin?(current_user.email) || @quiz.is_author?(current_user.email) || @quiz.has_access?(current_user.email) || @quiz.public == true
-                @questions = @quiz.questions
-                @correct_answers = @questions.map{|q| q.get_correct_answers}
-                answers = @quiz.answers
-                @results = Answer.create_checked_answers(params[:answers].values, answers)
-                @scores = Answer.get_scores(@results, @questions)
-                @percent = Answer.get_percent(@scores)
+                @questions = @quiz.questions                                    #ActiveRecord collection of question objects
+                @correct_answers = @questions.map{|q| q.get_correct_answers}    #array of arrays of correct answers (sorted by question)
+                answers = @quiz.answers                                         #ActiveRecord collection of all answer objects
+                @responses = Answer.create_checked_answers(params[:answers].values, answers) #array of arrays of [question content, selected answer, correct boolean, comment]
+                @scores = Answer.get_scores(@responses, @questions)             #array of [correct responses, total correct responses]
+                @percent = Answer.get_percent(@scores)                          #float percent by points
                 Result.create(user: current_user, quiz: @quiz, score: @percent, date: Time.now)
                 erb :'/quizzes/results'
             else

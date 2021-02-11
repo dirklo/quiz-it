@@ -164,7 +164,7 @@ New Quiz Create:
 Quiz Play:
 -Check for active session
 -@quiz pulls quiz from db by id in params
--@question_hashes creates array of hashes for the play view to render questions:
+-@question_hashes creates array of hashes with shuffled answers for the play view to render questions:
     [
         {Question Object=>[Answer Object, Answer Object, Answer Object]},
         {Question Object=>[Answer Object, Answer Object, Answer Object]},

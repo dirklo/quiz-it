@@ -1,7 +1,6 @@
 function addAnswer(questionNum) {
     // ADD ANSWER DIV
     answerNum = parseInt(document.getElementById(`q${questionNum}_answers`).getElementsByClassName('answer_div').length) + 1;
-    console.log(answerNum)
     var div = document.createElement('div');
     div.setAttribute('id', `q${questionNum}_a${answerNum}`);
     div.setAttribute('class', "answer_div");
@@ -38,9 +37,10 @@ function addAnswer(questionNum) {
                 <input 
                     type="checkbox" 
                     id="q${questionNum}_a${answerNum}_correct" 
-                    class="answer_correct_input" 
+                    class="answer_correct_input q${questionNum}_correct_input" 
                     name="questions[][answers][][correct]" 
                     value="true"
+                    onclick="setLimit(${questionNum})"
                 >
             </div>
             <div id="q${questionNum}_a${answerNum}_add_comment_div" class="add_comment_div">
@@ -107,8 +107,21 @@ function renumberAnswers(questionNum) {
 function setLimit(questionNum) {
     let totalAnswers = document.getElementById(`q${questionNum}_answers`).getElementsByClassName('answer_div').length;
     let limit = document.getElementById(`q${questionNum}_limit`);
-    limit.value = totalAnswers;
-    limit.max = totalAnswers;
+    let checked = 0 
+    if (document.getElementById(`q${questionNum}_kind`).value == "mc_one") {
+        const cb = document.getElementsByClassName(`q${questionNum}_correct_input`)
+        if (cb.length > 0) {
+            for (input of cb) {
+                if (input.checked) {
+                    checked += 1;
+                };
+            }
+        };
+        checked -= 1;
+        checked = Math.max(0, checked);
+    };
+    limit.value = totalAnswers - checked;
+    limit.max = totalAnswers - checked;
 }
 
 function addQuestion() {
@@ -186,9 +199,10 @@ function addQuestion() {
                         <input 
                             type="checkbox" 
                             id="q${questionNum}_a1_correct" 
-                            class="answer_correct_input" 
+                            class="answer_correct_input q${questionNum}_correct_input" 
                             name="questions[][answers][][correct]" 
                             value="true"
+                            onclick="setLimit(${questionNum})"
                         >
                     </div>
                     <div id="q${questionNum}_a1_add_comment_div" class="add_comment_div">
@@ -226,9 +240,10 @@ function addQuestion() {
                         <input 
                             type="checkbox" 
                             id="q${questionNum}_a2_correct" 
-                            class="answer_correct_input" 
+                            class="answer_correct_input q${questionNum}_correct_input" 
                             name="questions[][answers][][correct]" 
                             value="true"
+                            onclick="setLimit(${questionNum})"
                         >
                     </div>
                     <div id="q${questionNum}_a2_add_comment_div" class="add_comment_div">

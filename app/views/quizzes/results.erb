@@ -7,7 +7,7 @@
             <div class="
             <% if @responses[index].any?{|r| r.include?(false)} %>
                 <%= 'result_card_incorrect' %>
-            <% elsif @questions[index].get_correct_answers.length > response.length %>    
+            <% elsif @questions[index].get_correct_answers.length > response.length && @questions[index].kind == "mc_many" %>    
                 <%= 'result_card_incorrect' %>
             <% else %>
                 <%= 'result_card_correct' %>

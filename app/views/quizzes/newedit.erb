@@ -1,7 +1,7 @@
 <form action="/quizzes" method="POST">
     <main class="container">
         <section class="new_edit_page_header">
-            <h1 class="page_title">Edit Quiz</h1>
+            <h1 class="page_title">New Quiz</h1>
             <div>
                 <% if flash.has?(:message) %>
                     <% if flash[:success] == true %>
@@ -132,7 +132,7 @@
                                             <button 
                                                 type="button" 
                                                 id="q<%= question.order %>_a<%= index + 1 %>_delete_button" 
-                                                class="card_delete_button" 
+                                                class="card_delete_button answer_delete_button" 
                                                 onclick="deleteAnswer(<%= question.order %>, <%= index + 1 %>)"
                                             >
                                                 X
@@ -161,9 +161,10 @@
                                             <input 
                                                 type="checkbox" 
                                                 id="q<%= question.order %>_a<%= index + 1 %>_correct" 
-                                                class="answer_correct_input" 
+                                                class="answer_correct_input q<%= question.order %>_correct_input" 
                                                 name="questions[][answers][][correct]" 
                                                 value="true"
+                                                onclick="setLimit(%= question.order %>)"
                                                 <%= 'checked' if answer.correct == true %>
                                             >
                                         </div>

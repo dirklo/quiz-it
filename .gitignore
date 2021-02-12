@@ -1,6 +1,7 @@
 *.gem
 *.rbc
 /.config
+/db/development.sqlite
 /coverage/
 /InstalledFiles
 /pkg/

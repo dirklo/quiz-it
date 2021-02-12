@@ -1,4 +1,5 @@
 class UsersAccessesController < ApplicationController
+    ##### DELETE A USER ACCESS #####
     delete '/accesses/:id' do
         access = UserAccess.find(params[:id])
         @quiz = access.quiz

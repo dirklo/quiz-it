@@ -14,7 +14,7 @@
             <h2>Created by <%= @quiz.author.name %></h2>
             <p><%= @quiz.description %></p>
             <a href="/quizzes/<%= @quiz.id%>/play">
-                <button class="button-green button-lg">
+                <button class="button button-green button-lg">
                     Start Quiz!
                 </button>
             </a>
@@ -24,19 +24,19 @@
             <div class="admin_controls">
                 <h2>Admin Tools</h2>
                 <a href="/quizzes/<%= @quiz.id%>/edit">
-                    <button class="button-green">
+                    <button class="button button-green">
                         Edit Quiz
                     </button>
                 </a>
                 <a href="/quizzes/<%= @quiz.id %>/statistics">
-                    <button type="button" class="button-yellow">Quiz Statistics</button>
+                    <button type="button" class="button button-yellow">Quiz Statistics</button>
                 </a>
         <% end %>
         <% if @quiz.is_author?(current_user.email)%>
                 <br>
                 <form action="/quizzes/<%= @quiz.id %>" method="POST">
                     <input type="hidden" id="hidden" name="_method" value="DELETE">
-                    <input type="submit" class="button-red" value="Delete Quiz">
+                    <input type="submit" class="button button-red" value="Delete Quiz">
                 </form>
                 <br>
         <% end %>
@@ -44,7 +44,7 @@
     </section>
     <section class="quiz_show_footer">
         <a href="/users/<%= current_user.id %>">
-            <button class="button-red" id="cancel_button">
+            <button class="button button-red" id="cancel_button">
                 Cancel and Exit
             </button>
         </a>

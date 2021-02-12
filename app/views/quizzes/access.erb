@@ -51,7 +51,7 @@
                     <% end %>
                 </div>
             <div>
-                <input type="submit" class="button-green" value="Save Changes">
+                <input type="submit" class="button button-green" value="Save Changes">
             </div>
         </form>
 
@@ -60,29 +60,38 @@
             <div class="add_access">
                 <div class="add_user">
                     <label for="new_access">Add a User:</label>
-                    <input type="text" id="new_access" name="email">
+                    <input 
+                        type="text" 
+                        id="new_access" 
+                        name="email"
+                    >
                 </div>
                 <div class="add_admin">
-                    <input type="checkbox" id="admin" name="admin" value="true">
+                    <input 
+                        type="checkbox" 
+                        id="admin" 
+                        name="admin" 
+                        value="true"
+                    >
                     <label for="admin">Make Administrator?</label>
                 </div>
             </div>    
             <div>
-                <input type="submit" class="button-green" value="Add User">
+                <input type="submit" class="button button-green" value="Add User">
             </div>
         </form>
     </section>
     <section class="access_page_footer">
         <a href="/quizzes/<%= @quiz.id %>/edit">
-            <input type="submit" class="button-yellow" value="Return to Edit Page">
+            <input type="submit" class="button button-yellow" value="Return to Edit Page">
         </a>
 
         <a href="/quizzes/<%= @quiz.id %>">
-            <input type="submit" value="View Quiz" class="button-green">
+            <input type="submit" value="View Quiz" class="button button-green">
         </form>
 
         <a href="/users/<%= current_user.id %>">
-            <input type="submit" value="Return to My Quizzes" class="button-red">
+            <input type="submit" value="Return to My Quizzes" class="button button-red">
         </a>
     </section>
 </main>

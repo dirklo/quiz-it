@@ -61,7 +61,7 @@
                 </div>
                 <% if @quiz.is_author?(current_user.email) %>
                     <a href="/quizzes/<%= @quiz.id %>/access">
-                        <button type="button" class="button-yellow">Edit User Access</button>
+                        <button type="button" class="button button-yellow">Edit User Access</button>
                     </a>
                 <% end %>
             </div>
@@ -98,6 +98,7 @@
                                 class="question_kind_input" 
                                 name="questions[][kind]" 
                                 value="<%= question.kind %>"
+                                onchange = "setLimit(<%= question.order %>)"
                             >
                                 <option 
                                     value="mc_many" <%= 'selected' if question.kind == 'mc_many' %>
@@ -217,7 +218,7 @@
                             <button 
                                 type="button" 
                                 id="q<%= question.order %>_add_answer" 
-                                class="button-green"
+                                class="button button-green"
                                 onclick="addAnswer(<%= question.order %>)"
                             >
                                 Add Answer
@@ -251,7 +252,7 @@
                 <button 
                     type="button" 
                     id="add_question" 
-                    class="button-green" 
+                    class="button button-green" 
                     onclick="addQuestion()"
                 >
                     Add Question
@@ -260,7 +261,7 @@
             <div>
                 <input 
                     type="submit" 
-                    class="button-yellow button-lg" 
+                    class="button button-yellow button-lg" 
                     value="Update Quiz"
                 >
             </div>
@@ -268,7 +269,7 @@
                 <a href="/users/<%= current_user.id %>">
                     <button 
                         type="button" 
-                        class="button-red"
+                        class="button button-red"
                     >
                         Cancel and Exit
                     </button>

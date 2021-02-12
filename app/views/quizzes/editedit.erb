@@ -93,6 +93,7 @@
                                 class="question_kind_input" 
                                 name="questions[][kind]" 
                                 value="<%= question.kind %>"
+                                onchange = "setLimit(<%= question.order %>)"
                             >
                                 <option 
                                     value="mc_many" <%= 'selected' if question.kind == 'mc_many' %>
@@ -212,7 +213,7 @@
                             <button 
                                 type="button" 
                                 id="q<%= question.order %>_add_answer" 
-                                class="button-green"
+                                class="button button-green"
                                 onclick="addAnswer(<%= question.order %>)"
                             >
                                 Add Answer
@@ -245,7 +246,7 @@
             <div>
                 <button 
                     type="button" 
-                    class="button-green" 
+                    class="button button-green" 
                     id="add_question" 
                     onclick="addQuestion()"
                 >
@@ -255,7 +256,7 @@
             <div>
                 <input 
                     type="submit" 
-                    class="button-yellow button-lg" 
+                    class="button button-yellow button-lg" 
                     value="Update Quiz"
                 >
             </div>
@@ -263,7 +264,7 @@
                 <a href="/users/<%= current_user.id %>">
                     <button 
                         type="button" 
-                        class="button-red"
+                        class="button button-red"
                     >
                         Cancel and Exit
                     </button>

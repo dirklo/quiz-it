@@ -7,7 +7,7 @@
             <div class="
             <% if @responses[index].any?{|r| r.include?(false)} %>
                 <%= 'result_card_incorrect' %>
-            <% elsif @questions[index].get_correct_answers.length > response.length && @questions[index].kind == "mc_many" %>    
+            <% elsif @correct_answers[index].length > response.length && @questions[index].kind == "mc_many" %>    
                 <%= 'result_card_incorrect' %>
             <% else %>
                 <%= 'result_card_correct' %>
@@ -33,10 +33,9 @@
                     </div>
                     <% if answer[2] == false %>
                         <% one_wrong = true %>
-                    <% end %>
-                        
+                    <% end %>   
                 <% end %>
-                <% if one_wrong == true || @questions[index].get_correct_answers.length > response.length %>
+                <% if one_wrong == true || @correct_answers[index].length > response.length %>
                     <div class="corrections">
                         <p>Correct answers:</p>
                         <ul>
@@ -53,7 +52,7 @@
     </section>
     <section class="result_page_footer">
         <a href="/users/<%= current_user.id %>">
-            <button class="button-green button-lg">Return Home</button>
+            <button class="button button-green button-lg">Return Home</button>
         </a>
     </section>
 </main>

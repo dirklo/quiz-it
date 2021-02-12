@@ -53,7 +53,6 @@
     text-align: center;
 }
 
-
 .page_title {
     color: white;
     font-family: 'Fredoka One', cursive;
@@ -62,18 +61,22 @@
     text-shadow: 1px 2px 5px #000;
 }
 
-@media (max-width: 375px){
-    .page_title {
-        font-size: 30px;
-    }
-}
-
 .page_subtitle {
     color: white;
     font-family: 'Fredoka One', cursive;
     text-align: center;
     font-size: 45px;
     text-shadow: 1px 2px 5px #000;
+}
+
+@media (max-width: 375px){
+    .page_title {
+        font-size: 35px;
+    }
+
+    .page_subtitle {
+        font-size: 30px;
+    }
 }
 
 footer {
@@ -248,14 +251,9 @@ nav #buttons button:hover{
 
 
 /* BUTTONS */
-.button-green:focus,
-.button-green {
+.button:focus,
+.button {
     padding: 2px 13px 4px 17px;
-    background: linear-gradient(
-        to bottom,  
-        rgba(7, 214, 7, .05), 
-        rgba(0, 255, 0, .05)
-    );
     border-radius: 10px;
     font-family: 'Sawarabi Gothic', sans-serif;
     text-shadow: 1px 1px 1px #000;
@@ -263,13 +261,30 @@ nav #buttons button:hover{
     font-size: 18px;
     color: white;
     cursor: pointer;
+    border:none;
+}
+
+.button:focus {
+    outline: none;
+}
+
+.button-lg {
+    padding: 10px 20px !important;
+}
+
+.button-green:focus,
+.button-green {
+    background: linear-gradient(
+        to bottom,  
+        rgba(7, 214, 7, .05), 
+        rgba(0, 255, 0, .05)
+    );
     box-shadow: -2px -2px 3px #000;
     box-shadow: 
         1px 1px 2px rgb(3, 59, 3),
         -1px -1px 2px rgb(214, 245, 217),
         inset 1px 1px 2px rgb(3, 59, 3),
         inset -1px -1px 2px rgb(214, 245, 217);
-    border:none;
     transition: all 0.3s ease;
     z-index: 1;
 }
@@ -281,25 +296,14 @@ nav #buttons button:hover{
         -1px -1px 2px rgb(214, 245, 217);
 }
 
-.button-green:focus {
-    outline: none;
-}
-
 .button-yellow:focus,
 .button-yellow {
-    padding: 2px 13px 4px 17px;
     background: linear-gradient(
         to bottom,  
         rgba(238, 241, 7, .05), 
         rgba(255, 217, 0, .05)
     );
     border-radius: 10px;
-    font-family: 'Sawarabi Gothic', sans-serif;
-    text-shadow: 1px 1px 1px #000;
-    font-weight: 400;
-    font-size: 18px;
-    cursor: pointer;
-    color: white;
     box-shadow: -2px -2px 3px #000;
     box-shadow: 
         1px 1px 2px rgb(84, 85, 7),
@@ -317,32 +321,19 @@ nav #buttons button:hover{
         -1px -1px 2px rgb(239, 241, 210);
 }
 
-.button-yellow:focus {
-    outline: none;
-}
-
 .button-red:focus,
 .button-red {
-    padding: 2px 13px 4px 17px;
     background: linear-gradient(
         to bottom,  
         rgba(214, 7, 7, 0.05), 
         rgba(255, 60, 0, 0.05)
     );
-    border-radius: 10px;
-    font-family: 'Sawarabi Gothic', sans-serif;
-    text-shadow: 1px 1px 1px #000;
-    font-weight: 400;
-    font-size: 18px;
-    color: white;
-    cursor: pointer;
     box-shadow: -2px -2px 3px #000;
     box-shadow: 
         1px 1px 2px rgb(59, 3, 3),
         -1px -1px 2px rgb(245, 214, 214),
         inset 1px 1px 2px rgb(59, 3, 3),
         inset -1px -1px 2px rgb(245, 214, 214);
-    border:none;
     transition: all 0.3s ease;
     z-index: 1;
 }
@@ -352,14 +343,6 @@ nav #buttons button:hover{
     box-shadow: 
         4px 4px 5px rgb(59, 3, 3),
         -1px -1px 2px rgb(245, 214, 214);
-}
-
-.button-red:focus {
-    outline: none;
-}
-
-.button-lg {
-    padding: 10px 20px !important;
 }
 
 .card_delete_button {
@@ -380,6 +363,26 @@ nav #buttons button:hover{
 }
 
 .card_delete_button:focus {
+    outline: none;
+}
+
+.comment_button {
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Baloo 2', cursive;
+    font-size: 15px;
+    background: rgba(154, 112, 221, 0.2);
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    transition: all 0.3s ease;
+}
+
+.comment_button:hover {
+    transform: scale(1.1)
+}
+
+.comment_button:focus {
     outline: none;
 }
 
@@ -702,7 +705,7 @@ nav #buttons button:hover{
 }
 
 .form_container .control input:focus ~ label,
-.form_container .control input:valid ~ label {
+.form_container .control input:not(:placeholder-shown) ~ label {
     color: rgb(20, 197, 220);
     top: -10px;
     left: 5px;
@@ -729,7 +732,9 @@ nav #buttons button:hover{
 .form_container .control input:-webkit-autofill:focus,
 .form_container .control input:-webkit-autofill:active {
     -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+            transition: "color 9999s ease-out, background-color 9999s ease-out";
     -webkit-transition-delay: 9999s;
+            transition-delay: 9999s;
 }
 
 
@@ -742,11 +747,6 @@ nav #buttons button:hover{
     flex-direction: column;
     justify-content: center;
     margin-bottom: 30px;
-}
-
-.user_home_header p {
-    font-family: 'Baloo 2', cursive;
-    text-shadow: 1px 1px 2px rgb(0, 0, 0);
 }
 
 .user_home_header div {
@@ -795,26 +795,6 @@ nav #buttons button:hover{
     width: 100%;
     display: flex;
     justify-content: space-between;
-}
-
-.comment_button {
-    padding: 5px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-family: 'Baloo 2', cursive;
-    font-size: 15px;
-    background: rgba(154, 112, 221, 0.2);
-    color: white;
-    text-shadow: 1px 1px 2px black;
-    transition: all 0.3s ease;
-}
-
-.comment_button:hover {
-    transform: scale(1.1)
-}
-
-.comment_button:focus {
-    outline: none;
 }
 
 .new_page_footer {
@@ -1290,4 +1270,3 @@ nav #buttons button:hover{
     text-align: center;
     text-shadow: 1px 1px 2px black;
 }
-

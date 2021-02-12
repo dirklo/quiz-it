@@ -31,12 +31,12 @@ class Quiz < ActiveRecord::Base
                 num_correct = question.get_correct_answers.length
             end
             num_incorrect = question.get_incorrect_answers.length
-            question.limit = num_incorrect + num_correct if !question.limit
             shuffled = question.shuffle_a_correct_and_b_incorrect(num_correct, question.limit - num_correct)
             {question => shuffled} 
         end
     end
 
+    ##### CREATE TEST QUIZ FOR VALIDATION #####
     def self.create_test(params)
         quiz = Quiz.new(
             name: params[:quiz][:name], 
@@ -62,6 +62,7 @@ class Quiz < ActiveRecord::Base
         quiz
     end
 
+    ##### SAVE QUIZ TO DATABASE #####
     def self.new_to_database(params, current_user)
         quiz = Quiz.create(
             name: params[:quiz][:name], 
@@ -90,6 +91,7 @@ class Quiz < ActiveRecord::Base
         quiz
     end
 
+    ##### RUN VALIDATIONS ON TEST QUIZ #####
     def validate_quiz 
         pass = true
         message = "none"
@@ -135,6 +137,7 @@ class Quiz < ActiveRecord::Base
         [pass, message]
     end
 
+    ##### UPDATE QUIZ IN DATABASE #####
     def self.update_to_database(params, quiz)
         quiz.update(
             name: params[:quiz][:name],

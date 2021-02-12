@@ -6,6 +6,7 @@ class Answer < ActiveRecord::Base
         find(answer_id).correct
     end
 
+    ##### CHECKS ANSWERS AND RETURNS BOOLEANS #####
     def self.check_answers(answer_ids)
         answer_ids.map do |item|
             if item.class == String
@@ -18,6 +19,7 @@ class Answer < ActiveRecord::Base
         end
     end
 
+    ##### TAKES IN ARRAYS OF RESPONSES FROM PLAY FORM, CHECKS ANSWERS AGAINST THE DB #####
     def self.create_checked_answers(answer_arrays, answers)
         answer_arrays.map do |array|
             array.map do |answer_id|
@@ -27,6 +29,7 @@ class Answer < ActiveRecord::Base
         end
     end
 
+    ##### TAKES IN RESULTS ARRAYS AND QUESTIONS, CALCULATES SCORE AMOUNTS #####
     def self.get_scores(results, questions)
         final = []
         questions.each_with_index do |question, index|
@@ -47,6 +50,7 @@ class Answer < ActiveRecord::Base
         final
     end
 
+    ##### TAKES IN SCORES AND CALCULATES PERCENTAGE CORRECT #####
     def self.get_percent(scores)
         total_correct = scores.inject(0){|sum, x| sum + x[0] }
         total_possible = scores.inject(0){|sum, x| sum + x[1] }

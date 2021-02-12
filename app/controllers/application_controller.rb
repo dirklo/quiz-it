@@ -1,5 +1,4 @@
 class ApplicationController < Sinatra::Base
-
     configure do
         set :public_folder, 'public'
         set :views, 'app/views'
@@ -8,6 +7,7 @@ class ApplicationController < Sinatra::Base
         set :session_secret, ENV['SESSION_SECRET']
     end
 
+    ##### RENDER SPLASH SCREEN #####
     get '/' do
         erb :'index'
     end

@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
+    ##### RENDER SIGNUP PAGE #####
     get '/users/new' do
         erb :'/users/new'
     end
 
+    ##### PATH FOR MAIN LOGO #####
     get '/users/home' do
         if logged_in?
             redirect "/users/#{current_user.id}"
@@ -17,10 +19,11 @@ class UsersController < ApplicationController
             erb :"users/history"
         else
             flash[:message] = "You must be logged in to view your hisory."
-            redirect "/login"
+            erb :'/sessions/login'
         end 
     end
     
+    ##### VIEW MY QUIZZES HOME PAGE #####
     get '/users/:id' do
         if logged_in?
             @user = User.find(current_user.id)
@@ -30,14 +33,18 @@ class UsersController < ApplicationController
             erb :'/users/show'
         else
             flash[:message] = "Please log in to continue."
-            redirect '/login'
-        end
+            erb :'/sessions/login'
+        end 
     end
 
+    ##### SEND DATA FOR NEW USER #####
     post '/users' do
         if User.find_by(email: params[:user][:email])
             flash[:message] = "That email is already in use by another account."
-            redirect '/users/new'
+            erb :'/users/new'
+        elsif params[:user][:password] != params[:user][:confirm_password]
+            flash[:message] = "Passwords must match."
+            erb :'/users/new'
         else
             User.create(
                 name: params[:user][:username], 
@@ -45,18 +52,21 @@ class UsersController < ApplicationController
                 password: params[:user][:password])
             flash[:message] = "Sucessfully created account, please log in."
             flash[:success] = true
-            redirect '/login'
+            erb :'/sessions/login'
         end
     end
 
+    ##### RENDER PAGE FOR ACCOUNT SETTINGS #####
     get '/users/:id/settings' do
         erb :'/users/settings'
     end
 
+    ##### RENDER ACCOUNT DELETE CONFIRMATION #####
     get '/users/:id/confirm' do
         erb :'/users/confirm'
     end
 
+    ##### DELETE USER ACCOUNT #####
     delete '/users/:id' do
         if logged_in? && current_user.id == params[:id].to_i
             user = User.find(current_user.id)

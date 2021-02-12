@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+    ##### RENDER CATEGORIES INDEX PAGE #####
     get '/categories' do
         if logged_in?
             @categories = Category.all
@@ -9,6 +10,7 @@ class CategoriesController < ApplicationController
         end
     end
 
+    ##### RENDER SHOW PAGE FOR CATEGORIES #####
     get '/categories/:slug' do
         if logged_in?
             @category = Category.find_by_slug(params[:slug])

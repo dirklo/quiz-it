@@ -107,21 +107,18 @@ function renumberAnswers(questionNum) {
 function setLimit(questionNum) {
     let totalAnswers = document.getElementById(`q${questionNum}_answers`).getElementsByClassName('answer_div').length;
     let limit = document.getElementById(`q${questionNum}_limit`);
-    let checked = 0 
-    if (document.getElementById(`q${questionNum}_kind`).value == "mc_one") {
-        const cb = document.getElementsByClassName(`q${questionNum}_correct_input`)
-        if (cb.length > 0) {
-            for (input of cb) {
-                if (input.checked) {
-                    checked += 1;
-                };
-            }
-        };
-        checked -= 1;
-        checked = Math.max(0, checked);
+    let kind = document.getElementById(`q${questionNum}_kind`).value;
+    // IF MANY ANSWERS ARE CORRECT FOR mc_one, ANSWER LIMIT SHOULD BE 
+    // INCORRECT ANSWERS + 1
+    const checkBoxes = new Array(...document.getElementsByClassName(`q${questionNum}_correct_input`));
+    const checked = checkBoxes.filter(input => input.checked).length;
+    if (checked > 1 && kind === "mc_one") {
+        limit.value = totalAnswers - checked + 1;
+        limit.max = totalAnswers - checked + 1;
+    } else {
+        limit.value = totalAnswers
+        limit.max = totalAnswers
     };
-    limit.value = totalAnswers - checked;
-    limit.max = totalAnswers - checked;
 }
 
 function addQuestion() {
@@ -153,6 +150,7 @@ function addQuestion() {
                 id="q${questionNum}_kind" 
                 class="question_kind_input" 
                 name="questions[][kind]"
+                onchange="setLimit(${questionNum})"
             >
                 <option value="mc_one">One Correct Answer</option>
                 <option value="mc_many">Many Correct Answers</option>
@@ -263,13 +261,19 @@ function addQuestion() {
             <button 
                 type="button" 
                 id="q${questionNum}_add_answer" 
-                class="button-green" 
+                class="button button-green" 
                 onclick="addAnswer(${questionNum})"
             >
                 Add an Answer
             </button>
         </div>
         <div>
+            <label 
+                for="q${questionNum}_limit" 
+                class="question_limit_label"
+            >
+                Answer Limit:
+            </label>
             <input 
                 type="number" 
                 id="q${questionNum}_limit" 
@@ -279,12 +283,6 @@ function addQuestion() {
                 max="2" 
                 min="2"
             >
-            <label 
-                for="q${questionNum}_limit" 
-                class="question_limit_label"
-            >
-                Total Answer Choices
-            </label>
         </div>
     `;
     document.getElementsByClassName('questions_card')[0].appendChild(article);

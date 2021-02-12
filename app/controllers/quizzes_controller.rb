@@ -1,9 +1,5 @@
 class QuizzesController < ApplicationController
-    get '/quizzes' do
-        erb :"quizzes/index"
-    end
-    
-    ##### RENDER FOR FOR NEW QUIZ #####
+    ##### RENDER FORM FOR NEW QUIZ #####
     get '/quizzes/new' do
         @categories = Category.all
         if !logged_in? 
@@ -24,7 +20,6 @@ class QuizzesController < ApplicationController
             quiz = Quiz.new_to_database(params, current_user)
             flash[:message] = "Quiz successfully created"
             flash[:success] = true
-            binding.pry
             redirect "/quizzes/#{quiz.id}"
         else
             @categories = Category.all
@@ -183,7 +178,7 @@ class QuizzesController < ApplicationController
         end
     end
 
-    ##### SEND DATA TO CREATE NEW ACCESS #####
+    ##### SEND DATA TO CREATE NEW USER ACCESS #####
     post '/quizzes/:id/access' do
         if logged_in?
             quiz = Quiz.find(params[:id])
@@ -216,7 +211,7 @@ class QuizzesController < ApplicationController
         end
     end
     
-    ##### SEND DATA TO UPDATE ACCESS TO A QUIZ #####
+    ##### SEND DATA TO UPDATE USER ACCESS TO A QUIZ #####
     patch '/quizzes/:id/access' do
         if logged_in?
             quiz = Quiz.find(params[:id])

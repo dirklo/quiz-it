@@ -12,6 +12,8 @@ class Question < ActiveRecord::Base
         Question.find(self.id).answers.where(correct: false).to_a
     end
 
+    ##### TAKES IN NUMBER OF CORRRECT AND INCORRECT ANSWERS REQUESTED #####
+    ##### SHUFFLES THEM, AND RETURNS ARRAY#####
     def shuffle_a_correct_and_b_incorrect(a = 1, b = 3)
         correct = get_correct_answers
         incorrect = get_incorrect_answers
@@ -23,10 +25,6 @@ class Question < ActiveRecord::Base
             incorrect = incorrect.shuffle if incorrect.length > 1
             incorrect.pop
         end
-        (correct + incorrect).shuffle.each_with_index{|answer, index| answer.order = index + 1}
-    end
-
-    def sort_answers_by_order
-        sorted = self.answers.sort {|a, b| a.order <=> b.order}
+        (correct + incorrect).shuffle
     end
 end

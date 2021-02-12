@@ -267,6 +267,7 @@ function addQuestion() {
                 Add an Answer
             </button>
         </div>
+        <br>
         <div>
             <label 
                 for="q${questionNum}_limit" 
@@ -284,6 +285,7 @@ function addQuestion() {
                 min="2"
             >
         </div>
+        </br>
     `;
     document.getElementsByClassName('questions_card')[0].appendChild(article);
 }

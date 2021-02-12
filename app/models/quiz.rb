@@ -30,7 +30,6 @@ class Quiz < ActiveRecord::Base
             elsif question.kind == "mc_many"
                 num_correct = question.get_correct_answers.length
             end
-            num_incorrect = question.get_incorrect_answers.length
             shuffled = question.shuffle_a_correct_and_b_incorrect(num_correct, question.limit - num_correct)
             {question => shuffled} 
         end

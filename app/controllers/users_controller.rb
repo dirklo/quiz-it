@@ -42,6 +42,9 @@ class UsersController < ApplicationController
         if User.find_by(email: params[:user][:email])
             flash[:message] = "That email is already in use by another account."
             erb :'/users/new'
+        elsif User.find_by(name: params[:user][:username])
+            flash[:message] = "That Username is already in use by another account."
+            erb :'/users/new'
         elsif params[:user][:password] != params[:user][:confirm_password]
             flash[:message] = "Passwords must match."
             erb :'/users/new'

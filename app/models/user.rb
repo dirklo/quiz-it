@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
     has_secure_password
     validates :email, presence: true
     validates :email, uniqueness: true
+    validates :name, presence: true
+    validates :name, uniqueness: true
     has_many :authored_quizzes, :class_name => "Quiz", :foreign_key => :author_id
     has_many :questions, through: :authored_quizzes
     has_many :user_accesses

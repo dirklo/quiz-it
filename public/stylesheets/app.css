@@ -672,6 +672,7 @@ nav #buttons button:hover{
     display: block;
     padding: 10px;
     color: white;
+    border-radius: 0;
     border: none;
     border-bottom: 2px solid white;
     outline: none;

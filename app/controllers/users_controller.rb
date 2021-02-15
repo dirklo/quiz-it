@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     ##### VIEW MY QUIZZES HOME PAGE #####
     get '/users/:id' do
         if logged_in?
-            @user = User.find(current_user.id)
+            @user = current_user
             @email = @user.email
             @authored_quizzes = @user.authored_quizzes
             @accessible_quizzes = @user.accessible_quizzes

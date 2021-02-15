@@ -94,6 +94,7 @@ class Quiz < ActiveRecord::Base
     def validate_quiz 
         pass = true
         message = "none"
+    
         if !name
             message = "Quiz must have a name."
             pass = false

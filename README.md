@@ -1,9 +1,10 @@
 # Quiz-It
- Flatiron School, Phase 2 final project using Ruby 2.6.1 and Sinatra. 
 
-A fully functioning quiz creation web application.  
+## A quiz creation web application for educators to create and share custom multiple choice quizzes. 
 
-# To install:
+## Built with Ruby 2.6.1 and Sinatra 2.1.0. 
+
+## Installation:
 1) Clone the github repository to your machine.
 
 2) Run `bundle install` from the root directory to install dependancies.
@@ -16,11 +17,16 @@ A fully functioning quiz creation web application.
 
 6) Use Chrome to visit http://localhost:9292/
 
-# Usage:
+# Key Features:
+
+## Database 
+Quiz-it leverages the power of Active-Record to maintain a PostgreSQL database.  The central model is a Quiz object, which belongs to an author, has many questions, which have many answers.  Users also have a quiz history built of result objects, which is generated when a quiz is taken. Users can also be given access to others' private quizzes through the users access join table.  See my full database brainstorm below:
+
+![quizit-database](https://user-images.githubusercontent.com/72274257/122447983-99fccd80-cfa4-11eb-94c8-8baa0ee93df0.jpg)
 
 ## Login/Signup
 
-Use the buttons on the home page to create an account or sign into your own.  You will not be able to create an account with a username or email that is already in use.
+Use the buttons on the home page to create an account or sign into your own.  You will not be able to create an account with a username or email that is already in use.  This application uses the Bcrypt gem for secure user login, and sessions/flash built into Sinatra for session management.
 
 ## My Quizzes
 
@@ -28,9 +34,13 @@ From your My Quizzes page, you are able to Create a New Quiz, view all the quizz
 
 You can also access your Quiz History, All Public Quizzes, and Account Settings from this page.
 
+![quizit-my-quizzes](https://user-images.githubusercontent.com/72274257/122449962-be59a980-cfa6-11eb-896d-e6f5eb8a388c.gif)
+
 ## Create a New Quiz
     
 Your new quiz must have a Name, a description and a category.  You can optionally make your quiz public.  This adds the quiz to the All Public Quizzes page, allowing anyone with an account to take the quiz.
+
+![quizit-new-quiz](https://user-images.githubusercontent.com/72274257/122450653-8737c800-cfa7-11eb-9192-9d96140970a4.gif)
 
 New Quizzes default to 1 question with 2 answers.  Questions or answers can be added as needed.  3 formats can be used to create questions for your quiz:
 
@@ -89,6 +99,10 @@ You can only delete the quiz from this page if you are the creator of that quiz.
 
 You can play a quiz from it's home page.  
 
+![quizit-take-quiz](https://user-images.githubusercontent.com/72274257/122451068-07f6c400-cfa8-11eb-9caa-fc00e8418a6e.gif)
+
+![quizit-grading](https://user-images.githubusercontent.com/72274257/122451493-7f2c5800-cfa8-11eb-8412-14d9299e7a2d.gif)
+
 ### Grading Parameters:
 
 Questions with 1 correct answer are worth 1 point.  You can only select 1 answer.
@@ -138,4 +152,5 @@ Clicking this button from the My Quizzes page will show you a list of all the qu
 
 Clicking here will allow you to delete your account.  Deleting your account will result in the loss of all your quizzes and their questions/answers.
 
-
+# What's Next?
+New features to add on this application would be the ability to create type-in answers, or questions that use pictures.  Integration into social media could come in the future as well.

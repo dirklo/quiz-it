@@ -3,6 +3,7 @@
 ## A quiz creation web application for educators to create and share custom multiple choice quizzes. 
 
 ## Built with Ruby 2.6.1 and Sinatra 2.1.0. 
+* View this app deployed on Heroku here: https://quiz-it-three.herokuapp.com
 
 ## Installation:
 1) Clone the github repository to your machine.
